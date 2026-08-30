@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="伊奈学園ロード">
+<meta name="theme-color" content="#14213D">
+<meta name="description" content="伊奈学園ロード｜5教科775問の記憶定着トレーナー">
+<meta name="robots" content="noindex">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%2314213D'/%3E%3Ctext x='90' y='118' font-size='84' font-family='sans-serif' font-weight='bold' fill='%23fff' text-anchor='middle'%3E伊%3C/text%3E%3C/svg%3E">
+<title>伊奈学園ロード｜5教科 記憶定着トレーナー</title>
+<style>
+:root{
+  --ink:#14213D; --paper:#EEF1F5; --card:#FFFFFF; --line:#D7DEE8;
+  --mid:#5B6B84; --accent:#0F766E; --accent-soft:#E3F1EF;
+  --warn:#C2760B; --bad:#B4232A; --gold:#8A6D1F;
+  --r:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI",sans-serif;
+  font-size:15px; line-height:1.7; padding-bottom:78px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:520px;margin:0 auto;padding:14px 14px 0}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:.01em}
+button{font-family:inherit;font-size:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum";letter-spacing:-.02em}
+
+/* header */
+header{padding:16px 14px 10px;max-width:520px;margin:0 auto}
+.eyebrow{font-size:11px;letter-spacing:.22em;color:var(--mid);font-weight:700}
+.h-row{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-top:2px}
+.h-row h1{font-size:19px}
+.countdown{text-align:right;line-height:1.2}
+.countdown b{font-size:30px;font-weight:800;display:block}
+.countdown span{font-size:10px;color:var(--mid);letter-spacing:.1em}
+
+/* card */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.card h2{font-size:14px;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h2::before{content:"";width:3px;height:14px;background:var(--ink);border-radius:2px}
+.sub{font-size:12.5px;color:var(--mid);line-height:1.65}
+
+/* signature: 500点ゲージ */
+.gauge{margin:6px 0 4px}
+.gauge-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.gauge-top .now{font-size:34px;font-weight:800}
+.gauge-top .now small{font-size:13px;font-weight:600;color:var(--mid);margin-left:2px}
+.bar{position:relative;height:26px;background:#DDE3EB;border-radius:6px;overflow:hidden}
+.bar-fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#0F766E,#15938a);transition:width .5s ease}
+.tick{position:absolute;top:0;bottom:0;width:2px;background:var(--ink);opacity:.75}
+.tick.g{background:var(--bad)}
+.tick-lbls{position:relative;height:30px;margin-top:4px;font-size:9.5px;color:var(--mid)}
+.tick-lbl{position:absolute;transform:translateX(-50%);text-align:center;line-height:1.25;width:80px}
+.tick-lbl b{display:block;font-size:11px;color:var(--ink)}
+
+/* mission */
+.mission{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px dashed var(--line)}
+.mission:last-child{border-bottom:none;padding-bottom:0}
+.mission .no{width:26px;height:26px;flex:none;border-radius:8px;background:var(--ink);color:#fff;
+  display:grid;place-items:center;font-size:12px;font-weight:800}
+.mission .tx{flex:1}
+.mission .tx b{display:block;font-size:14px}
+.mission .tx span{font-size:11.5px;color:var(--mid)}
+.mission.done .no{background:var(--accent)}
+.mission.done .tx b{color:var(--mid);text-decoration:line-through}
+
+/* buttons */
+.btn{display:block;width:100%;padding:14px;border-radius:12px;background:var(--ink);color:#fff;
+  font-weight:800;font-size:15px;text-align:center;margin-top:10px}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.soft{background:var(--accent-soft);color:var(--accent);border:1px solid #BFE0DB}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.4}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.chip{padding:7px 11px;border-radius:20px;border:1.5px solid var(--line);background:#fff;
+  font-size:12.5px;font-weight:700;color:var(--mid)}
+.chip.on{border-color:var(--ink);background:var(--ink);color:#fff}
+
+/* stats grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.grid div{background:#F7F9FB;border:1px solid var(--line);border-radius:10px;padding:10px 4px}
+.grid b{display:block;font-size:21px;font-weight:800}
+.grid span{font-size:10.5px;color:var(--mid)}
+
+/* subject rows */
+.srow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #EDF1F5}
+.srow:last-child{border-bottom:none}
+.srow .nm{width:34px;font-weight:800;font-size:13px;flex:none}
+.srow .track{flex:1;height:9px;background:#E3E8EF;border-radius:5px;overflow:hidden}
+.srow .track i{display:block;height:100%;background:var(--accent);border-radius:5px;transition:width .4s}
+.srow .vl{width:56px;text-align:right;font-size:12px;color:var(--mid);font-weight:700}
+
+/* quiz */
+.qtag{font-size:11px;color:var(--mid);font-weight:700;letter-spacing:.08em}
+.qtext{font-size:19px;font-weight:700;line-height:1.65;margin:12px 0 4px;white-space:pre-wrap}
+.atext{font-size:19px;font-weight:800;color:var(--accent);line-height:1.6;margin:8px 0;white-space:pre-wrap}
+.choice{display:block;width:100%;text-align:left;padding:13px 14px;border:1.5px solid var(--line);
+  border-radius:11px;background:#fff;margin-top:8px;font-size:15px;font-weight:600}
+.choice.ok{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.choice.ng{border-color:var(--bad);background:#FBECEB;color:var(--bad)}
+.grade{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.grade button{padding:13px 4px;border-radius:11px;font-weight:800;font-size:13.5px;border:1.5px solid}
+.g1{border-color:var(--bad);color:var(--bad);background:#FDF3F2}
+.g2{border-color:var(--warn);color:var(--warn);background:#FDF7EC}
+.g3{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.prog{height:5px;background:#E3E8EF;border-radius:3px;overflow:hidden;margin-bottom:4px}
+.prog i{display:block;height:100%;background:var(--ink);transition:width .3s}
+
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);
+  border-top:1px solid var(--line);display:flex;padding:6px 0 max(6px,env(safe-area-inset-bottom));
+  backdrop-filter:blur(8px);z-index:20}
+nav button{flex:1;padding:5px 0;font-size:10.5px;font-weight:700;color:var(--mid);line-height:1.5}
+nav button b{display:block;font-size:17px;font-weight:800}
+nav button.on{color:var(--ink)}
+nav button.on b{color:var(--accent)}
+
+/* plan */
+.ph{border-left:3px solid var(--ink);padding:2px 0 2px 12px;margin:16px 0 8px}
+.ph b{font-size:15px}
+.ph span{display:block;font-size:11px;color:var(--mid);letter-spacing:.1em;font-weight:700}
+ul.tidy{margin:6px 0 0;padding-left:19px;font-size:13.5px;line-height:1.85}
+ul.tidy li{margin-bottom:3px}
+.note{background:#FBF6E9;border:1px solid #E8DCBC;border-radius:11px;padding:12px;font-size:12.5px;color:#5A4A22}
+.slider{width:100%;accent-color:var(--ink);margin:2px 0}
+.srow2{display:flex;align-items:center;gap:10px;margin-bottom:2px}
+.srow2 b{width:34px;font-size:13px}
+.srow2 span{width:52px;text-align:right;font-size:13px;font-weight:800}
+input[type=date],input[type=number],input[type=text],textarea{font-family:inherit;font-size:15px;padding:9px;
+  border:1.5px solid var(--line);border-radius:9px;width:100%;background:#fff;color:var(--ink);display:block}
+textarea{resize:vertical;line-height:1.6}
+.exp{margin-top:10px;padding:10px 12px;background:#F4F7F6;border-left:3px solid var(--accent);
+  border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.75;color:var(--ink);text-align:left}
+.exp b{color:var(--accent);font-size:11px;letter-spacing:.08em;display:block;margin-bottom:3px}
+.seg{display:flex;gap:6px;background:#E4E9F0;padding:4px;border-radius:11px;margin-bottom:14px}
+.seg button{flex:1;padding:9px;border-radius:8px;font-size:13.5px;font-weight:700;color:var(--mid)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(20,33,61,.12)}
+.bigmin{text-align:center;padding:4px 0 10px}
+.bigmin span{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.bigmin small{font-size:17px;font-weight:700;color:var(--mid);margin:0 2px 0 3px}
+.mrow{display:flex;border-top:1px solid var(--line);padding-top:12px}
+.mrow>div{flex:1;text-align:center}
+.mrow .num{font-size:22px;font-weight:800}
+.mrow small{font-size:11px;color:var(--mid);margin:0 1px}
+.mrow i{display:block;font-style:normal;font-size:10.5px;color:var(--mid);letter-spacing:.06em;margin-top:2px}
+.gwrap{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.gbar{height:9px;background:#E4E9F0;border-radius:5px;overflow:hidden}
+.gbar span{display:block;height:100%;background:var(--accent);border-radius:5px;transition:width .4s}
+.clock{text-align:center;font-size:44px;font-weight:800;letter-spacing:.02em;padding:6px 0 2px;color:var(--ink)}
+.clock.run{color:var(--accent)}
+.mbar{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:12.5px}
+.mbar b{width:34px;font-weight:700}
+.mbar div{flex:1;height:8px;background:#E4E9F0;border-radius:4px;overflow:hidden}
+.mbar div span{display:block;height:100%;background:var(--accent);border-radius:4px}
+.mbar em{font-style:normal;width:52px;text-align:right;color:var(--mid);font-variant-numeric:tabular-nums}
+nav button{font-size:10px}
+.hide{display:none}
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--ink);color:#fff;
+  padding:10px 18px;border-radius:22px;font-size:13px;font-weight:700;z-index:50;opacity:0;
+  transition:opacity .25s;pointer-events:none}
+.toast.show{opacity:1}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">埼玉県公立高校入試</div>
+  <div class="h-row">
+    <h1>伊奈学園ロード</h1>
+    <div class="countdown"><b class="num" id="cd">—</b><span>DAYS LEFT</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ========== HOME ========== -->
+<section id="v-home">
+  <div class="card">
+    <h2>いまの実力（推定）</h2>
+    <div class="gauge">
+      <div class="gauge-top">
+        <div class="now num" id="gScore">0<small>/500点</small></div>
+        <div class="sub" id="gMsg" style="text-align:right;max-width:52%"></div>
+      </div>
+      <div class="bar"><div class="bar-fill" id="gFill" style="width:0%"></div>
+        <div class="tick" style="left:50%"></div>
+        <div class="tick g" style="left:64%"></div>
+      </div>
+      <div class="tick-lbls">
+        <div class="tick-lbl" style="left:50%"><b>250</b>白岡 目安</div>
+        <div class="tick-lbl" style="left:64%"><b>320</b>伊奈学園 目安</div>
+      </div>
+    </div>
+    <div class="sub">※ 覚えたカードの割合から自動計算した「目安」。本番の点数を保証するものではありません。北辰テストの結果が出たら【設定】で上書きできます。</div>
+  </div>
+
+  <div class="card">
+    <h2>今日の3ミッション（合計25分）</h2>
+    <div id="missions"></div>
+    <button class="btn" onclick="startSession('mix')">今日の学習をはじめる</button>
+  </div>
+
+  <div class="card">
+    <h2>記憶の状態</h2>
+    <div class="grid">
+      <div><b class="num" id="stDue">0</b><span>今すぐ復習</span></div>
+      <div><b class="num" id="stMastered">0</b><span>定着ずみ</span></div>
+      <div><b class="num" id="stStreak">0</b><span>連続日数</span></div>
+    </div>
+    <p class="sub" id="stage" style="margin:12px 0 0"></p>
+    <div style="margin-top:8px" id="subjBars"></div>
+  </div>
+
+  <div class="card">
+    <h2>弱点だけを叩く</h2>
+    <p class="sub" style="margin:0 0 8px">3回以上まちがえた問題だけを集めた特訓モードです。</p>
+    <button class="btn ghost" onclick="startSession('weak')">弱点カードで演習（<span id="weakN">0</span>問）</button>
+  </div>
+</section>
+
+<!-- ========== DRILL ========== -->
+<section id="v-drill" class="hide">
+  <div class="card">
+    <h2>教科をえらぶ</h2>
+    <div class="chips" id="subjChips"></div>
+    <h2 style="margin-top:16px">単元をえらぶ</h2>
+    <div class="chips" id="unitChips"></div>
+    <button class="btn" onclick="startSession('filter')">この範囲で10問</button>
+    <button class="btn soft" onclick="startSession('newonly')">まだ見ていない問題だけ</button>
+  </div>
+  <div class="card">
+    <h2>入試直結ドリル</h2>
+    <p class="sub" style="margin:0 0 8px">伊奈学園は「学校選択問題」ではなく通常問題です。つまり<b>基礎〜標準の取りこぼしゼロ</b>が合格の条件。まずここから。</p>
+    <button class="btn ghost" onclick="startSession('unit','数学','計算の基礎')">数学 大問1（計算）を10問</button>
+    <button class="btn ghost" onclick="startSession('subj','理科')">理科 一問一答を10問</button>
+    <button class="btn ghost" onclick="startSession('subj','社会')">社会 一問一答を10問</button>
+    <button class="btn ghost" onclick="startSession('unit','英語','不規則動詞')">英語 不規則動詞を10問</button>
+  </div>
+  <div class="card">
+    <h2>問題を見る・足す</h2>
+    <button class="btn ghost" onclick="go('list')">収録されている問題をぜんぶ見る</button>
+    <button class="btn soft" onclick="go('add')">わからなかった問題を追加する</button>
+  </div>
+</section>
+<section id="v-quiz" class="hide">
+  <div class="card">
+    <div class="prog"><i id="qProg" style="width:0%"></i></div>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div class="qtag" id="qTag"></div>
+      <button class="qtag" style="color:var(--bad)" onclick="endSession()">やめる</button>
+    </div>
+    <div class="qtext" id="qText"></div>
+    <div id="qChoices"></div>
+    <div id="qAnsWrap" class="hide">
+      <div class="atext" id="qAns"></div>
+      <div class="sub" id="qHint"></div>
+      <div id="qExp" class="exp hide"></div>
+    </div>
+    <button class="btn" id="qShow" onclick="showAnswer()">答えを見る</button>
+    <div class="grade hide" id="qGrade">
+      <button class="g1" onclick="grade(0)">できなかった</button>
+      <button class="g2" onclick="grade(1)">あやしい</button>
+      <button class="g3" onclick="grade(2)">できた</button>
+    </div>
+    <button class="btn hide" id="qNext" onclick="nextCard()">次へ</button>
+  </div>
+  <div class="card" id="qResult" style="display:none"></div>
+</section>
+
+<!-- ========== RECORD ========== -->
+<section id="v-rec" class="hide">
+  <div class="seg">
+    <button id="segLog" class="on" onclick="switchRec('log')">勉強時間</button>
+    <button id="segExam" onclick="switchRec('exam')">模試の結果</button>
+  </div>
+
+<div id="recLog">
+  <div class="card">
+    <h2>今日の勉強</h2>
+    <div class="bigmin"><span id="todayMin" class="num">0<small>分</small></span></div>
+    <div class="mrow">
+      <div><span class="num" id="weekMin">0<small>分</small></span><i>今週</i></div>
+      <div><span class="num" id="allMin">0<small>分</small></span><i>合計</i></div>
+      <div><span class="num" id="dayStreak">0</span><small>日</small><i>連続</i></div>
+    </div>
+    <div class="gwrap"><div class="gbar"><span id="goalBar"></span></div>
+      <p class="sub" style="margin:6px 0 0" id="goalMsg"></p></div>
+  </div>
+
+  <div class="card">
+    <h2>ストップウォッチ</h2>
+    <p class="sub" style="margin:0 0 8px">教科を選んで始めると、止めたときに自動で記録されます。ノートや問題集をやるときにも使えます。</p>
+    <div class="chips" id="timerChips"></div>
+    <div class="clock num" id="clock">00:00</div>
+    <button class="btn" id="timerBtn" onclick="toggleTimer()">はじめる</button>
+  </div>
+
+  <div class="card">
+    <h2>この1週間</h2>
+    <div id="weekChart"></div>
+    <div id="subjMin" style="margin-top:14px"></div>
+  </div>
+
+  <div class="card">
+    <h2>手で記録する</h2>
+    <p class="sub" style="margin:0 0 8px">塾や学校での勉強、あとから思い出した分をここに足せます。</p>
+    <input type="date" id="lgDate">
+    <div class="chips" id="manChips" style="margin-top:8px"></div>
+    <div class="srow2" style="margin-top:8px"><b style="width:44px">時間</b>
+      <input type="number" id="lgMin" placeholder="分"></div>
+    <input type="text" id="lgMemo" placeholder="内容（例：数学ワークp.30〜35）" style="margin-top:8px">
+    <button class="btn soft" onclick="addManual()">記録する</button>
+  </div>
+
+  <div class="card">
+    <h2>目標</h2>
+    <div class="srow2"><b style="width:88px">1週間の目標</b>
+      <input type="number" id="goalH" placeholder="時間" onchange="saveGoal()" style="flex:1;min-width:0">
+      <input type="number" id="goalM" placeholder="分" onchange="saveGoal()" style="flex:1;min-width:0"></div>
+    <p class="sub" style="margin:8px 0 0">迷ったら、まず1週間10時間（1日およそ1時間25分）から。達成できたら少しずつ増やしてください。</p>
+  </div>
+
+  <div class="card">
+    <h2>記録した勉強</h2>
+    <div id="logList"></div>
+  </div>
+</div>
+
+<div id="recExam" class="hide">
+  <div class="card">
+    <h2>北辰テスト・模試の記録</h2>
+    <p class="sub" style="margin:0 0 10px">点数か偏差値のどちらかだけでも大丈夫です。入れた分だけグラフになります。</p>
+    <input type="date" id="exDate">
+    <input type="text" id="exLabel" placeholder="回の名前（例：第4回北辰）" style="margin-top:8px">
+    <div id="exInputs" style="margin-top:10px"></div>
+    <div class="srow2" style="margin-top:8px"><b style="width:74px">5科偏差値</b>
+      <input type="number" id="exT5" placeholder="全体の偏差値（任意）"></div>
+    <button class="btn" onclick="addExam()">この回を記録する</button>
+  </div>
+
+  <div class="card">
+    <h2>偏差値の推移</h2>
+    <div class="chips" id="chartChips"></div>
+    <div id="chartBox" style="margin-top:10px"></div>
+    <p class="sub" id="chartMsg" style="margin:8px 0 0"></p>
+  </div>
+
+  <div class="card">
+    <h2>記録した回</h2>
+    <div id="exList"></div>
+  </div>
+</div>
+</section>
+
+<!-- ========== 問題リスト ========== -->
+<section id="v-list" class="hide">
+  <div class="card">
+    <h2>収録されている問題</h2>
+    <div class="chips" id="listChips"></div>
+    <input type="text" id="listSearch" placeholder="キーワードで探す" oninput="renderList()" style="margin-top:10px">
+    <p class="sub" style="margin:8px 0 0" id="listCount"></p>
+  </div>
+  <div class="card" style="padding:8px 14px">
+    <div id="listBody"></div>
+  </div>
+  <button class="btn ghost" onclick="go('drill')" style="margin-bottom:20px">演習にもどる</button>
+</section>
+
+<!-- ========== カード追加 ========== -->
+<section id="v-add" class="hide">
+  <div class="card">
+    <h2>わからなかった問題を追加する</h2>
+    <p class="sub" style="margin:0 0 10px">過去問や北辰でまちがえた問題を入れておくと、他の問題と同じように忘れかけたころに出てきます。ここが一番点になります。</p>
+    <div class="chips" id="addSubjChips"></div>
+    <input type="text" id="addUnit" placeholder="単元（例：一次関数／公民）" style="margin-top:10px">
+    <textarea id="addQ" placeholder="問題文" rows="3" style="margin-top:8px"></textarea>
+    <textarea id="addA" placeholder="答え" rows="2" style="margin-top:8px"></textarea>
+    <input type="text" id="addH" placeholder="ヒント・覚え方（任意）" style="margin-top:8px">
+    <button class="btn" onclick="addCard()">カードを追加する</button>
+  </div>
+  <div class="card">
+    <h2>自分で追加したカード（<span id="myN">0</span>）</h2>
+    <div id="myList"></div>
+  </div>
+  <button class="btn ghost" onclick="go('drill')" style="margin-bottom:20px">演習にもどる</button>
+</section>
+
+<!-- ========== PLAN ========== -->
+<section id="v-plan" class="hide">
+  <div class="card">
+    <h2>合格までの設計図</h2>
+    <p class="sub" style="margin:0">偏差値40から伊奈学園（目安 偏差値55前後）は、<b>ひらめきではなく「取りこぼし回収」で届く</b>距離です。数学と英語の難問は最初から捨て、理科・社会・数学大問1・英語の基本・漢字と作文で320点を組み立てます。</p>
+  </div>
+
+  <div class="card">
+    <h2>得点シミュレーター</h2>
+    <div id="simRows"></div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;border-top:1px solid var(--line);padding-top:10px">
+      <b>合計</b><b class="num" id="simTotal" style="font-size:26px">0</b>
+    </div>
+    <div class="sub" id="simMsg" style="margin-top:6px"></div>
+  </div>
+
+  <div class="card">
+    <h2>おすすめの配点設計（合計320点）</h2>
+    <ul class="tidy">
+      <li><b>社会 70点</b>／覚えれば取れる。最優先の得点源</li>
+      <li><b>理科 70点</b>／同上。計算単元は後回しでOK</li>
+      <li><b>数学 60点</b>／大問1の計算（約40点分）を全問正解＋作図・確率・資料</li>
+      <li><b>英語 60点</b>／リスニング＋語彙＋英作文。長文は設問を先に読む</li>
+      <li><b>国語 60点</b>／漢字・知識で満点、作文12点を型で確保</li>
+    </ul>
+    <div class="note" style="margin-top:10px">難問を1問取るより、<b>取れるはずの問題を落とさない</b>ほうが3倍速い。捨て問を決めるのは逃げではなく戦略です。</div>
+  </div>
+
+  <div class="card">
+    <h2>月ごとの動き方</h2>
+    <div class="ph"><span>STEP 1</span><b>9〜10月：中1・中2の穴うめ</b></div>
+    <ul class="tidy">
+      <li>理社は中1・中2範囲を1周（このアプリの一問一答を毎日）</li>
+      <li>数学は計算だけを毎日10問。関数・図形はまだ触らない</li>
+      <li>英語は不規則動詞と基本単語。長文はまだ読まなくていい</li>
+      <li><b>内申が動く時期</b>。提出物と定期テストは絶対に手を抜かない</li>
+    </ul>
+    <div class="ph"><span>STEP 2</span><b>11〜12月：中3範囲＋北辰対策</b></div>
+    <ul class="tidy">
+      <li>理科（イオン・運動・天体）社会（公民）を追加</li>
+      <li>数学は一次関数・二次関数・相似・三平方の「基本形」だけ</li>
+      <li>北辰テストの偏差値で伊奈学園の確約・目安を確認する</li>
+    </ul>
+    <div class="ph"><span>STEP 3</span><b>1月：過去問で時間配分を体に入れる</b></div>
+    <ul class="tidy">
+      <li>埼玉県の過去問を5年分。1教科50分をタイマーで厳守</li>
+      <li>解き直しノートを作り、まちがえた問題をこのアプリに追加</li>
+      <li>捨て問を決める練習（1問に3分以上かけない）</li>
+    </ul>
+    <div class="ph"><span>STEP 4</span><b>2月：回転数を上げて本番へ</b></div>
+    <ul class="tidy">
+      <li>新しい教材は買わない。弱点カードを毎日全部まわす</li>
+      <li>朝型に切り替え、入試と同じ時間に頭を動かす</li>
+      <li>前日は暗記の総確認だけ。夜ふかし厳禁</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>忘れないための5つのルール</h2>
+    <ul class="tidy">
+      <li><b>読むな、思い出せ。</b>眺める勉強は記憶に残らない。隠して言えるか試すのが唯一の方法</li>
+      <li><b>忘れかけで復習する。</b>1日後→3日後→1週間後→2週間後→1か月後。このアプリが自動で出してくれる</li>
+      <li><b>まぜて解く。</b>同じ単元を続けるより、教科を混ぜたほうが本番で使える記憶になる</li>
+      <li><b>寝る。</b>記憶は睡眠中に固定される。6時間未満の勉強は穴の空いたバケツ</li>
+      <li><b>毎日やる。</b>週1回3時間より、毎日25分のほうが強い</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>おうちの方へ</h2>
+    <p class="sub" style="margin:0">「勉強したの？」より「今日は何問できた？」。<b>成果ではなく行動をほめる</b>ほうが継続します。点数が下がった日ほど、続けたこと自体を認めてあげてください。また、埼玉県の入試は調査書（内申）も合否に関わります。学校の提出物・出欠・定期テストは、当日点と同じくらい重要です。</p>
+  </div>
+</section>
+
+<!-- ========== SETTINGS ========== -->
+<section id="v-set" class="hide">
+  <div class="card">
+    <h2>入試日</h2>
+    <input type="date" id="examDate" onchange="saveSettings()">
+    <p class="sub" style="margin-top:6px">埼玉県公立高校の学力検査は例年2月下旬です。正確な日程は埼玉県教育委員会の発表で確認してください。</p>
+  </div>
+  <div class="card">
+    <h2>実際の模試の点数（500点満点）</h2>
+    <p class="sub" style="margin:0 0 8px">北辰テストや過去問の合計点を入れると、ホームのゲージがその値に切りかわります。空欄にすると自動計算に戻ります。</p>
+    <input type="number" id="realScore" placeholder="例：215" oninput="saveSettings()">
+  </div>
+  <div class="card">
+    <h2>1日の問題数</h2>
+    <div class="chips" id="paceChips"></div>
+    <p class="sub" style="margin-top:8px">続けられる量が正解です。迷ったら10問から。</p>
+  </div>
+  <div class="card">
+    <h2>データ</h2>
+    <p class="sub" style="margin:0 0 8px">収録 <b id="bankN">0</b> 問。</p>
+    <div id="storeMsg" class="exp" style="margin:0 0 10px"></div>
+    <button class="btn ghost" onclick="resetAll()">学習履歴をすべて消す</button>
+  </div>
+
+  <div class="card">
+    <h2>バックアップ（機種変更・消えたとき用）</h2>
+    <p class="sub" style="margin:0 0 8px">下の文字列をコピーして、LINEの自分宛やメモアプリに貼っておけば、いつでも元に戻せます。月に一度やっておくと安心です。</p>
+    <button class="btn soft" onclick="makeBackup()">バックアップを作る</button>
+    <textarea id="bkText" rows="4" placeholder="ここにバックアップの文字列が出ます" style="margin-top:8px;font-size:11px"></textarea>
+    <button class="btn ghost" onclick="copyBackup()" style="margin-top:6px">コピーする</button>
+    <p class="sub" style="margin:14px 0 6px"><b>もどすとき</b>：保存しておいた文字列を上の欄に貼り付けてから押してください。</p>
+    <button class="btn ghost" onclick="restoreBackup()">この内容で復元する</button>
+  </div>
+</section>
+
+</div>
+
+<nav>
+  <button class="on" data-v="home" onclick="go('home')"><b>◎</b>ホーム</button>
+  <button data-v="drill" onclick="go('drill')"><b>✎</b>演習</button>
+  <button data-v="rec" onclick="go('rec')"><b>📈</b>記録</button>
+  <button data-v="plan" onclick="go('plan')"><b>▤</b>作戦</button>
+  <button data-v="set" onclick="go('set')"><b>⚙</b>設定</button>
+</nav>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 問題バンク =================
+   [教科, 単元, 問題, 答え, 選択肢("正解|誤1|誤2|誤3")または null, ヒント] */
+const RAW = [
+/* ---------- 数学：計算の基礎（大問1直結） ---------- */
+["数学","計算の基礎","-3 + (-8)","-11",null,"同符号は足して符号そのまま"],
+["数学","計算の基礎","5 - (-2) × 3","11",null,"かけ算が先。5-(-6)=11"],
+["数学","計算の基礎","(-2)³","-8",null,"(-2)×(-2)×(-2)"],
+["数学","計算の基礎","-2²","-4",null,"2乗するのは2だけ。符号は最後"],
+["数学","計算の基礎","(-18) ÷ (-3) × 2","12",null,"左から順に計算"],
+["数学","計算の基礎","2(3x-1) - 3(x-2)","3x+4",null,"かっこを外すとき符号に注意"],
+["数学","計算の基礎","12a²b ÷ 4ab","3a",null,"係数どうし・文字どうしで約分"],
+["数学","計算の基礎","(2x-y)/3 + (x+2y)/2 を通分すると分母は","6",null,"3と2の最小公倍数"],
+["数学","計算の基礎","√12 + √27","5√3",null,"2√3+3√3"],
+["数学","計算の基礎","√50 - √18","2√2",null,"5√2-3√2"],
+["数学","計算の基礎","√6 × √3","3√2",null,"√18=3√2"],
+["数学","計算の基礎","6/√3 を有理化すると","2√3",null,"分母分子に√3をかける"],
+["数学","計算の基礎","(√5+1)(√5-1)","4",null,"和と差の積＝5-1"],
+["数学","計算の基礎","(x+3)(x-5) を展開","x²-2x-15",null,"和が-2、積が-15"],
+["数学","計算の基礎","(x-4)² を展開","x²-8x+16",null,"2乗の公式"],
+["数学","計算の基礎","x²-49 を因数分解","(x+7)(x-7)",null,"2乗の差"],
+["数学","計算の基礎","x²+7x+12 を因数分解","(x+3)(x+4)",null,"足して7、かけて12"],
+["数学","計算の基礎","x²-6x+9 を因数分解","(x-3)²",null,"完全平方"],
+["数学","計算の基礎","2x²-8 を因数分解","2(x+2)(x-2)",null,"まず共通因数2をくくる"],
+["数学","方程式","3x-5 = x+7 のとき x =","6",null,"2x=12"],
+["数学","方程式","0.3x - 1 = 0.5 のとき x =","5",null,"両辺を10倍する"],
+["数学","方程式","x+y=7, 2x-y=2 のとき x =","3",null,"辺々を足すと3x=9"],
+["数学","方程式","x²-5x+6=0 の解","x=2, 3",null,"(x-2)(x-3)=0"],
+["数学","方程式","x²=7 の解","x=±√7",null,"±を忘れない"],
+["数学","方程式","x²+3x+1=0 の解","x=(-3±√5)/2",null,"解の公式"],
+["数学","方程式","解の公式 x = ?（ax²+bx+c=0）","x=(-b±√(b²-4ac))/2a",null,"暗唱できるまで"],
+["数学","方程式","3:5 = x:20 のとき x =","12",null,"内項の積＝外項の積"],
+["数学","関数","傾き2で点(1,5)を通る直線の式","y=2x+3",null,"5=2+bよりb=3"],
+["数学","関数","2点(1,3)(3,7)を通る直線の式","y=2x+1",null,"傾き=(7-3)/(3-1)=2"],
+["数学","関数","y=ax² が点(2,12)を通るときaは","3",null,"12=a×4"],
+["数学","関数","y=3x² で x が1→3のときの変化の割合","12",null,"a(p+q)=3×4"],
+["数学","関数","反比例 y=12/x で x=3 のとき y =","4",null,"積が一定"],
+["数学","関数","一次関数 y=ax+b の b が表すもの","切片（y軸との交点）",null,null],
+["数学","図形","n角形の内角の和","180×(n-2) 度",null,"五角形なら540度"],
+["数学","図形","多角形の外角の和","360度",null,"何角形でも同じ"],
+["数学","図形","円周角は中心角の何倍","2分の1倍",null,null],
+["数学","図形","半円の弧に対する円周角","90度",null,null],
+["数学","図形","三平方の定理の式","a²+b²=c²",null,"cは斜辺"],
+["数学","図形","直角二等辺三角形の3辺の比","1 : 1 : √2",null,null],
+["数学","図形","30°60°90°の三角形の3辺の比","1 : √3 : 2（30°の対辺 : 60°の対辺 : 斜辺）",null,null],
+["数学","図形","相似比が a:b のとき面積比は","a² : b²",null,null],
+["数学","図形","相似比が a:b のとき体積比は","a³ : b³",null,null],
+["数学","図形","半径4の円の面積","16π",null,"πr²"],
+["数学","図形","半径3の球の体積","36π",null,"(4/3)πr³"],
+["数学","図形","半径3の球の表面積","36π",null,"4πr²"],
+["数学","図形","円錐の体積の公式","(1/3)×底面積×高さ",null,null],
+["数学","図形","おうぎ形の弧の長さ（半径r・中心角a）","2πr × a/360",null,null],
+["数学","図形","中点連結定理が示すこと","中点を結ぶ線は第三辺に平行で長さは半分",null,null],
+["数学","確率と資料","さいころ2個の目の和が7になる確率","1/6",null,"6通り÷36通り"],
+["数学","確率と資料","硬貨3枚で表がちょうど2枚出る確率","3/8",null,"全8通り中3通り"],
+["数学","確率と資料","5本中2本があたりのくじを1本引く確率","2/5",null,null],
+["数学","確率と資料","中央値とは","データを大きさ順に並べたときの真ん中の値",null,"偶数個なら真ん中2つの平均"],
+["数学","確率と資料","最頻値とは","最も多く出てくる値",null,null],
+["数学","確率と資料","四分位範囲の求め方","第3四分位数 - 第1四分位数",null,null],
+["数学","確率と資料","相対度数の求め方","その階級の度数 ÷ 度数の合計",null,null],
+["数学","文章題","10%の食塩水200gに含まれる食塩の重さ","20g",null,"200×0.1"],
+["数学","文章題","定価x円の20%引きの値段","0.8x 円",null,null],
+["数学","文章題","速さ・時間・道のりの関係","道のり = 速さ × 時間",null,null],
+["数学","文章題","連続する3つの整数を文字で表すと","n-1, n, n+1",null,null],
+
+/* ---------- 英語 ---------- */
+["英語","不規則動詞","go の過去形・過去分詞","went / gone",null,null],
+["英語","不規則動詞","see の過去形・過去分詞","saw / seen",null,null],
+["英語","不規則動詞","take の過去形・過去分詞","took / taken",null,null],
+["英語","不規則動詞","write の過去形・過去分詞","wrote / written",null,null],
+["英語","不規則動詞","eat の過去形・過去分詞","ate / eaten",null,null],
+["英語","不規則動詞","give の過去形・過去分詞","gave / given",null,null],
+["英語","不規則動詞","know の過去形・過去分詞","knew / known",null,null],
+["英語","不規則動詞","speak の過去形・過去分詞","spoke / spoken",null,null],
+["英語","不規則動詞","buy の過去形・過去分詞","bought / bought",null,null],
+["英語","不規則動詞","bring の過去形・過去分詞","brought / brought",null,null],
+["英語","不規則動詞","think の過去形・過去分詞","thought / thought",null,null],
+["英語","不規則動詞","teach の過去形・過去分詞","taught / taught",null,null],
+["英語","不規則動詞","find の過去形・過去分詞","found / found",null,null],
+["英語","不規則動詞","leave の過去形・過去分詞","left / left",null,null],
+["英語","不規則動詞","begin の過去形・過去分詞","began / begun",null,null],
+["英語","不規則動詞","become の過去形・過去分詞","became / become",null,null],
+["英語","不規則動詞","hear の過去形・過去分詞","heard / heard",null,null],
+["英語","不規則動詞","choose の過去形・過去分詞","chose / chosen",null,null],
+["英語","不規則動詞","build の過去形・過去分詞","built / built",null,null],
+["英語","不規則動詞","break の過去形・過去分詞","broke / broken",null,null],
+["英語","文法","現在完了の形","have[has] + 過去分詞",null,null],
+["英語","文法","「私は3年間ずっと東京に住んでいる」","I have lived in Tokyo for three years.",null,"継続。forは期間"],
+["英語","文法","for と since の使い分け","for=期間 / since=起点",null,"for two years / since 2020"],
+["英語","文法","受動態の形","be動詞 + 過去分詞",null,null],
+["英語","文法","「この本は多くの人に読まれている」","This book is read by many people.",null,null],
+["英語","文法","不定詞の3用法","名詞的・副詞的・形容詞的",null,null],
+["英語","文法","「私は英語を勉強するために早く起きた」","I got up early to study English.",null,"副詞的用法（目的）"],
+["英語","文法","「〜することは楽しい」の書き出し","It is fun to ~",null,"Itは形式主語"],
+["英語","文法","enjoy の後ろに来る形","動名詞（〜ing）",null,"enjoy playing"],
+["英語","文法","want の後ろに来る形","to不定詞",null,"want to play"],
+["英語","文法","「彼に〜してほしい」の形","want + 人 + to 動詞の原形",null,null],
+["英語","文法","比較級の作り方（長い語）","more + 原級",null,"more beautiful"],
+["英語","文法","最上級の作り方（長い語）","most + 原級",null,null],
+["英語","文法","good の比較級・最上級","better / best",null,null],
+["英語","文法","「AはBと同じくらい〜だ」","A is as ~ as B.",null,null],
+["英語","文法","「AはBより〜だ」","A is 比較級 than B.",null,null],
+["英語","文法","関係代名詞：人が先行詞で主格","who",null,null],
+["英語","文法","関係代名詞：ものが先行詞で目的格","which（またはthat）",null,null],
+["英語","文法","「向こうで走っている少年」","the boy running over there",null,"現在分詞の後置修飾"],
+["英語","文法","「英語で書かれた手紙」","a letter written in English",null,"過去分詞の後置修飾"],
+["英語","文法","間接疑問の語順","疑問詞 + 主語 + 動詞",null,"I know what he wants."],
+["英語","文法","There is / There are の使い分け","後ろの名詞が単数ならis、複数ならare",null,null],
+["英語","文法","「〜しなければならない」2つの言い方","must / have to",null,null],
+["英語","文法","「〜する必要はない」","don't have to ~",null,"mustn'tは「してはいけない」"],
+["英語","文法","「〜してくれませんか」の丁寧な依頼","Could you ~ ?",null,null],
+["英語","会話","How long does it take? の意味","どのくらい時間がかかりますか",null,null],
+["英語","会話","May I help you? への返答（探し物中）","I'm looking for ~",null,null],
+["英語","会話","Shall we ~ ? の意味","（一緒に）〜しませんか",null,null],
+["英語","会話","I'm afraid I can't. の意味","残念ですができません",null,null],
+["英語","英作文","理由を続けるつなぎ言葉","because / First, Second,",null,"条件英作文は理由2つが基本"],
+["英語","英作文","意見を述べる書き出し","I think that ~",null,null],
+["英語","英作文","例をあげる表現","For example,",null,null],
+["英語","単語","increase の意味","増える・増やす","増える・増やす|減る|決める|運ぶ",null],
+["英語","単語","although の意味","〜だけれども","〜だけれども|〜のあいだ|〜のために|〜以来",null],
+["英語","単語","environment の意味","環境","環境|経験|実験|政府",null],
+["英語","単語","important の意味","重要な","重要な|不可能な|興味深い|独立した",null],
+["英語","単語","through の意味","〜を通って","〜を通って|〜のあいだじゅう|〜に向かって|〜のまわりに",null],
+["英語","単語","enough の意味","十分な","十分な|少しの|多すぎる|ほとんどない",null],
+["英語","単語","choose の意味","選ぶ","選ぶ|変える|閉じる|運ぶ",null],
+["英語","単語","difficult の意味","難しい","難しい|ちがう|危険な|静かな",null],
+["英語","単語","experience の意味","経験","経験|実験|運動|説明",null],
+["英語","単語","future の意味","未来","未来|過去|家具|特徴",null],
+["英語","熟語","take care of の意味","〜の世話をする",null,null],
+["英語","熟語","look forward to の後ろの形","動名詞（〜ing）",null,"toは前置詞"],
+["英語","熟語","be interested in の意味","〜に興味がある",null,null],
+["英語","熟語","be able to の意味","〜することができる",null,null],
+["英語","熟語","give up の意味","あきらめる",null,null],
+
+/* ---------- 国語 ---------- */
+["国語","漢字（読み）","「著しい」の読み","いちじるしい",null,null],
+["国語","漢字（読み）","「厳か」の読み","おごそか",null,null],
+["国語","漢字（読み）","「培う」の読み","つちかう",null,null],
+["国語","漢字（読み）","「促す」の読み","うながす",null,null],
+["国語","漢字（読み）","「委ねる」の読み","ゆだねる",null,null],
+["国語","漢字（読み）","「憂慮」の読み","ゆうりょ",null,null],
+["国語","漢字（読み）","「示唆」の読み","しさ",null,null],
+["国語","漢字（読み）","「相殺」の読み","そうさい",null,null],
+["国語","漢字（読み）","「凡例」の読み","はんれい",null,null],
+["国語","漢字（読み）","「暫定」の読み","ざんてい",null,null],
+["国語","漢字（書き）","キケンな場所","危険",null,null],
+["国語","漢字（書き）","責任をハタす","果たす",null,null],
+["国語","漢字（書き）","キチョウな体験","貴重",null,null],
+["国語","漢字（書き）","カンタンな問題","簡単",null,null],
+["国語","漢字（書き）","意見をノベる","述べる",null,null],
+["国語","漢字（書き）","セイセキが上がる","成績",null,null],
+["国語","漢字（書き）","シュウカン（毎週の刊行物）","週刊",null,"習慣・週間と区別"],
+["国語","漢字（書き）","タイショウ（左右がつり合う）","対称",null,"対象・対照と区別"],
+["国語","漢字（書き）","ホショウ（損害をつぐなう）","補償",null,"保証・保障と区別"],
+["国語","漢字（書き）","ゼッタイに負けない","絶対",null,null],
+["国語","語彙","「五里霧中」の意味","事情がわからず方針が立たないこと",null,null],
+["国語","語彙","「試行錯誤」の意味","失敗をくり返しながら解決に近づくこと",null,null],
+["国語","語彙","「一朝一夕」の意味","わずかな時間・短期間",null,null],
+["国語","語彙","「手前みそ」の意味","自分で自分をほめること","自分で自分をほめること|準備が早いこと|人をだますこと|遠慮すること",null],
+["国語","語彙","「気が置けない」の意味","遠慮がいらない・気楽である","遠慮がいらない|油断ならない|気が短い|信用できない",null],
+["国語","語彙","「役不足」の正しい意味","力量に対して役目が軽すぎること","役目が軽すぎる|力が足りない|人手が足りない|準備不足",null],
+["国語","語彙","「情けは人のためならず」の意味","人への親切は巡りめぐって自分に返る","巡って自分に返る|甘やかすのは害|親切は無意味|人は信じるな",null],
+["国語","語彙","「客観的」の対義語","主観的",null,null],
+["国語","語彙","「具体」の対義語","抽象",null,null],
+["国語","語彙","「絶対」の対義語","相対",null,null],
+["国語","文法","「きれいだ」の品詞","形容動詞",null,null],
+["国語","文法","「大きな」の品詞","連体詞",null,"「大きい」は形容詞"],
+["国語","文法","「れる・られる」の4つの意味","受け身・可能・自発・尊敬",null,null],
+["国語","文法","「ようだ」が表す3つの意味","推定・たとえ・例示",null,null],
+["国語","文法","文節に区切るときのコツ","「ね」を入れて切れるところ",null,null],
+["国語","文法","主語・述語の関係を何というか","主述の関係",null,null],
+["国語","古文","歴史的仮名遣い「けふ」の読み","きょう",null,"eu→yô"],
+["国語","古文","歴史的仮名遣い「をとこ」の読み","おとこ",null,"語頭以外のハ行・ワ行に注意"],
+["国語","古文","歴史的仮名遣い「いふ」の読み","いう",null,null],
+["国語","古文","係助詞「ぞ・なむ・や・か」の結びの活用形","連体形",null,null],
+["国語","古文","係助詞「こそ」の結びの活用形","已然形",null,null],
+["国語","古文","「あはれなり」の意味","しみじみと心を打たれる",null,null],
+["国語","古文","「をかし」の意味","趣がある・興味深い",null,null],
+["国語","作文","埼玉県入試の作文で最初に書くこと","資料から読み取った事実",null,"第一段落＝事実、第二段落＝自分の体験と意見"],
+["国語","作文","作文で減点されない基本","原稿用紙の使い方・常体か敬体の統一・字数の9割以上",null,null],
+["国語","読解","説明文で筆者の主張が出やすい位置","最初と最後の段落",null,null],
+["国語","読解","「つまり」の後ろに来るもの","前の内容の言いかえ・まとめ",null,null],
+["国語","読解","「しかし」の後ろに来るもの","筆者が本当に言いたいこと",null,null],
+["国語","読解","記述問題で必ずやること","設問の語尾に合わせて答える（「なぜ」→「〜から」）",null,null],
+
+/* ---------- 理科 ---------- */
+["理科","物理（光音力）","入射角と反射角の関係","等しい",null,null],
+["理科","物理（光音力）","凸レンズで焦点距離の2倍の位置に物体を置くとできる像","同じ大きさの倒立実像",null,null],
+["理科","物理（光音力）","物体を焦点の内側に置いたとき見えるもの","正立虚像（大きく見える）",null,null],
+["理科","物理（光音力）","音の高さを決めるもの","振動数",null,"大きさは振幅"],
+["理科","物理（光音力）","音が空気中を伝わる速さ（約）","約340 m/s",null,null],
+["理科","物理（光音力）","1Nは何gの物体にはたらく重力とほぼ同じか","約100g",null,null],
+["理科","物理（光音力）","浮力の求め方","空気中での重さ - 水中での重さ",null,null],
+["理科","物理（電流）","オームの法則","電圧 = 抵抗 × 電流",null,"V=RI"],
+["理科","物理（電流）","直列回路の電流","どこでも同じ",null,null],
+["理科","物理（電流）","並列回路の電圧","どこでも同じ",null,null],
+["理科","物理（電流）","電力の式","電力(W) = 電圧(V) × 電流(A)",null,null],
+["理科","物理（電流）","電力量の式","電力量(J) = 電力(W) × 時間(s)",null,null],
+["理科","物理（電流）","電流が磁界から受ける力の向きを調べる法則","フレミング左手の法則",null,null],
+["理科","物理（運動）","仕事の式","仕事(J) = 力(N) × 動かした距離(m)",null,null],
+["理科","物理（運動）","仕事の原理とは","道具を使っても仕事の大きさは変わらない",null,null],
+["理科","物理（運動）","等速直線運動のグラフ（時間と速さ）","時間軸に平行な直線",null,null],
+["理科","物理（運動）","力がはたらかないとき物体が運動を続ける性質","慣性",null,null],
+["理科","化学","水の電気分解の化学反応式","2H₂O → 2H₂ + O₂",null,"陰極に水素、陽極に酸素"],
+["理科","化学","炭酸水素ナトリウムを加熱したときの生成物","炭酸ナトリウム・水・二酸化炭素",null,null],
+["理科","化学","酸化銅を炭素で還元したときの化学反応式","2CuO + C → 2Cu + CO₂",null,null],
+["理科","化学","鉄と硫黄が結びついてできる物質","硫化鉄",null,null],
+["理科","化学","二酸化炭素の確認方法","石灰水が白くにごる",null,null],
+["理科","化学","酸素の確認方法","線香が炎を上げて燃える",null,null],
+["理科","化学","水素の確認方法","マッチの火を近づけると音を立てて燃える",null,null],
+["理科","化学","アンモニアの集め方","上方置換法",null,"水に非常によく溶け空気より軽い"],
+["理科","化学","質量保存の法則とは","化学変化の前後で物質全体の質量は変わらない",null,null],
+["理科","化学","酸の水溶液に共通して含まれるイオン","水素イオン H⁺",null,null],
+["理科","化学","アルカリの水溶液に共通して含まれるイオン","水酸化物イオン OH⁻",null,null],
+["理科","化学","中和の化学式","H⁺ + OH⁻ → H₂O",null,null],
+["理科","化学","BTB溶液の色（酸性・中性・アルカリ性）","黄・緑・青",null,null],
+["理科","化学","電池で−極になるのはイオンになりやすい金属か","なりやすい金属（例：亜鉛）",null,null],
+["理科","化学","塩化銅水溶液の電気分解で陰極に出るもの","銅",null,"陽極は塩素"],
+["理科","化学","状態変化で変わらないもの","質量（体積は変わる）",null,null],
+["理科","化学","溶解度曲線から結晶を取り出す方法","再結晶（冷やす・水を蒸発させる）",null,null],
+["理科","生物","光合成で使われるもの・できるもの","二酸化炭素と水 → デンプンと酸素",null,null],
+["理科","生物","葉のデンプンを調べる薬品と反応","ヨウ素液で青紫色",null,null],
+["理科","生物","気孔のはたらき","蒸散・気体の出入り",null,null],
+["理科","生物","デンプンを分解する消化酵素","アミラーゼ",null,"だ液に含まれる"],
+["理科","生物","タンパク質を分解する胃の消化酵素","ペプシン",null,null],
+["理科","生物","脂肪を分解する消化酵素","リパーゼ",null,null],
+["理科","生物","ブドウ糖・アミノ酸が吸収されて入る管","毛細血管",null,"脂肪酸などはリンパ管"],
+["理科","生物","動脈血が流れている静脈","肺静脈",null,null],
+["理科","生物","尿素をつくる器官・こしとる器官","肝臓でつくり、じん臓でこしとる",null,null],
+["理科","生物","赤血球のはたらき","酸素を運ぶ（ヘモグロビン）",null,null],
+["理科","生物","減数分裂で染色体の数はどうなるか","半分になる",null,null],
+["理科","生物","AaとAaをかけ合わせたときの子の比","顕性:潜性 = 3 : 1",null,null],
+["理科","生物","無性生殖で子に現れる形質","親とまったく同じ（クローン）",null,null],
+["理科","生物","生態系の3つの役割","生産者・消費者・分解者",null,null],
+["理科","生物","被子植物と裸子植物のちがい","胚珠が子房に包まれているかどうか",null,null],
+["理科","生物","単子葉類の葉脈と根","平行脈・ひげ根",null,null],
+["理科","生物","セキツイ動物5種類","魚類・両生類・は虫類・鳥類・哺乳類",null,null],
+["理科","地学","示準化石が示すもの","地層ができた時代",null,"示相化石は環境"],
+["理科","地学","アンモナイトが示す地質年代","中生代",null,null],
+["理科","地学","火山岩と深成岩の組織","火山岩＝斑状組織、深成岩＝等粒状組織",null,null],
+["理科","地学","深成岩3つ","花こう岩・せん緑岩・斑れい岩",null,null],
+["理科","地学","火山岩3つ","流紋岩・安山岩・玄武岩",null,null],
+["理科","地学","マグマのねばりけが強い火山の形","もり上がった形（ドーム状）",null,"色は白っぽい"],
+["理科","地学","初期微動を伝える波","P波",null,"主要動はS波"],
+["理科","地学","湿度の求め方","空気中の水蒸気量 ÷ 飽和水蒸気量 × 100",null,null],
+["理科","地学","露点とは","水蒸気が凝結し始める温度",null,null],
+["理科","地学","寒冷前線が通過した後の気温と天気","気温は下がる。短時間の強い雨（積乱雲）",null,null],
+["理科","地学","温暖前線がもたらす雨","長時間の弱い雨（乱層雲）",null,null],
+["理科","地学","日本の冬の気圧配置","西高東低",null,"シベリア気団"],
+["理科","地学","日本の夏をもたらす気団","小笠原気団（あたたかく湿っている）",null,null],
+["理科","地学","太陽の1日の動きの原因","地球の自転",null,null],
+["理科","地学","季節が生じる理由","地軸が傾いたまま公転しているから",null,null],
+["理科","地学","金星が真夜中に見えない理由","地球より内側を公転しているから",null,null],
+["理科","地学","月食が起きるときの並び","太陽－地球－月",null,null],
+
+/* ---------- 社会 ---------- */
+["社会","地理（世界）","本初子午線が通るロンドンの旧天文台","グリニッジ天文台",null,null],
+["社会","地理（世界）","日本の標準時子午線","東経135度（兵庫県明石市）",null,null],
+["社会","地理（世界）","経度15度で生じる時差","1時間",null,null],
+["社会","地理（世界）","EUの共通通貨","ユーロ",null,null],
+["社会","地理（世界）","東南アジア諸国連合の略称","ASEAN",null,null],
+["社会","地理（世界）","ブラジルなどで話される言語","ポルトガル語","ポルトガル語|スペイン語|フランス語|英語",null],
+["社会","地理（世界）","アメリカ北緯37度以南の工業地域","サンベルト",null,null],
+["社会","地理（世界）","一年中雨が多く高温な気候帯","熱帯（熱帯雨林気候）",null,null],
+["社会","地理（世界）","焼畑農業が行われる地域の特徴","熱帯の森林地域",null,null],
+["社会","地理（世界）","中国の沿岸部に設けられた外国企業誘致地域","経済特区",null,null],
+["社会","地理（日本）","日本の排他的経済水域の範囲","海岸線から200海里",null,null],
+["社会","地理（日本）","日本最大の工業地帯","中京工業地帯",null,"自動車工業が中心"],
+["社会","地理（日本）","関東から九州北部に連なる工業地域の帯","太平洋ベルト",null,null],
+["社会","地理（日本）","高知や宮崎で行われる野菜の早づくり","促成栽培",null,null],
+["社会","地理（日本）","長野や群馬の高原で行う野菜の遅づくり","抑制栽培",null,null],
+["社会","地理（日本）","日本アルプスを構成する3つの山脈","飛驒・木曽・赤石",null,null],
+["社会","地理（日本）","日本で最も長い川","信濃川",null,null],
+["社会","地理（日本）","日本で最も広い平野","関東平野",null,null],
+["社会","地理（日本）","冬に雪が多い日本海側の気候の原因","北西の季節風と対馬海流",null,null],
+["社会","地理（日本）","扇状地の利用に適した農業","果樹栽培",null,"水はけがよい"],
+["社会","地理（日本）","三角州の特徴","河口にできる細かい土砂の低平地",null,null],
+["社会","地理（日本）","地形図で等高線の間隔が狭い場所","傾斜が急",null,null],
+["社会","地理（日本）","2万5千分の1地形図で4cmは実際に何m","1000m",null,"4×25000=100000cm"],
+["社会","地理（日本）","第三次産業の割合が特に高い都道府県","沖縄県・東京都",null,null],
+["社会","歴史（古代中世）","645年に始まった政治改革","大化の改新",null,"中大兄皇子と中臣鎌足"],
+["社会","歴史（古代中世）","701年に定められた律令","大宝律令",null,null],
+["社会","歴史（古代中世）","710年に都が移された場所","平城京（奈良）",null,null],
+["社会","歴史（古代中世）","743年に出された土地私有を認める法","墾田永年私財法",null,null],
+["社会","歴史（古代中世）","794年に都が移された場所","平安京（京都）",null,null],
+["社会","歴史（古代中世）","藤原氏が行った政治","摂関政治",null,null],
+["社会","歴史（古代中世）","源頼朝が置いた地方の役職2つ","守護・地頭",null,null],
+["社会","歴史（古代中世）","1274年と1281年の出来事","元寇（文永の役・弘安の役）",null,null],
+["社会","歴史（古代中世）","1467年に始まった戦乱","応仁の乱",null,"戦国時代の始まり"],
+["社会","歴史（古代中世）","1543年に鉄砲が伝わった場所","種子島",null,null],
+["社会","歴史（古代中世）","1549年にキリスト教を伝えた人物","フランシスコ・ザビエル",null,null],
+["社会","歴史（近世）","豊臣秀吉が行った土地と武器の政策","太閤検地・刀狩",null,null],
+["社会","歴史（近世）","1600年の戦い","関ヶ原の戦い",null,null],
+["社会","歴史（近世）","大名を統制するために出された法","武家諸法度",null,null],
+["社会","歴史（近世）","大名に江戸と領地を往復させた制度","参勤交代",null,"徳川家光が制度化"],
+["社会","歴史（近世）","徳川吉宗の改革","享保の改革",null,null],
+["社会","歴史（近世）","1853年に浦賀に来航した人物","ペリー",null,null],
+["社会","歴史（近世）","1858年に結ばれた不平等条約","日米修好通商条約",null,"領事裁判権と関税自主権の欠如"],
+["社会","歴史（近代）","1868年に示された新政府の方針","五箇条の御誓文",null,null],
+["社会","歴史（近代）","1873年に始まった土地・税の改革","地租改正",null,null],
+["社会","歴史（近代）","1889年に発布された憲法","大日本帝国憲法",null,null],
+["社会","歴史（近代）","1894年に始まった戦争と講和条約","日清戦争・下関条約",null,null],
+["社会","歴史（近代）","1904年に始まった戦争と講和条約","日露戦争・ポーツマス条約",null,null],
+["社会","歴史（近代）","1925年に成立した2つの法律","普通選挙法・治安維持法",null,null],
+["社会","歴史（近代）","1929年に始まった世界的な不況","世界恐慌",null,null],
+["社会","歴史（近代）","1931年に始まった出来事","満州事変",null,null],
+["社会","歴史（現代）","1945年に日本が受諾した宣言","ポツダム宣言",null,null],
+["社会","歴史（現代）","日本国憲法の公布日と施行日","1946年11月3日公布・1947年5月3日施行",null,null],
+["社会","歴史（現代）","1951年に結ばれた講和条約","サンフランシスコ平和条約",null,null],
+["社会","歴史（現代）","日本が国際連合に加盟した年","1956年",null,"日ソ共同宣言の年"],
+["社会","歴史（現代）","1972年に日本に復帰した地域","沖縄",null,null],
+["社会","公民","日本国憲法の三大原則","国民主権・基本的人権の尊重・平和主義",null,null],
+["社会","公民","天皇の役割","日本国と国民統合の象徴",null,null],
+["社会","公民","憲法改正の手続き","各議院の総議員の3分の2以上の賛成→国民投票で過半数",null,null],
+["社会","公民","生存権を定めた条文","第25条（健康で文化的な最低限度の生活）",null,null],
+["社会","公民","社会権に含まれる権利","生存権・教育を受ける権利・勤労の権利・労働三権",null,null],
+["社会","公民","労働三権","団結権・団体交渉権・団体行動権",null,null],
+["社会","公民","三権分立の3つの機関","国会（立法）・内閣（行政）・裁判所（司法）",null,null],
+["社会","公民","国会が持つ「唯一の」権能","唯一の立法機関",null,null],
+["社会","公民","衆議院の優越が認められる理由","任期が短く解散があり国民の意思を反映しやすいから",null,null],
+["社会","公民","内閣不信任決議が可決された後の対応","10日以内に衆議院を解散するか総辞職",null,null],
+["社会","公民","裁判を3回まで受けられる制度","三審制",null,null],
+["社会","公民","国民が刑事裁判に参加する制度","裁判員制度",null,null],
+["社会","公民","最高裁判所が「憲法の番人」と呼ばれる理由","法律が憲法に違反していないか最終決定するから",null,null],
+["社会","公民","地方公共団体が独自に定めるきまり","条例",null,null],
+["社会","公民","条例の制定・改廃を求めるのに必要な署名","有権者の50分の1以上",null,null],
+["社会","公民","首長の解職請求に必要な署名","有権者の3分の1以上",null,null],
+["社会","公民","需要量が供給量を上回ると価格はどうなるか","上がる",null,null],
+["社会","公民","日本銀行の3つの役割","発券銀行・政府の銀行・銀行の銀行",null,null],
+["社会","公民","不景気のとき日本銀行が行う金融政策","国債などを買って通貨量を増やす",null,null],
+["社会","公民","所得が多いほど税率が高くなるしくみ","累進課税",null,null],
+["社会","公民","消費税のように所得に関係なく同率の税の問題点","低所得者ほど負担が重い（逆進性）",null,null],
+["社会","公民","直接税と間接税の例","直接税＝所得税、間接税＝消費税",null,null],
+["社会","公民","社会保障の4つの柱","社会保険・公的扶助・社会福祉・公衆衛生",null,null],
+["社会","公民","国連の安全保障理事会の常任理事国","米・英・仏・露・中",null,"拒否権を持つ"],
+["社会","公民","持続可能な開発目標の略称","SDGs",null,null],
+["社会","公民","循環型社会の3R","リデュース・リユース・リサイクル",null,null]
+];
+
+/* ===== 追加バンク（7番目の数字＝1:必修 2:標準 3:上積み） ===== */
+const RAW2 = [
+/* ---------- 数学 ---------- */
+["数学","計算の基礎","-7 - (-4)","-3",null,null,1],
+["数学","計算の基礎","(-3) × (-4) ÷ 6","2",null,null,1],
+["数学","計算の基礎","4 - (-3)²","-5",null,"9を引く",1],
+["数学","計算の基礎","-1/2 + 2/3","1/6",null,"通分して6分の",1],
+["数学","計算の基礎","3/4 ÷ (-9/8)","-2/3",null,"逆数をかける",2],
+["数学","計算の基礎","5a - 3b - (2a - b)","3a-2b",null,null,1],
+["数学","計算の基礎","(6x - 9) ÷ 3","2x-3",null,null,1],
+["数学","計算の基礎","(-3a)²","9a²",null,"符号も2乗",1],
+["数学","計算の基礎","2x²y × 3xy²","6x³y³",null,null,1],
+["数学","計算の基礎","8a²b ÷ (-2a) × 3b","-12ab²",null,null,2],
+["数学","計算の基礎","x=-2 のとき 3x²-x の値","14",null,"12-(-2)",1],
+["数学","計算の基礎","√8 × √6","4√3",null,"√48",2],
+["数学","計算の基礎","√27 ÷ √3","3",null,null,1],
+["数学","計算の基礎","(√3+√2)²","5+2√6",null,null,2],
+["数学","計算の基礎","√45 を簡単にすると","3√5",null,null,1],
+["数学","計算の基礎","2/√8 を有理化","√2/2",null,"まず√8=2√2",3],
+["数学","計算の基礎","(x+2)(x-2) - (x-1)²","2x-5",null,null,2],
+["数学","計算の基礎","(2x+3)(2x-3)","4x²-9",null,null,1],
+["数学","計算の基礎","(x+5)(x-2)","x²+3x-10",null,null,1],
+["数学","計算の基礎","x²-x-20 を因数分解","(x-5)(x+4)",null,"足して-1 かけて-20",1],
+["数学","計算の基礎","x²+10x+25 を因数分解","(x+5)²",null,null,1],
+["数学","計算の基礎","3x²-12x を因数分解","3x(x-4)",null,"共通因数が先",1],
+["数学","計算の基礎","ax+ay-bx-by を因数分解","(a-b)(x+y)",null,null,3],
+["数学","計算の基礎","2.4×10⁴ を整数で表すと","24000",null,null,1],
+["数学","計算の基礎","3.14 を有効数字2桁で表すと","3.1",null,null,2],
+["数学","方程式","5(x-2) = 3x+4 のとき x =","7",null,null,1],
+["数学","方程式","x/2 - 1 = x/3 のとき x =","6",null,"両辺を6倍",1],
+["数学","方程式","2x+3y=12 で x=3 のとき y =","2",null,null,1],
+["数学","方程式","3x+2y=8, 2x-y=3 のとき y =","1",null,"x=2",2],
+["数学","方程式","x²-4x=0 の解","x=0, 4",null,"x(x-4)=0",1],
+["数学","方程式","(x+3)²=16 の解","x=1, -7",null,"x+3=±4",2],
+["数学","方程式","2x²-5x+2=0 の解","x=2, 1/2",null,"解の公式",3],
+["数学","方程式","x²+2x-1=0 の解","x=-1±√2",null,null,2],
+["数学","方程式","x:8 = 3:4 のとき x =","6",null,null,1],
+["数学","方程式","ある数を3倍して5を引くと13。その数は","6",null,null,1],
+["数学","方程式","連立方程式の解き方2つ","加減法・代入法",null,null,1],
+["数学","方程式","解が2つあるかを判断する式","b²-4ac の符号",null,null,3],
+["数学","方程式","文章題で最初にやること","何をxにするか決めて書く",null,null,1],
+["数学","関数","y=-2x+6 のグラフがx軸と交わる点のx座標","3",null,"y=0を代入",2],
+["数学","関数","y=2x+1 と y=2x-3 の位置関係","平行",null,null,1],
+["数学","関数","傾きが負の一次関数のグラフの向き","右下がり",null,null,1],
+["数学","関数","変化の割合とは","xが1増えたときのyの増加量",null,null,1],
+["数学","関数","y=x² のグラフの名前と頂点","放物線・原点",null,null,1],
+["数学","関数","y=ax² で a<0 のときグラフの開き方","下に開く",null,null,1],
+["数学","関数","y=2x² で x=-3 のとき y =","18",null,null,1],
+["数学","関数","y=-x² で x が -2→1 のときの変化の割合","1",null,"a(p+q)",3],
+["数学","関数","2直線の交点の求め方","2つの式を連立方程式として解く",null,null,2],
+["数学","関数","反比例のグラフの名前","双曲線",null,null,1],
+["数学","関数","y=6/x のグラフ上で x=2 のとき y =","3",null,null,1],
+["数学","関数","一次関数の式を求める手順","傾きを出す→通る1点を代入",null,null,1],
+["数学","関数","動点の問題で最初にすること","面積や長さを x の式で表す",null,null,3],
+["数学","図形","三角形の内角の和","180度",null,null,1],
+["数学","図形","二等辺三角形の2つの底角","等しい",null,null,1],
+["数学","図形","正三角形の1つの内角","60度",null,null,1],
+["数学","図形","正八角形の1つの内角","135度",null,"1080÷8",2],
+["数学","図形","対頂角の性質","等しい",null,null,1],
+["数学","図形","平行線の同位角の性質","等しい",null,null,1],
+["数学","図形","三角形の合同条件3つ","3辺／2辺とその間の角／1辺とその両端の角",null,null,1],
+["数学","図形","直角三角形の合同条件2つ","斜辺と1つの鋭角／斜辺と他の1辺",null,null,2],
+["数学","図形","三角形の相似条件3つ","3組の辺の比／2組の辺の比と間の角／2組の角",null,null,1],
+["数学","図形","平行四辺形の対角線の性質","それぞれの中点で交わる",null,null,1],
+["数学","図形","ひし形の対角線の性質","垂直に交わる",null,null,2],
+["数学","図形","円の接線と半径の関係","接点で垂直に交わる",null,null,1],
+["数学","図形","同じ弧に対する円周角どうしの関係","すべて等しい",null,null,1],
+["数学","図形","直角三角形で他の2辺が5と12のときの斜辺","13",null,null,1],
+["数学","図形","1辺2の正三角形の高さ","√3",null,null,2],
+["数学","図形","1辺4の立方体の対角線の長さ","4√3",null,"a√3",3],
+["数学","図形","円柱の側面積の求め方","底面の円周 × 高さ",null,null,2],
+["数学","図形","作図で使ってよい道具","定規とコンパスだけ",null,"分度器は使わない",1],
+["数学","図形","垂直二等分線上の点の性質","2点から等しい距離にある",null,null,2],
+["数学","図形","おうぎ形の面積（半径r・中心角a）","πr² × a/360",null,null,1],
+["数学","図形","投影図で正面から見た図の名前","立面図",null,"真上からは平面図",2],
+["数学","確率と資料","さいころ1個で3以上が出る確率","2/3",null,null,1],
+["数学","確率と資料","さいころ2個で少なくとも1つ1が出る確率","11/36",null,"1-25/36",3],
+["数学","確率と資料","A・B・C の3人から2人を選ぶ組み合わせ","3通り",null,null,1],
+["数学","確率と資料","1〜4の4枚のカードから2枚使ってできる2けたの整数は何通り","12通り",null,"4×3",2],
+["数学","確率と資料","「起こらない確率」の求め方","1 - 起こる確率",null,null,1],
+["数学","確率と資料","標本調査を使う理由","全部を調べるのが困難だから",null,null,1],
+["数学","確率と資料","箱ひげ図の箱の左端が示す値","第1四分位数",null,null,2],
+["数学","確率と資料","累積相対度数とは","その階級までの相対度数の合計",null,null,2],
+["数学","文章題","時速4kmで3km歩くのにかかる時間","45分",null,"3/4時間",1],
+["数学","文章題","8%の食塩水 x g に含まれる食塩","0.08x g",null,null,1],
+["数学","文章題","原価 x 円に3割の利益をつけた定価","1.3x 円",null,null,1],
+["数学","文章題","毎分 x m で y 分歩いた道のり","xy m",null,null,1],
+["数学","文章題","x円の品物を a% 引きで買った代金","x(100-a)/100 円",null,null,2],
+["数学","文章題","池の周りを反対向きに回って出会う式","2人の道のりの和 = 1周",null,null,3],
+["数学","文章題","式を立てたあと必ずやること","答えが問題に合うか確かめる",null,null,1],
+
+/* ---------- 英語 ---------- */
+["英語","不規則動詞","come の過去形・過去分詞","came / come",null,null,1],
+["英語","不規則動詞","get の過去形・過去分詞","got / gotten(got)",null,null,1],
+["英語","不規則動詞","make の過去形・過去分詞","made / made",null,null,1],
+["英語","不規則動詞","put の過去形・過去分詞","put / put",null,null,1],
+["英語","不規則動詞","read の過去形・過去分詞","read / read（読みはレッド）",null,null,1],
+["英語","不規則動詞","run の過去形・過去分詞","ran / run",null,null,1],
+["英語","不規則動詞","say の過去形・過去分詞","said / said",null,null,1],
+["英語","不規則動詞","send の過去形・過去分詞","sent / sent",null,null,1],
+["英語","不規則動詞","sing の過去形・過去分詞","sang / sung",null,null,1],
+["英語","不規則動詞","sit の過去形・過去分詞","sat / sat",null,null,1],
+["英語","不規則動詞","sleep の過去形・過去分詞","slept / slept",null,null,1],
+["英語","不規則動詞","stand の過去形・過去分詞","stood / stood",null,null,1],
+["英語","不規則動詞","swim の過去形・過去分詞","swam / swum",null,null,1],
+["英語","不規則動詞","tell の過去形・過去分詞","told / told",null,null,1],
+["英語","不規則動詞","understand の過去形・過去分詞","understood / understood",null,null,2],
+["英語","不規則動詞","wear の過去形・過去分詞","wore / worn",null,null,2],
+["英語","不規則動詞","win の過去形・過去分詞","won / won",null,null,1],
+["英語","不規則動詞","keep の過去形・過去分詞","kept / kept",null,null,1],
+["英語","不規則動詞","lose の過去形・過去分詞","lost / lost",null,null,1],
+["英語","不規則動詞","meet の過去形・過去分詞","met / met",null,null,1],
+["英語","文法","動詞に3単現のsをつけるのはどんなとき","主語が3人称単数で現在の文",null,null,1],
+["英語","文法","3単現の疑問文で使う語","does",null,"動詞は原形に戻す",1],
+["英語","文法","過去進行形の形","was / were + 動詞ing",null,null,1],
+["英語","文法","未来を表す2つの言い方","will / be going to",null,null,1],
+["英語","文法","現在完了の3つの用法","継続・経験・完了",null,null,1],
+["英語","文法","「〜へ行ったことがある」","have been to ~",null,null,2],
+["英語","文法","「〜へ行ってしまった（今いない）」","have gone to ~",null,null,3],
+["英語","文法","経験を表す語","ever / never / once / before",null,null,2],
+["英語","文法","完了を表す語","just / already / yet",null,null,2],
+["英語","文法","否定文の yet の意味","まだ",null,"疑問文では「もう」",2],
+["英語","文法","現在完了進行形の形","have been + 動詞ing",null,null,3],
+["英語","文法","「彼を幸せにする」","make him happy",null,"SVOC",2],
+["英語","文法","「彼に本をあげる」2通り","give him a book / give a book to him",null,null,2],
+["英語","文法","「〜のやり方」","how to ~",null,null,1],
+["英語","文法","「何をすべきか」","what to do",null,null,2],
+["英語","文法","too ~ to ... の意味","あまりに〜なので…できない",null,null,2],
+["英語","文法","so ~ that ... の意味","とても〜なので…だ",null,null,2],
+["英語","文法","「彼が私にくれた本」（関係代名詞の省略）","the book he gave me",null,"接触節",3],
+["英語","文法","「もし明日晴れたら」の動詞の形","現在形（If it is sunny tomorrow）",null,"未来でも現在形",2],
+["英語","文法","「私が〜ならいいのに」（仮定法）","I wish I were ~",null,null,3],
+["英語","文法","If I were you, ~ の意味","もし私があなたなら",null,null,3],
+["英語","文法","help + 人 + の後ろの動詞の形","原形（help me carry）",null,null,3],
+["英語","文法","感嘆文 How と What の使い分け","How+形容詞／What+名詞",null,null,2],
+["英語","文法","冠詞 a と an の使い分け","次の語が母音の音で始まればan",null,null,1],
+["英語","文法","「〜も…も両方」","both A and B",null,null,2],
+["英語","単語","different の意味","ちがった","ちがった|難しい|危険な|便利な",null,1],
+["英語","単語","decide の意味","決める","決める|続ける|届ける|describeする",null,1],
+["英語","単語","receive の意味","受け取る","受け取る|返す|拒む|信じる",null,2],
+["英語","単語","invent の意味","発明する","発明する|招待する|投資する|防ぐ",null,2],
+["英語","単語","protect の意味","守る","守る|produceする|進める|予測する",null,1],
+["英語","単語","reduce の意味","減らす","減らす|増やす|集める|続ける",null,2],
+["英語","単語","especially の意味","特に","特に|突然|最終的に|たぶん",null,2],
+["英語","単語","finally の意味","ついに・最後に","ついに|最初に|特に|実際に",null,1],
+["英語","単語","probably の意味","たぶん","たぶん|決して|すでに|まだ",null,1],
+["英語","単語","health の意味","健康","健康|富|habit|高さ",null,1],
+["英語","単語","culture の意味","文化","文化|自然|農業|未来",null,1],
+["英語","単語","society の意味","社会","社会|科学|安全|静けさ",null,1],
+["英語","単語","opinion の意味","意見","意見|機会|操作|反対",null,1],
+["英語","単語","reason の意味","理由","理由|季節|結果|地域",null,1],
+["英語","単語","result の意味","結果","結果|理由|規則|要求",null,1],
+["英語","単語","several の意味","いくつかの","いくつかの|深刻な|同じ|すべての",null,2],
+["英語","単語","useful の意味","役に立つ","役に立つ|無用の|美しい|忙しい",null,1],
+["英語","単語","support の意味","支える・支援する","支える|報告する|運ぶ|驚かす",null,1],
+["英語","単語","develop の意味","発展させる","発展させる|届ける|離れる|決める",null,2],
+["英語","単語","communicate の意味","意思を伝え合う","意思を伝え合う|通勤する|完成させる|比べる",null,2],
+["英語","会話","Here you are. の意味","はい、どうぞ",null,null,1],
+["英語","会話","What's wrong? の意味","どうしたの",null,null,1],
+["英語","会話","That sounds good. の意味","それはいいですね",null,null,1],
+["英語","会話","Would you like some tea? への肯定の返事","Yes, please.",null,null,1],
+["英語","会話","How about ~ ? の意味","〜はどうですか",null,null,1],
+["英語","会話","Just a moment, please. の意味","少々お待ちください",null,null,1],
+["英語","会話","電話で「私です」","Speaking.",null,null,2],
+["英語","会話","Why don't we go? の意味","一緒に行きませんか",null,null,2],
+["英語","会話","I'd like to ~ の意味","〜したいのですが",null,null,1],
+["英語","会話","Could you tell me the way to ~ ? の意味","〜への行き方を教えてくれませんか",null,null,1],
+["英語","熟語","be proud of の意味","〜を誇りに思う",null,null,1],
+["英語","熟語","be famous for の意味","〜で有名だ",null,null,1],
+["英語","熟語","take part in の意味","〜に参加する",null,null,1],
+["英語","熟語","come true の意味","実現する",null,null,1],
+["英語","熟語","look after の意味","〜の世話をする",null,null,1],
+["英語","熟語","be full of の意味","〜でいっぱいだ",null,null,1],
+["英語","熟語","thanks to の意味","〜のおかげで",null,null,2],
+["英語","熟語","because of の後ろに来る形","名詞（becauseは文）",null,null,2],
+["英語","熟語","at first の意味","最初は",null,null,1],
+["英語","熟語","get to / arrive at の意味","〜に到着する",null,null,1],
+["英語","熟語","put on と wear のちがい","put on＝着る動作、wear＝着ている状態",null,null,2],
+["英語","熟語","as soon as の意味","〜するとすぐに",null,null,2],
+["英語","英作文","賛成・反対を述べる書き出し","I agree / I disagree with ~",null,null,1],
+["英語","英作文","「〜すべきだ」","We should ~",null,null,1],
+["英語","英作文","2つ目の理由を書くときの語","Second, / Also,",null,null,1],
+["英語","英作文","まとめの書き出し","That's why ~ / So ~",null,null,2],
+["英語","英作文","意見文の基本構成","意見 → 理由2つ → まとめ",null,null,1],
+["英語","英作文","スペルが不安なときの対処","知っている簡単な語に言いかえる",null,null,1],
+["英語","英作文","書いたあと必ず見直す2点","主語と動詞の一致・時制",null,null,1],
+["英語","英作文","語数の数え方","I'm は1語、コンマやピリオドは数えない",null,null,2],
+
+/* ---------- 国語 ---------- */
+["国語","漢字（読み）","「滞る」の読み","とどこおる",null,null,2],
+["国語","漢字（読み）","「遮る」の読み","さえぎる",null,null,2],
+["国語","漢字（読み）","「潤う」の読み","うるおう",null,null,2],
+["国語","漢字（読み）","「陥る」の読み","おちいる",null,null,2],
+["国語","漢字（読み）","「巧み」の読み","たくみ",null,null,1],
+["国語","漢字（読み）","「拙い」の読み","つたない",null,null,3],
+["国語","漢字（読み）","「疎か」の読み","おろそか",null,null,2],
+["国語","漢字（読み）","「賄う」の読み","まかなう",null,null,2],
+["国語","漢字（読み）","「貪欲」の読み","どんよく",null,null,2],
+["国語","漢字（読み）","「出納」の読み","すいとう",null,null,3],
+["国語","漢字（読み）","「遂行」の読み","すいこう",null,null,2],
+["国語","漢字（読み）","「貢献」の読み","こうけん",null,null,1],
+["国語","漢字（読み）","「抑揚」の読み","よくよう",null,null,2],
+["国語","漢字（読み）","「概念」の読み","がいねん",null,null,1],
+["国語","漢字（読み）","「憤る」の読み","いきどおる",null,null,3],
+["国語","漢字（書き）","ケイザイの発展","経済",null,null,1],
+["国語","漢字（書き）","人口がゲンショウする","減少",null,null,1],
+["国語","漢字（書き）","フクザツな仕組み","複雑",null,null,1],
+["国語","漢字（書き）","セイカクに測る","正確",null,"性格と区別",1],
+["国語","漢字（書き）","会社のソシキ","組織",null,null,1],
+["国語","漢字（書き）","社会にカンシンを持つ","関心",null,"感心と区別",2],
+["国語","漢字（書き）","作品をヒョウカする","評価",null,null,1],
+["国語","漢字（書き）","ドクトクの雰囲気","独特",null,null,1],
+["国語","漢字（書き）","キョウミがわく","興味",null,null,1],
+["国語","漢字（書き）","タンジュンな作り","単純",null,null,1],
+["国語","漢字（書き）","ホウフな資源","豊富",null,null,1],
+["国語","漢字（書き）","シゲキを受ける","刺激",null,null,2],
+["国語","漢字（書き）","案をケントウする","検討",null,"見当と区別",2],
+["国語","漢字（書き）","キカイ（チャンス）をのがす","機会",null,"機械と区別",2],
+["国語","漢字（書き）","時間をツイやす","費やす",null,null,2],
+["国語","語彙","「臨機応変」の意味","場面に応じて適切に対応すること",null,null,1],
+["国語","語彙","「温故知新」の意味","昔のことを学んで新しい知識を得ること",null,null,1],
+["国語","語彙","「大同小異」の意味","だいたい同じで細かい差しかないこと",null,null,2],
+["国語","語彙","「単刀直入」の意味","前置きなしにいきなり本題に入ること",null,null,2],
+["国語","語彙","「自画自賛」の意味","自分で自分をほめること",null,null,1],
+["国語","語彙","「水を差す」の意味","うまくいっていることを邪魔する",null,null,1],
+["国語","語彙","「舌を巻く」の意味","たいへん驚き感心する",null,null,2],
+["国語","語彙","「手を焼く」の意味","扱いに困る",null,null,1],
+["国語","語彙","「二の足を踏む」の意味","ためらう",null,null,2],
+["国語","語彙","「需要」の対義語","供給",null,null,1],
+["国語","語彙","「保守」の対義語","革新",null,null,2],
+["国語","語彙","「積極」の対義語","消極",null,null,1],
+["国語","語彙","「原因」の対義語","結果",null,null,1],
+["国語","語彙","「権利」の対義語","義務",null,null,1],
+["国語","語彙","「必然」の対義語","偶然",null,null,2],
+["国語","文法","「ない」が形容詞か助動詞かの見分け方","直前に「は」を入れて意味が通れば形容詞",null,null,3],
+["国語","文法","「の」が主語を表す例","「私の書いた本」の「の」＝が",null,null,3],
+["国語","文法","用言とは","動詞・形容詞・形容動詞",null,null,1],
+["国語","文法","体言とは","名詞",null,null,1],
+["国語","文法","自立語と付属語のちがい","単独で文節を作れるかどうか",null,null,2],
+["国語","文法","敬語の3種類","尊敬語・謙譲語・丁寧語",null,null,1],
+["国語","文法","「おっしゃる」はどの敬語","尊敬語",null,null,1],
+["国語","文法","「申し上げる」はどの敬語","謙譲語",null,null,1],
+["国語","文法","「いらっしゃる」の謙譲表現","うかがう・参る",null,null,2],
+["国語","文法","接続語のはたらき","前後の文や文節をつなぐ",null,null,1],
+["国語","文法","動詞の活用の種類（口語）","五段・上一段・下一段・カ変・サ変",null,null,2],
+["国語","文法","「読ま(ない)」の活用形","未然形",null,null,2],
+["国語","古文","「つとめて」の意味","早朝",null,null,2],
+["国語","古文","「ありがたし」の意味","めったにない",null,null,2],
+["国語","古文","「うつくし」の意味","かわいらしい",null,null,2],
+["国語","古文","「やがて」の意味","すぐに・そのまま",null,null,2],
+["国語","古文","「なほ」の意味","やはり",null,null,2],
+["国語","古文","「いと」の意味","たいそう・とても",null,null,1],
+["国語","古文","「げに」の意味","本当に・なるほど",null,null,3],
+["国語","古文","助動詞「けり」の意味","過去・詠嘆",null,null,2],
+["国語","古文","古文で省略されやすいもの","主語・助詞",null,null,1],
+["国語","古文","『枕草子』の作者と種類","清少納言・随筆",null,null,1],
+["国語","古文","『徒然草』の作者","兼好法師（吉田兼好）",null,null,1],
+["国語","古文","『竹取物語』の分類","日本最古の物語",null,null,2],
+["国語","読解","指示語の答え方","直前を探し、答えを指示語に入れて確かめる",null,null,1],
+["国語","読解","「つまり」「要するに」の後ろにあるもの","筆者のまとめ・主張",null,null,1],
+["国語","読解","対比が出てきたときにすること","2つを線で区別して整理する",null,null,1],
+["国語","読解","「〜から」で答える設問","理由を問う問題（なぜ）",null,null,1],
+["国語","読解","小説で心情が表れる場所","行動・表情・情景描写",null,null,1],
+["国語","読解","抜き出し問題のコツ","字数のヒントから本文を探す",null,null,1],
+["国語","読解","選択肢を切る手がかり","本文にない語・言い過ぎの表現",null,null,2],
+["国語","読解","記述問題の答え方","設問の言葉をそのまま使って組み立てる",null,null,1],
+["国語","読解","段落の役割を聞かれたら見るもの","冒頭の接続語",null,null,2],
+["国語","読解","「たとえば」の後ろにあるもの","前の内容の具体例",null,null,1],
+["国語","作文","作文で避けるべき言葉づかい","話し言葉（〜とか、すごく）",null,null,1],
+["国語","作文","作文の文体","常体か敬体のどちらかに統一する",null,null,1],
+["国語","作文","資料がある作文で第一段落に書くこと","資料から読み取れる事実",null,null,1],
+["国語","作文","第二段落に書くこと","自分の体験を根拠にした意見",null,null,1],
+["国語","作文","作文にかける時間の目安","15分以内で書き切る",null,null,2],
+["国語","作文","字数の目安","指定字数の9割以上",null,null,1],
+
+/* ---------- 理科 ---------- */
+["理科","物理（光音力）","水中から空気中へ光が出るときの屈折角","入射角より大きい",null,null,2],
+["理科","物理（光音力）","全反射が起こる条件","水やガラスから空気へ、入射角が大きいとき",null,null,2],
+["理科","物理（光音力）","白色光をプリズムで分けたもの","光の色の帯（スペクトル）",null,null,2],
+["理科","物理（光音力）","音の大きさを決めるもの","振幅",null,null,1],
+["理科","物理（光音力）","弦を短く・細く・強く張ると音は","高くなる",null,null,1],
+["理科","物理（光音力）","真空中で音は伝わるか","伝わらない",null,null,1],
+["理科","物理（光音力）","力の3要素","大きさ・向き・作用点",null,null,1],
+["理科","物理（光音力）","2力がつり合う条件","大きさが等しい・向きが反対・同一直線上",null,null,1],
+["理科","物理（光音力）","ばねののびと力の関係","比例する（フックの法則）",null,null,1],
+["理科","物理（光音力）","圧力の求め方","力(N) ÷ 面積(m²)",null,"単位はPa",1],
+["理科","物理（電流）","電流・電圧・抵抗の単位","A・V・Ω",null,null,1],
+["理科","物理（電流）","直列つなぎの合成抵抗","2つの抵抗の和",null,null,1],
+["理科","物理（電流）","並列つなぎの合成抵抗の特徴","どちらの抵抗よりも小さくなる",null,null,2],
+["理科","物理（電流）","100Vで2A流れる電熱線の抵抗","50Ω",null,"R=V÷I",1],
+["理科","物理（電流）","電流計のつなぎ方","はかりたい部分に直列",null,null,1],
+["理科","物理（電流）","電圧計のつなぎ方","はかりたい部分に並列",null,null,1],
+["理科","物理（電流）","同じ種類の静電気どうしは","しりぞけ合う",null,null,1],
+["理科","物理（電流）","電子の流れる向きと電流の向き","逆向き",null,null,2],
+["理科","物理（電流）","陰極線の正体","電子の流れ",null,null,2],
+["理科","物理（電流）","電磁誘導とは","コイル内の磁界が変化して電流が流れる現象",null,null,1],
+["理科","物理（電流）","誘導電流を大きくする方法","磁石を速く動かす・巻数を増やす・強い磁石",null,null,2],
+["理科","物理（電流）","直流と交流のちがい","向きが一定か、周期的に変わるか",null,null,1],
+["理科","物理（運動）","1 m/s は時速何km","3.6 km/h",null,null,2],
+["理科","物理（運動）","記録タイマー(50Hz)の1打点の時間","1/50秒",null,null,2],
+["理科","物理（運動）","斜面を下る台車の速さの変化","一定の割合で増える",null,null,1],
+["理科","物理（運動）","斜面の角度を大きくすると速さの増え方は","大きくなる",null,null,1],
+["理科","物理（運動）","自由落下で速さが増え続ける理由","重力がはたらき続けるから",null,null,1],
+["理科","物理（運動）","作用・反作用の法則","力を加えると同じ大きさの力が反対向きに返る",null,null,1],
+["理科","物理（運動）","位置エネルギーが大きくなる条件","高い位置・質量が大きい",null,null,1],
+["理科","物理（運動）","運動エネルギーが大きくなる条件","速い・質量が大きい",null,null,1],
+["理科","物理（運動）","力学的エネルギー保存の法則","位置エネルギーと運動エネルギーの和は一定",null,null,1],
+["理科","物理（運動）","仕事率の式と単位","仕事(J) ÷ 時間(s)、単位はW",null,null,1],
+["理科","化学","単体と化合物のちがい","1種類の原子か、2種類以上の原子でできているか",null,null,1],
+["理科","化学","純物質と混合物のちがい","1種類の物質か、複数が混ざっているか",null,null,1],
+["理科","化学","原子の性質3つ","それ以上分けられない・種類ごとに質量と大きさが決まる・なくならない",null,null,2],
+["理科","化学","二酸化炭素の化学式","CO₂",null,null,1],
+["理科","化学","塩化ナトリウムの化学式","NaCl",null,null,1],
+["理科","化学","銅が酸化するときの化学反応式","2Cu + O₂ → 2CuO",null,null,2],
+["理科","化学","マグネシウムが燃えるときの化学反応式","2Mg + O₂ → 2MgO",null,null,2],
+["理科","化学","銅と結びつく酸素の質量比","銅 : 酸素 = 4 : 1",null,null,2],
+["理科","化学","マグネシウムと結びつく酸素の質量比","マグネシウム : 酸素 = 3 : 2",null,null,3],
+["理科","化学","発熱反応と吸熱反応の例","発熱＝鉄の酸化、吸熱＝塩化アンモニウムと水酸化バリウム",null,null,2],
+["理科","化学","蒸留とは","沸点のちがいを利用して混合物を分ける方法",null,null,1],
+["理科","化学","質量パーセント濃度の式","溶質の質量 ÷ 溶液の質量 × 100",null,null,1],
+["理科","化学","溶質・溶媒・溶液の関係","溶質＋溶媒＝溶液",null,null,1],
+["理科","化学","飽和水溶液とは","溶質がそれ以上溶けなくなった水溶液",null,null,1],
+["理科","化学","原子がイオンになるしくみ","電子を失う（陽イオン）・受け取る（陰イオン）",null,null,1],
+["理科","化学","銅イオンと塩化物イオンの化学式","Cu²⁺ と Cl⁻",null,null,2],
+["理科","化学","塩酸と水酸化ナトリウムの中和でできる塩","塩化ナトリウム",null,null,1],
+["理科","化学","ガスバーナーの点火手順","元栓→コック→マッチ→ガス調節ねじ→空気調節ねじ",null,null,2],
+["理科","生物","すべての細胞に共通するつくり","核・細胞膜・細胞質",null,null,1],
+["理科","生物","植物細胞だけにあるつくり","細胞壁・葉緑体・液胞",null,null,1],
+["理科","生物","顕微鏡の倍率の求め方","接眼レンズ × 対物レンズ",null,null,1],
+["理科","生物","高倍率にすると視野は","暗く、せまくなる",null,null,1],
+["理科","生物","対照実験を行う理由","条件を1つだけ変えて比べるため",null,null,1],
+["理科","生物","昼の植物が行っていること","光合成と呼吸の両方",null,null,1],
+["理科","生物","道管と師管が運ぶもの","道管＝根から吸った水、師管＝葉でつくった養分",null,null,1],
+["理科","生物","根毛があることの利点","表面積が大きくなり水を吸収しやすい",null,null,1],
+["理科","生物","シダ植物とコケ植物のちがい","維管束があるかないか",null,null,2],
+["理科","生物","肺胞がたくさんあることの利点","表面積が大きく気体交換の効率がよい",null,null,1],
+["理科","生物","心臓の4つの部屋","右心房・右心室・左心房・左心室",null,null,1],
+["理科","生物","血液の成分4つ","赤血球・白血球・血小板・血しょう",null,null,1],
+["理科","生物","白血球と血小板のはたらき","白血球＝細菌を分解、血小板＝出血を止める",null,null,1],
+["理科","生物","反射とは","刺激に対して意識と無関係に起こる反応",null,null,1],
+["理科","生物","反射の信号の経路","感覚器官→せきずい→運動器官",null,null,2],
+["理科","生物","中枢神経とは","脳とせきずい",null,null,1],
+["理科","生物","遺伝子の本体","DNA（デオキシリボ核酸）",null,null,1],
+["理科","生物","体細胞分裂で染色体の数はどうなるか","変わらない",null,null,1],
+["理科","生物","食物連鎖で数量が最も多い生物","生産者（植物）",null,null,1],
+["理科","生物","分解者の例","菌類・細菌類（カビ・キノコ）",null,null,1],
+["理科","地学","震度とマグニチュードのちがい","震度＝ゆれの大きさ、M＝地震そのものの規模",null,null,1],
+["理科","地学","初期微動継続時間と震源距離の関係","比例する",null,null,1],
+["理科","地学","震源と震央のちがい","震源＝地下の位置、震央＝その真上の地表",null,null,1],
+["理科","地学","日本付近で地震が多い理由","プレートの境界にあるから",null,null,1],
+["理科","地学","れき・砂・泥が堆積する順","岸に近い順にれき→砂→泥",null,null,2],
+["理科","地学","凝灰岩からわかること","そのころ火山活動があったこと",null,null,2],
+["理科","地学","石灰岩に塩酸をかけると出る気体","二酸化炭素",null,null,2],
+["理科","地学","しゅう曲と断層のちがい","曲がったか、ずれたか",null,null,1],
+["理科","地学","気圧の単位","hPa（ヘクトパスカル）",null,null,1],
+["理科","地学","北半球の高気圧の風の吹き方","時計回りに吹き出す",null,null,2],
+["理科","地学","低気圧の中心付近の天気","上昇気流でくもりや雨",null,null,1],
+["理科","地学","気温が上がると飽和水蒸気量は","大きくなる",null,null,1],
+["理科","地学","雲ができるしくみ","上昇した空気が膨張して冷え、水蒸気が水滴になる",null,null,1],
+["理科","地学","春と秋の天気の特徴","移動性高気圧と低気圧が交互に通る",null,null,1],
+["理科","地学","梅雨をもたらす前線","停滞前線（梅雨前線）",null,null,1],
+["理科","地学","星の日周運動の向き","東から西へ",null,null,1],
+["理科","地学","北極星がほとんど動かない理由","地軸の延長上にあるから",null,null,1],
+["理科","地学","星座が季節で変わる理由","地球の公転",null,null,1],
+["理科","地学","南中高度が最も高くなる日","夏至",null,null,1],
+["理科","地学","日食が起きるときの並び","太陽－月－地球",null,null,1],
+
+/* ---------- 社会 ---------- */
+["社会","地理（世界）","六大陸をすべて","ユーラシア・アフリカ・北アメリカ・南アメリカ・オーストラリア・南極",null,null,1],
+["社会","地理（世界）","三大洋","太平洋・大西洋・インド洋",null,null,1],
+["社会","地理（世界）","赤道が通る国の例","ブラジル・インドネシア・ケニア",null,null,1],
+["社会","地理（世界）","乾燥帯で見られる伝統的な暮らし","遊牧・日干しれんがの家",null,null,1],
+["社会","地理（世界）","地中海性気候で栽培がさかんな作物","オリーブ・ぶどう",null,null,1],
+["社会","地理（世界）","アメリカで土地に合った作物を作ること","適地適作",null,null,2],
+["社会","地理（世界）","プランテーションとは","輸出向けに単一の作物を大規模に栽培する農園",null,null,1],
+["社会","地理（世界）","モノカルチャー経済の問題点","価格の変動で経済が不安定になる",null,null,2],
+["社会","地理（世界）","OPECとは","石油輸出国機構",null,null,2],
+["社会","地理（世界）","BRICSに含まれる国","ブラジル・ロシア・インド・中国・南アフリカ",null,null,2],
+["社会","地理（世界）","中国の人口が集中している地域","東部の沿岸部",null,null,1],
+["社会","地理（世界）","ヨーロッパが高緯度でも温暖な理由","偏西風と北大西洋海流",null,null,1],
+["社会","地理（世界）","西アジアで多く信仰されている宗教","イスラム教",null,null,1],
+["社会","地理（世界）","オーストラリアの主な輸出品","鉄鉱石・石炭",null,null,2],
+["社会","地理（日本）","日本の東西南北の端の島","北＝択捉島 東＝南鳥島 南＝沖ノ鳥島 西＝与那国島",null,null,2],
+["社会","地理（日本）","日本の都道府県の数","47",null,null,1],
+["社会","地理（日本）","日本が属する造山帯","環太平洋造山帯",null,null,1],
+["社会","地理（日本）","フォッサマグナとは","本州の中央部を南北に走る大きな溝",null,null,2],
+["社会","地理（日本）","リアス海岸の特徴と利用","入り組んだ海岸線・養殖に適する",null,null,1],
+["社会","地理（日本）","日本の食料自給率の特徴","先進国の中で低い",null,null,1],
+["社会","地理（日本）","近郊農業とは","大都市の近くで野菜などを作る農業",null,null,1],
+["社会","地理（日本）","養殖業と栽培漁業のちがい","育てて出荷するか、稚魚を放流するか",null,null,2],
+["社会","地理（日本）","加工貿易とは","原料を輸入し製品にして輸出する貿易",null,null,1],
+["社会","地理（日本）","産業の空洞化とは","工場が海外に移り国内の産業が衰えること",null,null,2],
+["社会","地理（日本）","三大工業地帯","京浜・中京・阪神",null,null,1],
+["社会","地理（日本）","過疎と過密の問題","過疎＝人口減少で生活が不便、過密＝住宅や交通の混雑",null,null,1],
+["社会","地理（日本）","日本で最も面積が大きい都道府県","北海道",null,null,1],
+["社会","地理（日本）","ハザードマップの目的","自然災害の被害予測と避難場所を知らせる",null,null,1],
+["社会","地理（日本）","地形図で北を示す決まり","特に断りがなければ上が北",null,null,1],
+["社会","地理（日本）","抑制栽培がさかんな高原の例","長野県の野辺山原・群馬県の嬬恋村",null,null,2],
+["社会","歴史（古代中世）","縄文時代の住居と道具","たて穴住居・縄文土器",null,null,1],
+["社会","歴史（古代中世）","弥生時代に大陸から伝わったもの","稲作・金属器",null,null,1],
+["社会","歴史（古代中世）","邪馬台国の女王","卑弥呼",null,null,1],
+["社会","歴史（古代中世）","聖徳太子が定めた2つの制度","冠位十二階・十七条の憲法",null,null,1],
+["社会","歴史（古代中世）","小野妹子が派遣された相手国","隋（遣隋使）",null,null,1],
+["社会","歴史（古代中世）","班田収授法とは","戸籍に基づき口分田を与える制度",null,null,2],
+["社会","歴史（古代中世）","奈良時代の税","租・庸・調",null,null,1],
+["社会","歴史（古代中世）","東大寺の大仏をつくらせた天皇","聖武天皇",null,null,1],
+["社会","歴史（古代中世）","遣唐使の停止後に発達した文化","国風文化",null,null,1],
+["社会","歴史（古代中世）","武士として初めて太政大臣になった人物","平清盛",null,null,1],
+["社会","歴史（古代中世）","1221年の出来事","承久の乱",null,null,2],
+["社会","歴史（古代中世）","北条泰時が定めた武士の法律","御成敗式目（貞永式目）",null,null,1],
+["社会","歴史（古代中世）","足利義満が始めた中国との貿易","勘合貿易（日明貿易）",null,null,1],
+["社会","歴史（古代中世）","下剋上とは","下の身分の者が上の者に打ち勝つこと",null,null,1],
+["社会","歴史（近世）","織田信長が商業のために行った政策","楽市・楽座",null,null,1],
+["社会","歴史（近世）","朱印船貿易で栄えた東南アジアの町","日本町",null,null,2],
+["社会","歴史（近世）","1637年に起きたキリスト教徒の一揆","島原・天草一揆",null,null,1],
+["社会","歴史（近世）","鎖国下で開かれていた4つの窓口","長崎・対馬・薩摩・松前",null,null,2],
+["社会","歴史（近世）","元禄文化の中心地と担い手","上方（大阪・京都）・町人",null,null,1],
+["社会","歴史（近世）","化政文化の中心地","江戸",null,null,1],
+["社会","歴史（近世）","杉田玄白らが訳した医学書","解体新書",null,null,1],
+["社会","歴史（近世）","1837年に大阪で乱を起こした元役人","大塩平八郎",null,null,2],
+["社会","歴史（近世）","江戸幕府が身分ごとに定めた社会のしくみ","身分制度（武士・百姓・町人）",null,null,1],
+["社会","歴史（近代）","1871年に藩を廃止した改革","廃藩置県",null,null,1],
+["社会","歴史（近代）","明治政府が産業を育てた政策","殖産興業",null,null,1],
+["社会","歴史（近代）","国会開設を求めた運動","自由民権運動",null,null,1],
+["社会","歴史（近代）","初代内閣総理大臣","伊藤博文",null,null,1],
+["社会","歴史（近代）","1910年に日本が行ったこと","韓国併合",null,null,1],
+["社会","歴史（近代）","1918年に全国に広がった騒動","米騒動",null,null,2],
+["社会","歴史（近代）","大正時代に広がった民主主義の風潮","大正デモクラシー",null,null,1],
+["社会","歴史（近代）","1938年に制定された戦時の法律","国家総動員法",null,null,2],
+["社会","歴史（現代）","戦後の農地改革の内容","地主の土地を小作人に分け自作農を増やした",null,null,2],
+["社会","歴史（現代）","1955年ごろから始まった経済成長","高度経済成長",null,null,1],
+["社会","歴史（現代）","1964年に東京で開かれた国際行事","東京オリンピック",null,null,1],
+["社会","公民","「効率」と「公正」とは","むだがないか・手続きや機会が平等か",null,null,1],
+["社会","公民","核家族とは","夫婦と未婚の子どもからなる家族",null,null,1],
+["社会","公民","少子高齢化が社会保障に与える影響","支える人が減り負担が増える",null,null,1],
+["社会","公民","選挙の4原則","普通・平等・直接・秘密",null,null,1],
+["社会","公民","衆議院議員選挙のしくみ","小選挙区比例代表並立制",null,null,1],
+["社会","公民","一票の格差が問題になる理由","選挙区で1票の価値が不平等になるから",null,null,2],
+["社会","公民","与党と野党のちがい","政権を担当しているかどうか",null,null,1],
+["社会","公民","国会の種類3つ","常会・臨時会・特別会",null,null,2],
+["社会","公民","二院制をとる理由","慎重な審議と行き過ぎの防止",null,null,1],
+["社会","公民","議院内閣制とは","内閣が国会の信任にもとづき国会に責任を負うしくみ",null,null,1],
+["社会","公民","司法権の独立とは","裁判官は憲法と法律にのみ従い独立して裁判を行う",null,null,1],
+["社会","公民","民事裁判と刑事裁判のちがい","私人間の争いか、犯罪を裁くか",null,null,1],
+["社会","公民","刑事裁判で訴える人","検察官",null,null,1],
+["社会","公民","被疑者・被告人に保障される権利の例","黙秘権・弁護人を依頼する権利",null,null,2],
+["社会","公民","えん罪を救うための制度","再審",null,null,2],
+["社会","公民","人権が制限されることがある理由","公共の福祉",null,null,1],
+["社会","公民","新しい人権4つ","環境権・知る権利・プライバシーの権利・自己決定権",null,null,1],
+["社会","公民","知る権利を保障する制度","情報公開制度",null,null,2],
+["社会","公民","株式会社で株主が持つ権利","配当を受ける・株主総会で議決する",null,null,1],
+["社会","公民","労働条件の最低基準を定めた法律","労働基準法",null,null,1],
+["社会","公民","独占を防ぐ法律と監視する機関","独占禁止法・公正取引委員会",null,null,1],
+["社会","公民","円高になると有利になるのは","輸入（海外旅行）",null,null,2],
+["社会","公民","円安になると有利になるのは","輸出",null,null,2],
+["社会","公民","財政の3つの役割","資源配分・所得の再分配・景気の安定",null,null,2],
+["社会","公民","国債を発行しすぎる問題点","将来の世代の負担になる",null,null,1],
+["社会","公民","四大公害病","水俣病・新潟水俣病・イタイイタイ病・四日市ぜんそく",null,null,1],
+["社会","公民","国連の平和維持活動の略称","PKO",null,null,1],
+["社会","公民","国連総会の議決の特徴","加盟国が1国1票を持つ",null,null,2],
+["社会","公民","地球温暖化対策の国際的な枠組み","パリ協定",null,null,1],
+["社会","公民","国民の三大義務","納税・勤労・子どもに普通教育を受けさせる",null,null,1]
+];
+
+/* ===== 解説（教科ごとに追加していく） ===== */
+const EXP=Object.assign({},{
+q0:"「マイナスを足す」は引くのと同じ。3の借金に8の借金が増えて合計11の借金。",
+q1:"かけ算が先。(-2)×3=-6。次に 5-(-6)。引くとマイナスが重なって足し算になり 5+6=11。",
+q2:"-2を3回かける。(-2)×(-2)=+4、+4×(-2)=-8。マイナスが奇数個なら答えはマイナス。",
+q3:"2乗されているのは2だけ。頭のマイナスは最後にくっつく。2²=4 だから -4。(-2)²=4 と区別する。",
+q4:"左から順に。(-18)÷(-3)=6（マイナス同士でプラス）、6×2=12。",
+q5:"6x-2-3x+6。うしろのカッコは-3をかけるので中の符号が全部ひっくり返る。ここが最大のミスどころ。",
+q6:"数字は12÷4=3、aはa²÷a=a、bはb÷b=1で消える。答え 3a。",
+q7:"分母が3と2。足すには分母をそろえる必要があり、最小公倍数の6にする。",
+q8:"√12=2√3、√27=3√3。中身がそろえば足せる。2√3+3√3=5√3。中身が違うと足せない。",
+q9:"√50=5√2、√18=3√2。中身が同じ√2なので 5-3=2 で 2√2。",
+q10:"√6×√3=√18。18=9×2 なので √9が3で外に出て 3√2。",
+q11:"分母に√があるのは×。分母分子に√3をかけて 6√3/3=2√3。",
+q12:"(a+b)(a-b)=a²-b² の形。5-1=4。展開せずに公式で一瞬。",
+q13:"定数は3×(-5)=-15、xの係数は3+(-5)=-2。かけて足す、の2手。",
+q14:"(x-4)²=x²-2×4×x+4²。真ん中を2倍するのを忘れる人がとても多い。",
+q15:"49は7²。a²-b²=(a+b)(a-b) にあてはめる。",
+q16:"かけて12、足して7になる2つの数を探す→3と4。",
+q17:"かけて9、足して-6→-3が2つ。同じ数が2つなら(x-3)²と書ける。",
+q18:"まず共通因数2をくくり出して 2(x²-4)。そこから 2(x+2)(x-2)。共通因数が先、が鉄則。",
+q19:"xを左、数字を右に集める。3x-x=7+5 → 2x=12 → x=6。移項したら符号が変わる。",
+q20:"小数はまず両辺10倍。3x-10=5 → 3x=15 → x=5。",
+q21:"2つの式をそのまま足すとyが消えて3x=9 → x=3。消える組み合わせを探すのがコツ。",
+q22:"かけて6、足して-5→-2と-3。(x-2)(x-3)=0。かけて0なら、どちらかが0。",
+q23:"2乗して7になる数はプラスとマイナスの両方ある。±を落とすと半分バツ。",
+q24:"因数分解できないので解の公式。a=1,b=3,c=1。b²-4ac=9-4=5。",
+q25:"因数分解でどうにもならないときの最終手段。理屈より丸暗記でよい。",
+q26:"外どうし・内どうしのかけ算が等しい。3×20=5x → 5x=60 → x=12。",
+q27:"y=2x+b とおいて(1,5)を代入。5=2+b → b=3。傾きが分かれば1点入れるだけ。",
+q28:"傾き=yの増加÷xの増加=(7-3)÷(3-1)=2。y=2x+b に(1,3)を入れて b=1。",
+q29:"点を代入する。12=a×2²=4a → a=3。",
+q30:"y=ax² の変化の割合は a(p+q) で出せる。3×(1+3)=12。公式を使えば一瞬。",
+q31:"x=3 を代入して 12÷3=4。反比例はかけると一定（3×4=12）。",
+q32:"グラフがy軸を切る高さ。x=0 を入れたときのyの値。",
+q33:"n角形は対角線で三角形(n-2)個に分けられる。三角形1つが180度。",
+q34:"何角形でも外角の和は必ず360度。1周ぐるっと回るから。",
+q35:"円周角は中心角の半分。逆に中心角は円周角の2倍。",
+q36:"半円の中心角は180度。その半分で90度。円の中に直角が現れる重要ポイント。",
+q37:"直角をはさむ2辺の2乗の和が、斜辺の2乗と等しい。cが必ず斜辺（一番長い辺）。",
+q38:"正方形を対角線で半分にした形。1:1:√2。",
+q39:"正三角形を半分にした形。短い辺:長い辺:斜辺 = 1:√3:2。斜辺（2）が一番長い。",
+q40:"長さが2倍になると面積は2×2=4倍。2乗で効く。",
+q41:"長さが2倍になると体積は2×2×2=8倍。3乗で効く。",
+q42:"πr²=π×4²=16π。πはそのまま残す。",
+q43:"(4/3)πr³=(4/3)×π×27=36π。",
+q44:"4πr²=4×π×9=36π。半径3のときだけ体積と同じ数字になる偶然。",
+q45:"同じ底面・同じ高さの円柱の3分の1。「3分の1」を落とすミスが多い。",
+q46:"円周の全体は2πr。そのうち中心角a度ぶん、つまり a/360 の割合だけ。",
+q47:"2辺の中点を結んだ線は、残りの辺と平行で長さが半分になる。",
+q48:"全部で36通り。和が7になるのは(1,6)(2,5)(3,4)(4,3)(5,2)(6,1)の6通り。6/36=1/6。",
+q49:"全部で8通り。表2枚は表表裏・表裏表・裏表表の3通り。3/8。",
+q50:"5本のうちあたりが2本。2/5。",
+q51:"順番に並べて真ん中。個数が偶数なら真ん中2つの平均。",
+q52:"いちばん回数が多い値。平均値とは別物なので混同しない。",
+q53:"データの真ん中50%がどれくらいの幅に入っているかを表す。",
+q54:"その階級が全体の何割か。全部足すと1になる。",
+q55:"200×0.1=20g。%は小数に直してかける。",
+q56:"20%引きは80%が残るということ。0.8倍。",
+q57:"「みはじ」の図。速さ=道のり÷時間、時間=道のり÷速さ。",
+q58:"真ん中をnにすると n-1, n, n+1 となり、足したとき3nになって式が短くなる。",
+q324:"-(-4) は +4 と同じ。-7+4=-3。",
+q325:"(-3)×(-4)=+12（マイナス2つでプラス）。12÷6=2。",
+q326:"(-3)²はカッコつきなので+9。4-9=-5。q3の -2² との違いに注意。",
+q327:"分母を6にそろえる。-3/6 + 4/6 = 1/6。",
+q328:"わり算は逆数のかけ算。3/4 × (-8/9) = -24/36 = -2/3。",
+q329:"-(2a-b) = -2a+b。5a-2a=3a、-3b+b=-2b。",
+q330:"6x と -9 の両方を3で割る。片方だけ割るミスが多い。",
+q331:"カッコの中全部が2乗。(-3)²=9、a²はそのまま。9a²。",
+q332:"数は2×3=6、xは x²×x=x³、yは y×y²=y³。",
+q333:"左から順に。8a²b÷(-2a)=-4ab、それに3bをかけて -12ab²。",
+q334:"3×(-2)²=3×4=12、-(-2)=+2。合わせて14。代入するときは必ずカッコをつける。",
+q335:"√48。48=16×3 なので √16=4 が外に出て 4√3。",
+q336:"√(27÷3)=√9=3。わり算は中身を割ってから。",
+q337:"(a+b)²=a²+2ab+b²。3+2√6+2=5+2√6。",
+q338:"45=9×5。√9=3 が外に出て 3√5。",
+q339:"√8=2√2 なので 2/(2√2)=1/√2。分母分子に√2をかけて √2/2。",
+q340:"x²-4-(x²-2x+1)。カッコの前がマイナスなので中の符号が全部変わる。x²が消えて 2x-5。",
+q341:"(a+b)(a-b)=a²-b²。(2x)²=4x²、3²=9。",
+q342:"定数は5×(-2)=-10、xの係数は5+(-2)=3。",
+q343:"かけて-20、足して-1になる2つ→-5と+4。",
+q344:"足して10、かけて25→5が2つ。だから(x+5)²。",
+q345:"3とxが共通。3x(x-4)。因数分解はまず共通因数を探す。",
+q346:"前2つと後ろ2つに分ける。a(x+y)-b(x+y) となり (x+y) が共通。",
+q347:"10⁴は0が4つ。2.4の小数点を右に4つずらして24000。",
+q348:"上から2けたまで残す。3けた目の4を四捨五入して 3.1。",
+q349:"まずカッコを外す。5x-10=3x+4 → 2x=14 → x=7。",
+q350:"分母2と3の最小公倍数6を両辺にかける。3x-6=2x → x=6。",
+q351:"x=3 を代入。6+3y=12 → 3y=6 → y=2。",
+q352:"下の式を y=2x-3 に変形して代入。3x+2(2x-3)=8 → 7x=14 → x=2、y=1。",
+q353:"x(x-4)=0 と因数分解。x=0 も立派な解。これを忘れる人が多い。",
+q354:"2乗して16になるのは±4。x+3=4 と x+3=-4 の2つ。",
+q355:"(2x-1)(x-2)=0。慣れないうちは解の公式でも同じ答えになる。",
+q356:"解の公式。b²-4ac=4+4=8、√8=2√2。(-2±2√2)/2 を約分して -1±√2。",
+q357:"外×外=内×内。4x=24 → x=6。",
+q358:"「その数」をxとおくと 3x-5=13。3x=18 → x=6。",
+q359:"どちらでもよい。文字が消しやすい形なら加減法、片方が y= の形なら代入法。",
+q360:"判別式という。0より大きければ解は2つ、0なら1つ、0より小さければなし。",
+q361:"これを書かないと式が立たない。「〜をx円とする」と必ず紙に書く。",
+q362:"x軸上ではyが0。0=-2x+6 → 2x=6 → x=3。",
+q363:"傾きが同じ2なので平行。永遠に交わらない。",
+q364:"xが増えるとyが減るので、右に行くほど下がる。",
+q365:"一次関数では傾きと同じ値になる。y=ax² では場所によって変わる。",
+q366:"y=ax² のグラフは必ず原点を通り、y軸で左右対称。",
+q367:"aがプラスなら上に開き、マイナスなら下に開く。",
+q368:"2×(-3)²=2×9=18。マイナスは2乗すると消える。",
+q369:"公式 a(p+q) を使う。-1×(-2+1)=-1×(-1)=1。",
+q370:"交点は2つの式の両方を満たす点。だから連立方程式になる。",
+q371:"2本の曲線が向かい合った形。原点は通らない。",
+q372:"6÷2=3。反比例は x×y が一定（2×3=6）。",
+q373:"この順番なら必ず出せる。傾き→1点代入→終わり。",
+q374:"まず図をかき、xが動いたときの長さを図に書き込む。式は図から出てくる。",
+q375:"どんな三角形でも必ず180度。角度の問題の出発点。",
+q376:"等しい2辺にはさまれていない下の2つの角が等しい。",
+q377:"180÷3=60。正三角形は3つとも同じ。",
+q378:"内角の和は180×(8-2)=1080。8で割って135。",
+q379:"交わる2直線の、向かい合った角。必ず等しい。",
+q380:"平行なら同位角も錯角も等しい。角度移動の道具になる。",
+q381:"証明でこの3つのどれかを必ず使う。丸暗記していい場所。",
+q382:"直角が最初から分かっているぶん、必要な条件が少なくて済む。",
+q383:"相似は角だけでも言える（2組の角）。合同より条件がゆるい。",
+q384:"対角線が互いを半分にする。だから交点までの長さが等しい。",
+q385:"ひし形は4辺が等しい平行四辺形。対角線は垂直に交わる。",
+q386:"接点で必ず直角。円の問題で直角三角形を作る入口になる。",
+q387:"同じ弧を見ている円周角は、どこから見ても同じ大きさ。",
+q388:"5²+12²=25+144=169。169=13²なので斜辺は13。よく出る組。",
+q389:"半分にすると1:√3:2の三角形。斜辺2、底辺1だから高さは√3。",
+q390:"立方体の対角線は1辺のa√3倍。4×√3=4√3。",
+q391:"側面を開くと長方形になる。たては高さ、よこは底面の円周。",
+q392:"分度器で角度を測るのは減点。コンパスで等しい長さを作って角を出す。",
+q393:"2点から同じ距離にある点が集まってできる線。だから作図に使える。",
+q394:"円全体の面積πr²のうち、中心角a度ぶん、つまり a/360 の割合。",
+q395:"真上から見たのが平面図、正面から見たのが立面図。",
+q396:"3・4・5・6の4通り。4/6=2/3。",
+q397:"「少なくとも」は逆から考える。1つも1が出ないのは(5/6)²=25/36。1-25/36=11/36。",
+q398:"AB・AC・BCの3通り。ABとBAは同じ組なので数えない。",
+q399:"十の位が4通り、一の位は残り3通り。4×3=12。0が入ると答えが変わるので注意。",
+q400:"「少なくとも」「〜でない」が出たら、この引き算を疑う。",
+q401:"全部調べると時間もお金もかかる。検査で壊れてしまう商品もある。",
+q402:"箱の左が第1四分位数、右が第3四分位数、中の線が中央値。",
+q403:"その階級までを足していった割合。最後は必ず1になる。",
+q404:"3÷4=0.75時間。0.75×60=45分。時間の単位変換を忘れない。",
+q405:"8%は0.08。x g の8%だから 0.08x。",
+q406:"3割の利益をのせるので1.3倍。3割引なら0.7倍。",
+q407:"道のり=速さ×時間。単位がm/分と分なので答えはm。",
+q408:"a%引かれると (100-a)% が残る。だから100で割る。",
+q409:"出会うのは2人が合わせて1周ぶん歩いたとき。追いつく問題なら差が1周。",
+q410:"「人数が-3人」のようなありえない答えに気づける。ここで点を落とさない。"
+},{
+q175:"光は来た角度と同じ角度ではね返る。角度は鏡の面ではなく、面に垂直な線から測る。",
+q176:"焦点距離のちょうど2倍の位置だと、像も同じ大きさになる。近づけるほど像は大きくなる。",
+q177:"焦点より内側に置くと光が集まらず像ができない。レンズごしにのぞくと大きく見える。虫めがねの状態。",
+q178:"速く振動するほど高い音。音の大きさを決めるのは振幅なので混同しない。",
+q179:"約340m/s。光よりずっと遅いので、雷は光ってから音が遅れて届く。",
+q180:"約100gで1N。1kgなら約10N。単位換算で必ず使う。",
+q181:"水に入れると軽くなる。その軽くなった分がそのまま浮力の大きさ。",
+q182:"電圧=抵抗×電流。求めたい文字を隠すと式が出る形で覚える。",
+q183:"一本道なので途中で電流が減ることはない。どこで測っても同じ。",
+q184:"枝分かれしていても、それぞれにかかる電圧は電源と同じ。",
+q185:"電力(W)=電圧(V)×電流(A)。1秒あたりに使うエネルギー。",
+q186:"電力量(J)=電力(W)×時間(秒)。同じ電力でも長く使えば量は増える。",
+q187:"左手の中指が電流、人差し指が磁界、親指が力。中・人・親の順で電・磁・力。",
+q188:"力を加えても動かなければ仕事は0。動かした距離が必要。",
+q189:"道具を使うと力は小さくてすむが、そのぶん動かす距離が伸びる。結局得はしない。",
+q190:"速さが変わらないので、時間が進んでも高さが変わらない横一直線。",
+q191:"電車が急ブレーキをかけたとき体が前に行くのがこれ。",
+q192:"2H₂O→2H₂+O₂。水素と酸素が体積比2:1で発生する。",
+q193:"炭酸ナトリウム・水・二酸化炭素の3つ。試験管の口を下げるのは、できた水が加熱部に戻って割れるのを防ぐため。",
+q194:"炭素が銅から酸素を奪う。銅は赤色になり、石灰水は白くにごる。",
+q195:"混ぜて加熱すると硫化鉄になる。鉄ではなくなるので磁石につかない。",
+q196:"石灰水が白くにごる。二酸化炭素だけが示す反応。",
+q197:"酸素はものを燃やす助けをする。酸素自身は燃えない。",
+q198:"ポンと音を立てる。水素は自分が燃える気体。",
+q199:"空気より軽く、水にとてもよく溶けるので上方置換法しか使えない。",
+q200:"化学変化の前後で原子の数は変わらないから。気体が逃げない密閉が条件。",
+q201:"酸性の正体は水素イオンH⁺。だから酸はどれも似た性質になる。",
+q202:"アルカリ性の正体は水酸化物イオンOH⁻。",
+q203:"H⁺とOH⁻が結びついて水になる。だから酸性もアルカリ性も打ち消される。",
+q204:"酸性が黄、中性が緑、アルカリ性が青。「き・み・あお」の順で覚える。",
+q205:"イオンになりやすい金属が溶けて電子を出す。電子を出す側が−極。",
+q206:"陰極に銅、陽極に塩素。陽イオン(Cu²⁺)が−の陰極に引かれる。",
+q207:"粒の並び方が変わるだけで粒の数は変わらない。だから質量は同じ、体積は変わる。",
+q208:"温度によって溶ける量が変わることを利用する。冷やすか水を蒸発させる。",
+q209:"光が必要。二酸化炭素と水を材料に、デンプンと酸素をつくる。",
+q210:"ヨウ素液が青紫色に変われば、そこにデンプンがある。",
+q211:"葉の裏に多い小さな穴。水が出ていく蒸散も、気体の出入りもここ。",
+q212:"だ液に含まれる。ご飯をかんでいると甘くなるのはこの働き。",
+q213:"胃液の中にある。タンパク質担当。",
+q214:"すい液に含まれる。脂肪を脂肪酸とモノグリセリドに分ける。",
+q215:"ブドウ糖とアミノ酸は毛細血管へ。脂肪の分解物だけはリンパ管に入る。ここが区別の決め手。",
+q216:"肺で酸素を受け取った血液が心臓へ戻る管。名前は静脈だが、中身は動脈血。",
+q217:"有害なアンモニアを肝臓で尿素に変え、じん臓でこして尿にする。",
+q218:"中のヘモグロビンが、酸素の多い所でくっつき、少ない所で離す。",
+q219:"半分になる。だから受精して2つ合わさると元の数に戻る。",
+q220:"子はAA・Aa・Aa・aaの4通り。見た目はAが入っている3つとaaの1つで3:1。",
+q221:"受精をしないので、親の遺伝子がそのまま伝わる。だから形質も同じ。",
+q222:"つくる植物、食べる動物、分解する菌類・細菌類。",
+q223:"胚珠が子房に包まれているのが被子植物。むき出しなのが裸子植物（マツなど）。",
+q224:"単子葉類は平行脈とひげ根。双子葉類は網状脈と主根・側根。セットで覚える。",
+q225:"背骨のある動物。魚類・両生類・は虫類・鳥類・哺乳類の5つ。",
+q226:"短い期間だけ広い範囲に栄えた生物。だから見つかれば時代が特定できる。",
+q227:"中生代。古生代はサンヨウチュウ、新生代はビカリアとセットで。",
+q228:"火山岩は地表近くで急に冷えるので斑状組織。深成岩は地下深くでゆっくり冷えるので等粒状組織。",
+q229:"白い順に花こう岩・せん緑岩・斑れい岩。",
+q230:"白い順に流紋岩・安山岩・玄武岩。深成岩と上下で対応している。",
+q231:"ねばりけが強いと流れずに盛り上がる。色は白っぽく、噴火は激しい。",
+q232:"P波が先に届いて小さくゆれる（初期微動）。あとからS波が来て大きくゆれる。",
+q233:"いま入っている水蒸気量÷入る限界×100。限界に近いほど湿度が高い。",
+q234:"これ以上入りきらなくなって水滴になり始める温度。コップの表面がくもるのがこれ。",
+q235:"冷たい空気が暖かい空気の下にもぐり込む。せまい範囲で強い雨が短時間、通過後は気温が下がる。",
+q236:"暖かい空気がゆるやかに乗り上げる。広い範囲で弱い雨が長く続く。",
+q237:"西のシベリアに高気圧、東に低気圧。等圧線が縦じま模様になる。",
+q238:"小笠原気団。あたたかく湿っているので蒸し暑くなる。",
+q239:"地球が西から東へ自転しているので、太陽は逆に東から西へ動いて見える。",
+q240:"地軸が傾いたまま公転するので、太陽の高さと昼の長さが場所と時期で変わる。",
+q241:"金星は地球より内側を回っているので、地球から見ると必ず太陽と同じ方向にある。だから真夜中は見えない。",
+q242:"太陽－地球－月。地球の影に月が入る。日食は月が太陽を隠すので並びが違う。",
+q591:"水から空気へ出るときは屈折角のほうが大きくなる。逆に入るときは小さくなる。",
+q592:"屈折角が90度を超えると外に出られず、全部はね返る。光ファイバーの原理。",
+q593:"色によって曲がり方が違うので分かれる。虹と同じしくみ。",
+q594:"振幅が大きいほど大きい音。高さを決めるのは振動数。セットで区別する。",
+q595:"短い・細い・強く張るの3つで高くなる。ギターの弦を押さえると高くなるのと同じ。",
+q596:"音は空気の振動なので、空気がないと伝わらない。光は真空でも伝わる。",
+q597:"力を矢印でかくときは、この3つを表している。",
+q598:"3つそろって初めてつり合う。1つでも欠けると物体は動く。",
+q599:"のびは力に比例する。グラフは原点を通る直線になる。",
+q600:"同じ力でも面積が小さいほど圧力は大きい。画びょうの先がとがっている理由。",
+q601:"アンペア・ボルト・オーム。記号と読みをセットで。",
+q602:"一本道なので、通りにくさがそのまま足される。",
+q603:"道が増えるので電流が流れやすくなる。だから合計の抵抗は小さくなる。",
+q604:"抵抗=電圧÷電流=100÷2=50Ω。",
+q605:"回路を切って、その間に割り込ませる。並列につなぐと壊れる。",
+q606:"回路はそのままで、測りたい部分の両端に当てる。",
+q607:"同じ種類はしりぞけ合い、違う種類は引き合う。磁石と同じ。",
+q608:"電流の向きは電子が発見される前に決められたので、実際の電子の動きとは逆になっている。",
+q609:"−極から飛び出した電子の流れ。だから+極側に曲がる。",
+q610:"コイルの中の磁界が「変化」したときだけ電流が流れる。磁石を止めると流れない。",
+q611:"速く動かす・巻数を増やす・強い磁石にする。3つとも「変化を大きくする」ことに行き着く。",
+q612:"乾電池は直流、家のコンセントは交流。",
+q613:"1秒で1m進むなら1時間(3600秒)で3600m=3.6km。",
+q614:"1秒間に50回打つので1打点は1/50秒。5打点で0.1秒になる。",
+q615:"斜面に沿う力が一定の大きさではたらき続けるから、速さが一定の割合で増える。",
+q616:"角度が大きいほど斜面に沿う力が大きくなり、速さの増え方も大きくなる。",
+q617:"重力が下向きにはたらき続けるので、速さは増え続ける。",
+q618:"壁を押すと自分も同じ大きさで押し返される。ロケットが飛ぶのもこれ。",
+q619:"高い位置にあるほど、質量が大きいほど大きい。",
+q620:"速いほど、質量が大きいほど大きい。",
+q621:"落ちるとき位置エネルギーが運動エネルギーに変わるが、合計はいつも同じ。摩擦がなければ。",
+q622:"同じ仕事でも短い時間で終えれば仕事率は大きい。単位はW（ワット）。",
+q623:"酸素O₂は1種類なので単体。水H₂Oは2種類なので化合物。",
+q624:"空気や食塩水のように、複数の物質が混ざっているのが混合物。",
+q625:"化学変化で原子は種類も数も変わらない。だから質量保存の法則が成り立つ。",
+q626:"CO₂。炭素1個と酸素2個。",
+q627:"NaCl。ナトリウムと塩素。ふつうの食塩のこと。",
+q628:"2Cu+O₂→2CuO。銅が黒くなる。前後で原子の数をそろえるのがポイント。",
+q629:"2Mg+O₂→2MgO。まぶしく光って白い粉になる。",
+q630:"銅:酸素=4:1。銅0.8gなら酸素0.2gと結びつき、酸化銅は1.0gになる。",
+q631:"マグネシウム:酸素=3:2。マグネシウム0.6gなら酸素0.4gで、酸化マグネシウムは1.0g。",
+q632:"熱が出るのが発熱反応（使い捨てカイロ）、熱をうばうのが吸熱反応（冷却パック）。",
+q633:"沸点の低いものが先に気体になる。それを冷やして取り出す。",
+q634:"溶質÷溶液×100。分母は水ではなく全体（溶質＋水）なので注意。",
+q635:"溶かしたものと水を足したものが全体の重さ。溶けても重さは消えない。",
+q636:"これ以上溶けない状態。冷やすと溶けきれなくなった分が結晶になって出てくる。",
+q637:"電子を失うと＋の陽イオン、受け取ると−の陰イオン。",
+q638:"銅は電子を2個失うのでCu²⁺。塩素は1個受け取るのでCl⁻。",
+q639:"HCl＋NaOH→NaCl＋H₂O。塩化ナトリウム（食塩）と水ができる。",
+q640:"2つの調節ねじが閉じているか確かめてから、元栓→コック→マッチ→ガス調節ねじ→空気調節ねじ。最後に青い炎にする。",
+q641:"核・細胞膜・細胞質は動物にも植物にもある。",
+q642:"細胞壁・葉緑体・液胞の3つは植物だけ。動物にはない。",
+q643:"接眼レンズ×対物レンズ。10倍×40倍なら400倍。",
+q644:"光が広がるので暗く、見える範囲もせまくなる。だから先に低倍率で探す。",
+q645:"調べたい条件だけを変え、ほかは全部同じにする。そうしないと原因が分からない。",
+q646:"呼吸は昼も夜もしている。昼は光合成のほうが多いので、見かけ上は二酸化炭素を吸っている。",
+q647:"道管は根から吸い上げた水を上へ。師管は葉でつくった養分を全身へ。向きが逆。",
+q648:"細い毛がたくさんあることで表面積が増え、水を吸いやすくなる。",
+q649:"シダには維管束があり根・茎・葉の区別がある。コケにはなく、体全体で水を吸う。",
+q650:"小さな袋がたくさんあると表面積が大きくなる。小腸の柔毛と同じ理屈。",
+q651:"上が心房、下が心室。全身に送る左心室の壁がいちばん厚い。",
+q652:"赤血球・白血球・血小板が固形、血しょうが液体。",
+q653:"白血球は細菌をやっつける、血小板は出血を止める。役割で区別する。",
+q654:"熱いものにさわって思わず手を引くのがこれ。考える前に体が動く。",
+q655:"脳を通らずせきずいで折り返すので反応が速い。危険から身を守れる。",
+q656:"脳とせきずいが中枢神経。そこから枝分かれしたものが末梢神経。",
+q657:"染色体の中にあるDNAが遺伝子の正体。",
+q658:"体細胞分裂では同じ数のまま2つに分かれる。半分になるのは減数分裂。",
+q659:"下にいくほど数が多いピラミッドになる。食べられる側のほうが多くないと成り立たない。",
+q660:"カビ・キノコ・細菌など。死がいやふんを無機物に分解して土に返す。",
+q661:"震度は場所ごとに違うゆれの強さ。マグニチュードは1回の地震に1つだけの規模。",
+q662:"震源が遠いほどP波とS波の到着の差が広がる。だから距離が計算できる。",
+q663:"地下で地震が起きた場所が震源、そのまっすぐ上の地表が震央。",
+q664:"4枚のプレートがぶつかり合う場所にあるから。",
+q665:"粒が大きいものほど早く沈む。だから岸に近いほうかられき→砂→泥。",
+q666:"火山灰が固まった岩なので、そのころ火山が噴火したと分かる。地層を対比するかぎ層にも使う。",
+q667:"石灰岩は貝やサンゴが元。塩酸で二酸化炭素が出る。チャートは溶けないので区別できる。",
+q668:"押されて曲がったのがしゅう曲、切れてずれたのが断層。",
+q669:"天気図の等圧線はhPa（ヘクトパスカル）で書かれている。",
+q670:"高気圧は時計回りに吹き出し、低気圧は反時計回りに吹き込む。北半球での話。",
+q671:"まわりから吹き込んだ空気が行き場をなくして上にのぼる。だから雲ができる。",
+q672:"気温が高いほど空気はたくさん水蒸気を含める。夏に蒸し暑いのはこのため。",
+q673:"上昇→気圧が下がる→膨張→温度が下がる→露点に達して水滴になる。この順番。",
+q674:"移動性高気圧と低気圧が交互に通るので、天気が数日周期で変わる。",
+q675:"北の冷たい気団と南のあたたかい気団の力がつり合って動かない停滞前線。",
+q676:"東から出て西に沈むように見える。地球の自転が原因。",
+q677:"地軸を延ばした先にあるので、地球が回ってもほぼ同じ位置に見える。他の星はその周りを回る。",
+q678:"地球が太陽のまわりを回るので、夜になる向きが季節でずれる。だから見える星座が変わる。",
+q679:"夏至。太陽がいちばん高くのぼり、昼が最も長い。",
+q680:"太陽－月－地球。月が太陽を隠す。月食は太陽－地球－月で、地球の影に月が入る。"
+},{
+q59:"3つとも形が違うA-B-C型。have gone to は「行ってしまって今いない」で、have been to（行ったことがある）と区別される。",
+q60:"see-saw-seen。「シーソー・シーン」とリズムで覚えると落ちにくい。",
+q61:"take-took-taken。過去分詞に -en がつく型。give・eat も同じ仲間。",
+q62:"write-wrote-written。過去分詞は t が2つ。「英語で書かれた手紙 a letter written in English」で頻出。",
+q63:"eat-ate-eaten。ate は「エイト」と読む。数字の eight と同じ音。",
+q64:"give-gave-given。母音が i→a→i と動く。",
+q65:"know-knew-known。k は読まない。knew は「ニュー」。",
+q66:"speak-spoke-spoken。break も broke-broken で同じ形。受動態 English is spoken でよく出る。",
+q67:"buy-bought-bought。過去と過去分詞が同じA-B-B型。",
+q68:"bring-brought-brought。buy とまったく同じ ought の形。",
+q69:"think-thought-thought。buy・bring・think の3つは ought 仲間としてまとめて覚える。",
+q70:"teach-taught-taught。catch-caught も同じ aught の形。",
+q71:"find-found-found。「見つける」。会社を設立する found とはたまたま同じつづりの別語。",
+q72:"leave-left-left。方向の left（左）と同じつづり。",
+q73:"begin-began-begun。i→a→u と動く型。sing・swim も同じ。",
+q74:"become-became-become。過去分詞が原形に戻る。come と同じ形。",
+q75:"hear-heard-heard。つづりは hear に d をつけるだけ。読みは「ハード」に変わる。",
+q76:"choose-chose-chosen。原形は o が2つ、過去は1つ。",
+q77:"build-built-built。最後の d が t に変わる型。send-sent も同じ。",
+q78:"break-broke-broken。speak とまったく同じ変わり方。",
+q79:"have[has]+過去分詞。主語が he・she・it なら has。過去のことが今につながっている感覚を表す。",
+q80:"「3年間」は for three years。今も住んでいるので過去形ではなく現在完了を使う。",
+q81:"for のあとは長さ（three years, a week）、since のあとは始まった時点（2020, I was ten）。あとに来る語で見分ける。",
+q82:"be動詞＋過去分詞。「される」側が主語になる。be動詞を過去にすれば「された」になる。",
+q83:"read の過去分詞は read（読みは「レッド」）。is read で「読まれている」。",
+q84:"名詞的「〜すること」、副詞的「〜するために」、形容詞的「〜するための」。日本語に訳して見分けるのが確実。",
+q85:"to study English で「英語を勉強するために」。目的を表す副詞的用法。「なぜ？」の答えになっている。",
+q86:"It は形だけの主語で、本当の主語は to 以下。It を「それ」と訳さないのがコツ。",
+q87:"enjoy・finish・stop のあとは ing だけ。enjoy to play は誤り。",
+q88:"want・hope・decide のあとは to だけ。want playing は誤り。enjoy との違いを対で覚える。",
+q89:"want him to go で「彼に行ってほしい」。人のあとは to＋原形。",
+q90:"beautiful のように長い語は more をつける。more beautifuler のような二重は誤り。",
+q91:"最上級は most。the most beautiful と the を忘れない。",
+q92:"good も well も better / best。不規則なので丸暗記。many・much は more / most。",
+q93:"as と as の間は比較級ではなく、もとの形（原級）。as taller as は誤り。",
+q94:"than の前は必ず比較級。短い語は -er、長い語は more。",
+q95:"who は人が先行詞で、うしろに動詞が続くとき。the boy who runs fast。",
+q96:"which・that はものが先行詞。うしろに主語＋動詞が続く目的格は省略できる。",
+q97:"running が後ろから boy を説明している。「〜している◯◯」は ing を名詞のうしろに置く。",
+q98:"written が letter を後ろから説明。「〜された◯◯」は過去分詞。ing と対で覚える。",
+q99:"疑問文が文の中に入ると、ふつうの語順に戻る。I know what he wants.（what does he want は誤り）",
+q100:"直後の名詞で決める。There is a book / There are two books。",
+q101:"must は話し手の強い気持ち、have to は事情による義務。過去形は had to しかない。",
+q102:"must not は「してはいけない」、don't have to は「しなくてよい」。意味が正反対なので必ず区別する。",
+q103:"Can you より Could you のほうが丁寧。Would you ~ ? もほぼ同じ。",
+q104:"時間を尋ねる決まり文句。答えは It takes about ten minutes.",
+q105:"店員の「いらっしゃいませ」。探し物なら I'm looking for a T-shirt. と答える。",
+q106:"Shall we ~ ? は「一緒に〜しませんか」。答えは Yes, let's.",
+q107:"I'm afraid は「残念ながら」。断るときのクッションになる言い方。",
+q108:"because のあとは主語＋動詞の文。理由を並べるなら First, Second, が読みやすい。",
+q109:"I think that ~ で意見を宣言できる。that は省略してもよい。",
+q110:"For example, のあとに自分の体験を書くと、一気に具体的になって説得力が出る。",
+q111:"increase は増える・増やす。反対は decrease。グラフの説明でよく出る。",
+q112:"although は接続詞で、うしろに主語＋動詞の文が来る。but と似た意味。",
+q113:"environment は環境。形容詞は environmental。長文の定番テーマ。",
+q114:"important は重要な。It is important to ~ の形でよく出る。",
+q115:"through は「〜を通り抜けて」。投げる throw とつづりが似ているので注意。",
+q116:"名詞の前（enough time）、形容詞の後ろ（old enough）と置く場所が変わる。",
+q117:"choose-chose-chosen と変化する。choice は名詞。",
+q118:"difficult は難しい。反対は easy。It is difficult for me to ~ の形で使える。",
+q119:"experience は経験。数えられる名詞としても動詞としても使う。",
+q120:"future は未来。in the future で「将来は」。作文で使いやすい。",
+q121:"人・動物・植物の面倒をみる。look after も同じ意味。",
+q122:"この to は不定詞ではなく前置詞なので、うしろは ing。look forward to seeing you。ひっかけの定番。",
+q123:"前置詞は in。be interested in music。at や for は誤り。",
+q124:"can と同じ意味。will be able to のように、can が使えない形で活躍する。",
+q125:"give up ~ing の形で使う。Don't give up. は励ましの決まり文句。",
+q411:"come-came-come。過去分詞が原形に戻る型。become も同じ。",
+q412:"get-got-gotten。イギリス英語では got。have got で「持っている」の意味にもなる。",
+q413:"make-made-made。過去と過去分詞が同じ。",
+q414:"put-put-put。3つとも同じなので、時制は前後の語（yesterday など）で判断する。",
+q415:"つづりは3つとも read。過去形だけ「レッド」と読む。読み方で時制を区別する珍しい動詞。",
+q416:"run-ran-run。過去分詞が原形に戻る。come と同じ型。",
+q417:"say-said-said。読みは「セッド」。つづりと読みがずれるので声に出して覚える。",
+q418:"send-sent-sent。build-built と同じ、d が t に変わる型。",
+q419:"sing-sang-sung。begin・swim と同じ i→a→u 型。3つまとめて覚える。",
+q420:"sit-sat-sat。1文字変わるだけ。",
+q421:"sleep-slept-slept。keep-kept・feel-felt と同じ ept・elt の型。",
+q422:"stand-stood-stood。understand も understood で同じ変化。",
+q423:"swim-swam-swum。sing・begin と同じ i→a→u 型。",
+q424:"tell-told-told。sell-sold と同じ。",
+q425:"stand の前に under がついただけ。変化のしかたも stand と同じ。",
+q426:"wear-wore-worn。tear-tore-torn と同じ形。",
+q427:"win-won-won。won は「ワン」と読む。数字の one と同じ音。",
+q428:"keep-kept-kept。sleep・feel と同じ仲間。",
+q429:"lose-lost-lost。「失う・負ける」。loose（ゆるい）とつづりが似ているので注意。",
+q430:"meet-met-met。ee が e に減るだけ。",
+q431:"he・she・it や単数の人名が主語で、今のことを言うとき。過去の文にはつけない。",
+q432:"Does he play ~ ? では動詞が原形 play に戻る。Does he plays は誤り。s は does に移ったと考える。",
+q433:"was / were + ing。過去のある時点で進行中だったこと。I was watching TV then.",
+q434:"will はその場で決めたこと、be going to は前から予定していたこと。",
+q435:"継続（ずっと）・経験（したことがある）・完了（したところ）。for/ever/just などの語で見分ける。",
+q436:"「行って戻ってきた」経験を表す。I have been to Kyoto twice.",
+q437:"「行ってしまって今ここにいない」。been と gone の違いは入試の定番。",
+q438:"ever は疑問文、never は否定、once・twice・before は回数。経験のサイン。",
+q439:"just「ちょうど」、already「もう」、yet は否定文・疑問文で使う。完了のサイン。",
+q440:"否定文なら「まだ〜していない」、疑問文なら「もう〜しましたか」。同じ語で意味が変わる。",
+q441:"have been + ing。「ずっと〜し続けている」と、動作が今も続いていることを強調する形。",
+q442:"make + 人 + 形容詞で「人を〜の状態にする」。The news made me happy.",
+q443:"give のあとは「人→もの」の順。to を使うときは「もの→人」の順。並べかえで頻出。",
+q444:"how to swim で「泳ぎ方」。疑問詞＋to＋動詞の原形。",
+q445:"what to do「何をすべきか」。where to go、when to start も同じ作り。",
+q446:"He is too young to drive. は「若すぎて運転できない」。not がないのに否定の意味になる。",
+q447:"so ~ that ... can't は too ~ to と同じ意味になる。書きかえ問題の定番。",
+q448:"目的格の関係代名詞は省略できる。名詞のすぐあとに主語＋動詞が続いていたら、省略を疑う。",
+q449:"if や when の文では、未来のことでも現在形を使う。If it will be sunny は誤り。",
+q450:"現実と違う願いごと。主語が I でも was ではなく were を使うのが決まり。",
+q451:"実際はあなたではないので were。「もし私があなたなら〜するのに」と続く。",
+q452:"help me carry のように to をつけない。make・let も同じで原形が続く。",
+q453:"うしろに名詞があれば What、形容詞や副詞だけなら How。What a kind boy he is! / How kind he is!",
+q454:"つづりではなく音で決まる。an hour（h を読まない）、a university（ユーと読む）。",
+q455:"both A and B は複数扱い。動詞は is ではなく are。",
+q456:"be different from ~ で「〜とちがう」。名詞は difference。",
+q457:"decide to ~ で「〜することに決める」。うしろは to 不定詞。",
+q458:"receive は受け取る。ei のつづりに注意。get より少し硬い語。",
+q459:"invent は発明する。invention は発明品、inventor は発明家。",
+q460:"protect A from B で「AをBから守る」。環境の長文で頻出。",
+q461:"reduce は減らす。3R の Reduce。increase の反対。",
+q462:"especially は「特に」。前に述べたものの中から1つ取り出して強調する。",
+q463:"finally は「最後に・ついに」。作文のまとめの書き出しに使える。",
+q464:"probably は「たぶん」。maybe よりも確かさが高いときに使う。",
+q465:"health は名詞（健康）、healthy は形容詞（健康な）。品詞で区別する。",
+q466:"culture は文化、cultural は形容詞。異文化理解の長文でよく出る。",
+q467:"society は社会、social は形容詞。social media などで見慣れている語。",
+q468:"In my opinion, ~ で「私の意見では」。英作文の書き出しに使える。",
+q469:"The reason is that ~ で理由を説明できる。why の答えになる語。",
+q470:"as a result で「その結果」。原因と結果をつなぐときに使う。",
+q471:"several は「いくつかの」。数えられる名詞の複数形につく。some より少し多いイメージ。",
+q472:"be useful for ~ で「〜に役立つ」。use の仲間の語。",
+q473:"support は支える・支援する。名詞でも動詞でも形は同じ。",
+q474:"develop は発展させる・開発する。developing country は発展途上国。",
+q475:"communicate with ~ で「〜と意思を伝え合う」。名詞は communication。",
+q476:"ものを手渡すときの決まり文句。Here it is. も同じ意味。",
+q477:"相手の様子がおかしいときに。答えは I have a headache. のように具合を言う。",
+q478:"誘いに賛成するとき。That sounds nice. / That's a good idea. も同じ。",
+q479:"すすめられて受けるなら Yes, please.、断るなら No, thank you. 対で覚える。",
+q480:"提案・すすめる言い方。How about going ~ ? のように、うしろは ing。",
+q481:"待ってもらうときの表現。Hold on, please. も同じ意味。",
+q482:"電話で「私です」。I am ~ とは言わない。電話特有の決まり文句。",
+q483:"Why don't we ~ ? は誘い、Why don't you ~ ? は相手へのすすめ。主語で意味が変わる。",
+q484:"I want to ~ の丁寧な言い方。お店での注文などで使う。",
+q485:"道を尋ねる定番。Could you tell me how to get to ~ ? も同じ。",
+q486:"be proud of ~ で「〜を誇りに思う」。名詞は pride。",
+q487:"be famous for ~ は「〜という理由で有名」。前置詞は for。",
+q488:"行事や活動に参加する。join とほぼ同じ意味だが、join は前置詞をつけない。",
+q489:"My dream came true. のように使う。「夢がかなう」の決まり文句。",
+q490:"take care of と同じ意味。「後ろから見守る」イメージで覚える。",
+q491:"be full of ~ で「〜でいっぱい」。The box is full of books.",
+q492:"thanks to はよい結果に使う。悪い結果なら because of を使うのがふつう。",
+q493:"because of のあとは名詞、because のあとは主語＋動詞の文。並べかえの落とし穴。",
+q494:"「最初は〜だった、でも今は」という流れで使うと、作文が書きやすくなる。",
+q495:"get to・arrive at・reach はどれも「着く」。reach だけ前置詞をつけない。",
+q496:"put on は着る「動作」、wear は着ている「状態」。写真の説明でどちらか問われる。",
+q497:"as soon as のあとの文は、未来のことでも現在形にする。if・when と同じ決まり。",
+q498:"賛成か反対かを1文目ではっきり書く。途中で立場を変えないことが大事。",
+q499:"should は「〜すべきだ」。must より角が立たず、意見文で使いやすい。",
+q500:"First, / Second, か、Also, でつなぐ。理由が2つあると説得力が出る。",
+q501:"最後にもう一度、自分の意見を短く言い直して締める。",
+q502:"この型に流し込むだけで形になる。埼玉県の英作文はこの構成で十分に点が取れる。",
+q503:"難しい語でスペルを間違えるより、簡単な語で正しく書くほうが点になる。",
+q504:"三単現の s と、過去の話なのに現在形になっていないか。減点の大半はこの2つ。",
+q505:"語数が足りないと減点されるので、指定より少し多めに書いておく。"
+},{
+q126:"「いちじるしい」。変化や差がはっきり大きいこと。「著しく増加した」のように使う。「著者」の「チョ」と読み分ける。",
+q127:"「おごそか」。重々しくて近寄りがたい様子。「厳かな儀式」。「厳しい（きびしい）」と読み分ける。",
+q128:"「つちかう」。土を培って育てるのが元の意味。「実力を培う」のように、時間をかけて育てることに使う。",
+q129:"「うながす」。相手に何かをするよう働きかける。「注意を促す」。",
+q130:"「ゆだねる」。相手にすべて任せること。「判断を委ねる」。「委員」の「イ」と読み分ける。",
+q131:"「ゆうりょ」。心配すること。「憂」は「うれい」とも読む。憂鬱の憂。",
+q132:"「しさ」。それとなく示すこと。「唆」を「サ」と読むのがポイント。「示唆に富む」。",
+q133:"「そうさい」。「サツ」ではなく「サイ」。プラスとマイナスを打ち消し合わせること。読み間違いの定番。",
+q134:"「はんれい」。「ぼんれい」ではない。本の最初にある、使い方の説明のこと。",
+q135:"「ざんてい」。とりあえず・仮に決めること。「暫定的な措置」。",
+q136:"危ない・険しい、どちらも「あぶない」意味の字を重ねた語。",
+q137:"「果たす」は責任などをやりとげること。「果す」と送りがなを短くしないこと。",
+q138:"「貴い」＋「重い」。値打ちが高いという意味。",
+q139:"「単」ではなく「簡」。竹かんむり。「簡素」「書簡」の簡。",
+q140:"「述べる」は意見を言うこと。「延べる」「伸べる」と書き分ける。",
+q141:"「績」は糸へん。「積む」の積と混同しやすい。成績・業績はどちらも糸へん。",
+q142:"毎週出る刊行物なので「週刊」。習慣は「習慣」、週間（1週間）は別の語。3つを区別する。",
+q143:"左右がつり合うのは「対称」。比べる相手は「対象」、性質を言うなら「対照的」。3つの書き分けが定番の出題。",
+q144:"損害をつぐなうのは「補償」。保険で守るのは「保障」、品質を約束するのは「保証」。3つを区別する。",
+q145:"「絶対」。「絶体」と書くのは「絶体絶命」のときだけ。",
+q146:"五里も続く霧の中にいる状態。どうしていいか分からず、見通しが立たないこと。",
+q147:"試して間違えてを繰り返すこと。「錯誤」は間違いのこと。",
+q148:"一つの朝と一つの夕方。それくらい短い時間。「一朝一夕にはできない」と否定で使うことが多い。",
+q149:"自分で作った味噌を自慢することから。自画自賛と同じ意味。",
+q150:"「気を置く」は遠慮すること。それが「置けない」＝遠慮しなくてよい相手。「油断できない」は誤り。誤用の定番。",
+q151:"その人の力に対して役目が軽すぎること。「力不足」の意味で使うのは誤り。ここが試験に出る。",
+q152:"人に情けをかけると回り回って自分に返ってくる。「その人のためにならない」は誤用。",
+q153:"客観的＝だれが見ても同じ、主観的＝自分の見方。説明文で必ず出る対。",
+q154:"具体＝目に見える形、抽象＝共通点だけ取り出した考え。説明文の基本の対。",
+q155:"絶対＝他と比べない、相対＝他と比べて決まる。",
+q156:"言い切りが「〜だ」で終わるのが形容動詞。「きれい」だけなら名詞に見えるが、活用するので形容動詞。",
+q157:"「大きな」は活用しない。「大きい」なら形容詞。活用するかどうかで見分ける。",
+q158:"受け身・可能・自発・尊敬の4つ。「先生が話される」は尊敬、「昔が思い出される」は自発。",
+q159:"推定（〜らしい）・たとえ（まるで〜）・例示（たとえば〜）。文脈で判断する。",
+q160:"「今日はね／学校へね／行くね」のように「ね」を入れて自然に切れる位置が文節の切れ目。",
+q161:"「何が」「どうする」の関係。修飾・被修飾の関係と区別する。",
+q162:"「けふ」の「ふ」は「う」に直し、「けう」→「きょう」。ハ行はワ行に直すのが基本ルール。",
+q163:"語頭以外の「を」ではなく、ここは「を」がそのまま「お」。「をとこ」→「おとこ」。",
+q164:"「ふ」を「う」に直して「いう」。言ふ・思ふ・給ふはすべてこの直し方。",
+q165:"「ぞ・なむ・や・か」があると、文末が連体形になる。係り結びという。",
+q166:"「こそ」だけが已然形で結ぶ。他の4つとは違うので、こそだけ別に覚える。",
+q167:"「あはれなり」はしみじみとした感動。「をかし」の明るい面白さと対になる語。",
+q168:"「をかし」は明るく興味を引かれる感じ。枕草子の基調。「おかしい・変だ」ではない。",
+q169:"意見からいきなり書き出さない。まず資料の数値や傾向を1〜2文で書くと、採点者に伝わる。",
+q170:"内容よりまず形式。書き出しの1マス下げ、文体の統一、字数。ここだけで数点変わる。",
+q171:"筆者は最初に問題を出し、最後に答えを言う。急いでいるときは、この2か所だけでも読む。",
+q172:"前の内容を短く言い直している。だから設問の答えが入っていることが多い。",
+q173:"逆接のあとに筆者の本音が来る。「しかし」に印をつけながら読むと主張を見失わない。",
+q174:"「なぜですか」なら「〜から。」、「どういうことですか」なら「〜ということ。」で終える。語尾が合わないだけで減点される。",
+q506:"「とどこおる」。物事が進まず止まっていること。「支払いが滞る」。",
+q507:"「さえぎる」。間に入って進むのを止めること。「視界を遮る」。",
+q508:"「うるおう」。水分や豊かさが行き渡ること。「地域経済が潤う」。",
+q509:"「おちいる」。よくない状態にはまり込むこと。「混乱に陥る」。",
+q510:"「たくみ」。腕前が優れていること。「巧みな話術」。「巧妙」の巧。",
+q511:"「つたない」。下手なこと。「拙い文章ですが」と、へりくだって使うことが多い。",
+q512:"「おろそか」。いいかげんに扱うこと。「基礎をおろそかにする」。「疎遠」の疎。",
+q513:"「まかなう」。必要な分を用意して間に合わせること。「費用を賄う」。",
+q514:"「どんよく」。欲が深いこと。悪い意味だけでなく「貪欲に学ぶ」と前向きにも使う。",
+q515:"「すいとう」。「しゅつのう」ではない。お金の出し入れのこと。読みの難問。",
+q516:"「すいこう」。やりとげること。「遂げる（とげる）」と読み分ける。",
+q517:"「こうけん」。役に立つこと。「貢」は「みつぐ」とも読む。",
+q518:"「よくよう」。声の上げ下げのこと。「抑揚をつけて読む」。",
+q519:"「がいねん」。おおまかな考え・とらえ方。説明文で頻出。",
+q520:"「いきどおる」。激しく怒ること。「憤慨」の憤。",
+q521:"「経」は糸へん。世の中を治め、生活を成り立たせるという意味から来ている。",
+q522:"減って少なくなる。「現象（起きること）」と同じ読みなので、意味で書き分ける。",
+q523:"複雑の「複」はころもへん。「復習」の「復」はぎょうにんべん。部首で区別する。",
+q524:"数値が正しいのは「正確」。人がらは「性格」。文の意味で判断する。",
+q525:"「織」は糸へん。人を糸のように編み合わせるイメージ。「識」「職」と形が似ているので注意。",
+q526:"興味を持つのは「関心」。えらいと思うのは「感心」。「社会に関心を持つ」は前者。",
+q527:"価値を決めるので「評価」。「価」の字を落とさない。",
+q528:"そのものだけが持つ特徴。「独特」と「特有」はほぼ同じ意味。",
+q529:"「興」の書き順と形が難しい字。「味」とセットで覚える。",
+q530:"「単純」。「単」の下は「十」ではなく横棒。「純」は糸へん。",
+q531:"「豊」も「富」もゆたかの意味。同じ意味の字を重ねた語。",
+q532:"「刺」はりっとう。「刺す」から来ている。「激」はさんずい。",
+q533:"よく調べて考えるのが「検討」。見当（見込み）とは別の語。「検討がつかない」は誤り。",
+q534:"チャンスは「機会」。道具は「機械」。同じ「キカイ」で意味がまったく違う。",
+q535:"「費やす」は時間やお金を使うこと。送りがなは「やす」。",
+q536:"その場に臨んで変化に応じる。決まったやり方にこだわらないこと。",
+q537:"故（ふるい）を温めて新しきを知る。過去から学ぶ姿勢を言う。",
+q538:"大部分は同じで違いは小さい。「似たり寄ったり」と同じ。",
+q539:"刀を1本持って敵陣に切り込むイメージ。前置きなしに本題へ入ること。",
+q540:"自分の絵に自分で賛（ほめ言葉）を書くことから。手前みそと同じ意味。",
+q541:"うまくいっている所に冷や水をかける。じゃまをすること。",
+q542:"驚いて舌が回らなくなる様子から。感心するときに使う、よい意味の言葉。",
+q543:"熱くて手を焼くことから。手に負えなくて困ること。",
+q544:"一歩目は出るが二歩目が出ない。ためらってぐずぐずすること。",
+q545:"需要＝ほしい量、供給＝出せる量。公民の価格の問題でも必ず出る。",
+q546:"保守＝今のやり方を守る、革新＝新しく変える。政治の話で頻出。",
+q547:"積極＝自分から進んで、消極＝ひかえめに。",
+q548:"原因があって結果が生まれる。説明文の骨組みになる対。",
+q549:"権利は主張できるもの、義務は果たすべきもの。公民でもそのまま出る。",
+q550:"必然＝必ずそうなる、偶然＝たまたま。",
+q551:"「本がない」→「本はない」で通るので形容詞。「読まない」→「読まはない」は変なので助動詞。",
+q552:"「私の書いた本」は「私が書いた本」と言いかえられる。この「の」は主語を表している。",
+q553:"活用があって、それだけで述語になれる語。動詞・形容詞・形容動詞の3つ。",
+q554:"活用しない名詞のこと。「体言止め」は名詞で文を終える技法。",
+q555:"自立語はそれだけで意味が分かる語、付属語は必ず他にくっつく語（助詞・助動詞）。",
+q556:"尊敬語は相手を上げる、謙譲語は自分を下げる、丁寧語は「です・ます」。",
+q557:"「言う」の尊敬語。先生や目上の人の動作に使う。自分には使わない。",
+q558:"「言う」の謙譲語。自分の動作をへりくだって言う。おっしゃると対で覚える。",
+q559:"「いらっしゃる」は尊敬語。自分が行くなら「うかがう・参る」。方向で使い分ける。",
+q560:"「しかし」「だから」など。前後の関係を示すので、読解の手がかりになる。",
+q561:"「ない」をつけたとき、直前の音がア段なら五段、イ段なら上一段、エ段なら下一段。",
+q562:"「ない」に続く形が未然形。まだそうなっていない形、という意味。",
+q563:"「つとめて」は早朝。「努めて」ではない。枕草子の「冬はつとめて」で有名。",
+q564:"「有り難し」＝あることが難しい＝めったにない。感謝の「ありがとう」の元。",
+q565:"古文の「うつくし」は小さくてかわいらしいこと。現代語の「美しい」とはずれる。",
+q566:"古文の「やがて」は「すぐに」。現代語の「そのうち」とは逆なので要注意。",
+q567:"「なほ」は「やはり・それでもなお」。「なお」と読む。",
+q568:"「いと」は程度が大きいことを表す。「いとをかし」＝とても趣がある。",
+q569:"「げに」は「なるほど本当に」。相手の言葉に納得したときに使う。",
+q570:"「けり」は過去のほか、気づきや感動を表す詠嘆の意味もある。和歌では詠嘆が多い。",
+q571:"古文は主語も助詞もよく省かれる。だれの動作かを補いながら読むのが最大のコツ。",
+q572:"清少納言の随筆。「春はあけぼの」で始まる。徒然草・方丈記と合わせて三大随筆。",
+q573:"兼好法師の随筆。「つれづれなるままに」で始まる。",
+q574:"かぐや姫の話。「物語の出で来はじめの祖」と言われる、日本最古の物語。",
+q575:"指示語の答えはほぼ直前にある。見つけたら、その言葉を指示語の位置に入れて意味が通るか確かめる。",
+q576:"直前の内容をまとめ直している。ここが答えになりやすいので、印をつけて読む。",
+q577:"説明文の多くは「AとB」の対比でできている。どちらの話か線を引き分けると混乱しない。",
+q578:"「なぜ」と聞かれたら答えは必ず「〜から。」「〜ため。」で終える。語尾だけで減点される。",
+q579:"「うつむいた」「雨が降り出した」など、直接書かれていない気持ちが行動や景色に出る。",
+q580:"「十字以内で」なら、その長さの表現を本文から探す。字数が探す手がかりになる。",
+q581:"本文に書かれていない語が入っている、「すべて」「必ず」と言い過ぎている選択肢は切る。",
+q582:"設問の言葉をそのまま使って組み立てると、聞かれたことに答えた形になる。自分の言葉に変えすぎない。",
+q583:"段落の最初の接続語を見る。「しかし」なら前を否定、「たとえば」なら具体例。役割がすぐ分かる。",
+q584:"直前の内容の具体例。逆に言えば、具体例の前に筆者の主張がある。",
+q585:"「〜とか」「すごく」「やっぱり」は書き言葉では使わない。「など」「非常に」に直す。",
+q586:"「だ・である」か「です・ます」のどちらかにそろえる。混ざると減点される。",
+q587:"いきなり意見を書かず、まず資料の事実を書く。これが埼玉県の作文の型。",
+q588:"事実のあとに、自分の体験を根拠にした意見を書く。体験があると説得力が出る。",
+q589:"作文に時間を使いすぎると読解が終わらない。15分で切り上げるつもりで練習する。",
+q590:"字数不足は減点対象。9割を下回らないよう、書きながらマス目を確認する。"
+},{
+q243:"ここを通る経線が経度0度。世界の時刻の基準になっている。",
+q244:"兵庫県明石市を通る東経135度。135÷15＝9で、日本はロンドンより9時間進んでいる。",
+q245:"地球1周360度を24時間で回るので、360÷24＝15度で1時間。時差の計算はこれが全部の土台。",
+q246:"国境をこえて同じお金が使えるので、両替の手間がなく貿易がしやすい。ただし全加盟国が使っているわけではない。",
+q247:"東南アジアの10か国の集まり。人口が多く、日本の工場も多く進出している。",
+q248:"ブラジルだけポルトガルの植民地だったから。南米の他の国はスペイン語。",
+q249:"北緯37度より南の温暖な地域。土地と労働力が安く、先端産業が集まった。",
+q250:"赤道付近。一年中暑くて雨が多く、密林が広がる。",
+q251:"森を焼いた灰を肥料にする。地力が落ちると移動するので、広い森林が必要。",
+q252:"外国の企業に税を安くするなどの優遇をして呼び込んだ地区。だから沿岸部が先に発展した。",
+q253:"200海里までの水産資源や鉱産資源を自国のものにできる。日本は島が多いので世界有数の広さ。",
+q254:"愛知県を中心とした地域。自動車工業が中心で、出荷額は日本一。",
+q255:"関東から九州北部まで帯状に連なる。原料の輸入と製品の輸出に便利な海沿いに集まった。",
+q256:"あたたかい気候を使って、他の産地より早く出荷する。値段が高い時期に売れるのが利点。",
+q257:"すずしい高原を使って、他の産地より遅らせて出荷する。促成栽培と対で覚える。",
+q258:"北から飛驒・木曽・赤石。北アルプス・中央アルプス・南アルプスの順に対応する。",
+q259:"長野県では千曲川、新潟県に入って信濃川と名前が変わる。全長約367km。",
+q260:"関東平野。日本の平野の中で最も広く、人口も集中している。",
+q261:"大陸から吹く北西の季節風が、あたたかい対馬海流の上で水蒸気を含み、山にぶつかって雪を降らせる。",
+q262:"扇状地は水はけがよいので、水田より果樹（ぶどう・ももなど）に向く。山梨県の甲府盆地が代表。",
+q263:"川が運んだ細かい土砂が河口に積もってできる。水はけが悪く、水田に利用されることが多い。",
+q264:"間隔が狭い＝短い距離で高さが変わる＝急な斜面。広ければゆるやか。",
+q265:"4cm×25000＝100000cm＝1000m。地図上の長さ×縮尺の分母で計算する。",
+q266:"沖縄は観光業、東京は商業やサービス業が中心だから。第三次産業＝商業・サービス業。",
+q267:"中大兄皇子と中臣鎌足が蘇我氏をたおして始めた。「むしごろし（645）大化の改新」。",
+q268:"唐の律令にならって作られた。これで天皇中心の国のしくみが整った。",
+q269:"唐の長安をまねた都。「なんと（710）大きな平城京」。",
+q270:"開墾した土地を永久に自分のものにしてよいとした。これで公地公民が崩れ、荘園が生まれる。",
+q271:"桓武天皇が移した。「鳴くよ（794）うぐいす平安京」。",
+q272:"娘を天皇のきさきにして、生まれた子を天皇にし、摂政・関白として実権を握った。",
+q273:"守護は国ごとの軍事・警察、地頭は荘園ごとの年貢の取り立て。役割で区別する。",
+q274:"元（モンゴル）が2度攻めてきた。防いだが新しい土地が手に入らず、御家人へのほうびが出せずに幕府が弱った。",
+q275:"将軍のあとつぎ争いから京都で11年続いた戦乱。これをきっかけに戦国時代へ。",
+q276:"ポルトガル人を乗せた船が漂着して伝わった。戦い方が変わり、城の作りも変わった。",
+q277:"イエズス会の宣教師。鹿児島に上陸してキリスト教を伝えた。",
+q278:"検地で年貢を確実にし、刀狩で百姓から武器を取り上げた。この2つで武士と百姓の身分がはっきり分かれた（兵農分離）。",
+q279:"徳川家康が石田三成らを破った。「天下分け目の戦い」。3年後に江戸幕府が開かれる。",
+q280:"大名が守るべききまり。城の修理や結婚まで許可制にして、幕府に逆らえないようにした。",
+q281:"1年おきに江戸と領地を往復させ、妻子は江戸に住まわせた。費用がかさんで大名の力が弱まった。",
+q282:"倹約と新田開発、公事方御定書、目安箱。享保・寛政・天保の三大改革の最初。",
+q283:"アメリカの軍艦4隻で浦賀へ。翌年の日米和親条約で開国することになる。",
+q284:"領事裁判権を認め、関税自主権がない不平等条約。この2つの不平等を直すのが明治の大きな課題になる。",
+q285:"新政府の基本方針を示したもの。会議を開いて政治を決めるという内容。",
+q286:"収穫高ではなく地価の3％を現金で納めさせた。これで政府の収入が毎年安定した。",
+q287:"ドイツ（プロイセン）の憲法を手本にした。天皇が定めて国民に与える形（欽定憲法）。",
+q288:"朝鮮をめぐる清との戦争。勝って賠償金と台湾を得た。",
+q289:"満州・朝鮮をめぐるロシアとの戦争。勝ったが賠償金が取れず、日比谷焼き打ち事件が起きた。",
+q290:"25歳以上の男子に選挙権を与える一方、社会運動を取り締まる法も同時に作った。アメとムチの関係。",
+q291:"アメリカの株価暴落から世界中に広がった。日本も打撃を受け、大陸進出へ向かう一因になった。",
+q292:"日本軍が南満州鉄道を爆破して始めた。翌年満州国を作り、国際連盟を脱退することになる。",
+q293:"無条件降伏を求める宣言。これを受け入れて第二次世界大戦が終わった。",
+q294:"公布は1946年11月3日（文化の日）、施行は1947年5月3日（憲法記念日）。祝日とセットで覚える。",
+q295:"日本が独立を回復した条約。同じ日に日米安全保障条約も結ばれた。",
+q296:"日ソ共同宣言でソ連と国交を回復し、その反対がなくなって加盟できた。順番が大事。",
+q297:"戦後アメリカの統治下にあった沖縄が日本に返還された。米軍基地は残った。",
+q298:"国民主権・基本的人権の尊重・平和主義。3つセットで必ず出る。",
+q299:"政治の権限は持たず、内閣の助言と承認で国事行為だけを行う。",
+q300:"国会が発議し、国民投票で決める。国民が最終的に決めるのは国民主権の表れ。",
+q301:"「健康で文化的な最低限度の生活を営む権利」。生活保護などの根拠になっている。",
+q302:"人間らしい生活を国に求める権利。自由権が「国は邪魔するな」なのに対し、社会権は「国は助けよ」。",
+q303:"団結権（組合を作る）・団体交渉権（話し合う）・団体行動権（ストライキ）。3つで労働者を守る。",
+q304:"力を3つに分けて、互いに行き過ぎを止め合う。1か所に権力が集まるのを防ぐしくみ。",
+q305:"法律を作れるのは国会だけ。選挙で選ばれた代表が集まる場所だから。",
+q306:"任期が短く解散もあるので、より新しい国民の意思を表していると考えられるから。",
+q307:"10日以内に衆議院を解散するか、内閣が総辞職する。国会と内閣が抑え合う代表例。",
+q308:"1つの事件で3回まで裁判を受けられる。間違いを防ぎ、人権を守るため。",
+q309:"国民から選ばれた裁判員が、裁判官と一緒に有罪・無罪と刑を決める。重大な刑事裁判が対象。",
+q310:"法律が憲法に合っているかを判断する違憲審査権を持ち、その最終判断をするから。",
+q311:"その地域だけで通用するきまり。法律の範囲内で作る。",
+q312:"50分の1以上の署名を集めて首長に請求する。人の職を奪う請求ではないので必要数が少ない。",
+q313:"3分の1以上。人の職を奪う重い請求なので、条例より多くの署名が必要になる。この差が問われる。",
+q314:"ほしい人が多いのに品物が少ないので、高くても買われる。だから価格が上がる。逆なら下がる。",
+q315:"お札を発行し、政府のお金を扱い、銀行とだけ取引する。私たちは直接取引できない。",
+q316:"銀行から国債を買うと、銀行に出回るお金が増えて貸し出しやすくなる。景気を上向かせるねらい。",
+q317:"所得が多いほど税率を高くして、収入の差を縮める。所得の再分配のしくみ。",
+q318:"収入が少ない人ほど、収入に占める税の割合が重くなる。これを逆進性という。",
+q319:"税を納める人と負担する人が同じなら直接税、違えば間接税。消費税は買った人が負担し、店が納める。",
+q320:"社会保険・公的扶助・社会福祉・公衆衛生。4つの名前と内容をセットで覚える。",
+q321:"アメリカ・イギリス・フランス・ロシア・中国の5か国。1国でも反対すると決議できない（拒否権）。",
+q322:"2030年までに達成をめざす17の目標。貧困・教育・環境などが含まれる。",
+q323:"減らす・くり返し使う・資源に戻す。この順番が大切で、まずリデュースが優先される。",
+q681:"ユーラシア・アフリカ・北アメリカ・南アメリカ・オーストラリア・南極の6つ。",
+q682:"太平洋・大西洋・インド洋。太平洋が最も広い。",
+q683:"ブラジル・インドネシア・ケニアなど。赤道は南アメリカ北部・アフリカ中部・東南アジアを通る。",
+q684:"雨が少なく木が育たないので、家畜とともに移動する遊牧。木がないので土をこねた日干しれんがで家を作る。",
+q685:"夏に乾燥するので、乾燥に強いオリーブやぶどうが向く。冬に雨が降るので小麦も作られる。",
+q686:"広い国土の中で、その土地の気候に合った作物を選んで大規模に作る。",
+q687:"植民地時代に作られた大農園。コーヒーやカカオなど輸出向けの1種類を作る。",
+q688:"1つの作物や資源に頼っているので、その価格が下がると国全体の収入が減ってしまう。",
+q689:"産油国が集まって石油の生産量や価格を調整する組織。",
+q690:"ブラジル・ロシア・インド・中国・南アフリカ。頭文字をつなげた呼び名で、急成長した国々。",
+q691:"東部の沿岸部。西部は山や砂漠が多く人口が少ない。経済特区も沿岸にある。",
+q692:"あたたかい北大西洋海流の上を偏西風が吹きつけるから。だから緯度のわりに冬が温暖。",
+q693:"イスラム教。1日5回の礼拝や豚肉を食べない決まりがある。",
+q694:"鉄鉱石・石炭。地下資源が豊富で、日本の重要な輸入相手国になっている。",
+q695:"北が択捉島、東が南鳥島、南が沖ノ鳥島、西が与那国島。沖ノ鳥島は水没を防ぐ工事をしている。",
+q696:"1都1道2府43県で47。",
+q697:"環太平洋造山帯。太平洋を取り囲むように地震と火山が多い。",
+q698:"本州の中央を南北に走る大きな溝。ここを境に東日本と西日本で地形が変わる。",
+q699:"山地が沈んでできた入り組んだ海岸。波が静かなので養殖に向く。ただし津波が高くなりやすい。",
+q700:"カロリーベースで4割ほど。輸入に頼っているので、国際情勢の影響を受けやすい。",
+q701:"大都市に近いので輸送費が安く、新鮮なうちに届けられる。千葉・茨城が代表。",
+q702:"養殖は最後まで育てて出荷、栽培漁業は途中まで育てて海に放し、大きくなってからとる。",
+q703:"資源が少ない日本が、technology で価値を高めて輸出してきた形。近年は製品輸入も増えている。",
+q704:"人件費の安い海外へ工場が移り、国内の雇用や技術が失われること。円高のときに進みやすい。",
+q705:"京浜（東京・神奈川）・中京（愛知）・阪神（大阪・兵庫）。北九州を加えて四大とすることもある。",
+q706:"過疎は学校や病院が維持できなくなる。過密は住宅不足や渋滞が起きる。人口の偏りが生む2つの問題。",
+q707:"北海道。日本の面積の約2割を占める。",
+q708:"どこがどれくらい危険か、どこへ逃げるかを前もって知らせる地図。備えのための資料。",
+q709:"方位記号がなければ上が北。地図記号の読み取り問題では最初に確認する。",
+q710:"長野県の野辺山原（レタス）、群馬県の嬬恋村（キャベツ）。夏でもすずしい高原を利用する。",
+q711:"地面を掘り下げたたて穴住居に住み、厚手で縄目の模様がある縄文土器を使った。狩りと採集の生活。",
+q712:"稲作と金属器（青銅器・鉄器）。米をたくわえられるようになり、貧富の差と身分が生まれた。",
+q713:"魏に使いを送り、「親魏倭王」の称号と金印を受けた。中国の歴史書『魏志倭人伝』に記されている。",
+q714:"冠位十二階は家柄によらず能力で位を与える制度、十七条の憲法は役人の心構え。ねらいは天皇中心の政治。",
+q715:"隋。「日出づる処の天子」の手紙を持っていったことで有名。唐ではないので注意。",
+q716:"6歳以上の男女に口分田を与え、死ぬと国に返させた。戸籍がないと成り立たない制度。",
+q717:"租は稲、庸は労役の代わりの布、調は地方の特産物。庸と調は都まで自分で運んだので重い負担だった。",
+q718:"聖武天皇。ききんや病気が続いたので、仏教の力で国を守ろうとした。",
+q719:"唐の影響が薄れ、日本らしい文化が育った。かな文字・源氏物語・寝殿造りがその例。",
+q720:"平清盛。日宋貿易で富を得て、娘を天皇のきさきにした。武士が政治の中心に立った最初。",
+q721:"後鳥羽上皇が幕府をたおそうとして失敗。これで幕府の力が西日本にも及んだ。",
+q722:"武士の慣習をまとめた最初の武家法。のちの武家法の手本になった。",
+q723:"倭寇と区別するため、勘合という合い札を使った。だから勘合貿易という。",
+q724:"実力があれば身分の低い者が上の者を倒せる風潮。応仁の乱のあと戦国時代に広がった。",
+q725:"市場の税をなくし、座（同業組合）の特権を廃止した。だれでも自由に商売できるようにして城下町を栄えさせた。",
+q726:"朱印状を持った船が東南アジアへ行き、日本人が住みついた町ができた。鎖国で途絶える。",
+q727:"重い年貢とキリスト教弾圧に対する一揆。天草四郎が指導者。これがきっかけで鎖国が強まった。",
+q728:"長崎（オランダ・中国）・対馬（朝鮮）・薩摩（琉球）・松前（アイヌ）。鎖国でも完全に閉じてはいなかった。",
+q729:"上方の町人が担い手。井原西鶴・近松門左衛門・松尾芭蕉が代表。",
+q730:"江戸中心。葛飾北斎・歌川広重の浮世絵、十返舎一九の小説。元禄と場所で区別する。",
+q731:"オランダ語の人体解剖書を訳したもの。これをきっかけに蘭学が広まった。",
+q732:"ききんで苦しむ人を救おうと、元幕府の役人が乱を起こした。幕府に衝撃を与えた。",
+q733:"武士が支配し、百姓・町人がそれを支えた。百姓が人口の大半を占めていた。",
+q734:"藩をなくして県を置き、政府が任命した役人に治めさせた。これで中央集権が完成した。",
+q735:"富岡製糸場などの官営工場を作り、近代産業を育てた。「富国強兵」とセットの政策。",
+q736:"板垣退助らが中心。国会を開けという声が高まり、1890年の国会開設につながった。",
+q737:"伊藤博文。憲法作りの中心人物でもある。",
+q738:"日露戦争で朝鮮での立場を強めた日本が、韓国を植民地にした。1945年まで続く。",
+q739:"シベリア出兵を見こした米の買い占めで値段が上がり、富山から全国へ広がった。",
+q740:"政党内閣ができ、普通選挙を求める運動が高まった時期。原敬の内閣が代表例。",
+q741:"議会の承認なしに、物資や人を戦争のために動員できるようにした法。戦時体制の完成。",
+q742:"地主の土地を政府が買い上げ、小作人に安く売った。これで自作農が増え、農村の民主化が進んだ。",
+q743:"1955年から1973年ごろまで。技術革新と輸出で経済が急成長した一方、公害が深刻になった。",
+q744:"東京オリンピック。東海道新幹線と高速道路が開通し、高度経済成長の象徴になった。",
+q745:"効率はむだがないか、公正は手続きや機会が平等か。対立を解決するときの2つのものさし。",
+q746:"夫婦だけ、または夫婦と未婚の子。都市化とともに増え、家族の人数は減ってきた。",
+q747:"働いて支える人が減り、支えられる人が増える。だから1人あたりの負担が重くなる。",
+q748:"普通（一定年齢以上全員）・平等（1人1票）・直接・秘密。4つセットで覚える。",
+q749:"小選挙区で人を選び、比例代表で政党を選ぶ。1人が2票を持つしくみ。",
+q750:"議員1人あたりの有権者数が選挙区で違うと、1票の重みが変わってしまい平等原則に反する。",
+q751:"政権を担当しているのが与党、していないのが野党。野党は政府を監視する役割を持つ。",
+q752:"常会は毎年1回（予算を決める）、臨時会は必要なとき、特別会は総選挙の後（首相を指名する）。",
+q753:"1つの院だけだと行き過ぎる恐れがある。2つで審議すれば慎重になり、間違いを防げる。",
+q754:"国会が首相を指名し、内閣は国会に責任を負う。だから不信任決議で内閣を辞めさせられる。",
+q755:"他の権力から口を出されずに裁判をするしくみ。公正な裁判のために欠かせない。",
+q756:"民事は個人どうしのお金や契約の争い。刑事は罪を犯した人を裁く。訴える人が違うのが見分け方。",
+q757:"検察官が起訴する。民事なら原告が訴える。ここが刑事と民事の大きな違い。",
+q758:"黙秘権、弁護人を依頼する権利など。無罪と決まるまでは罪人として扱わない原則がある。",
+q759:"有罪が確定した後でも、新しい証拠が出れば裁判をやり直せる制度。",
+q760:"人権は無制限ではない。他の人の人権とぶつかるときに調整される。",
+q761:"環境権・知る権利・プライバシーの権利・自己決定権。憲法に直接書かれていないが認められてきた権利。",
+q762:"国や自治体が持つ情報を、国民が求めれば見られる制度。知る権利を実際に使えるようにするもの。",
+q763:"利益の分け前（配当）を受け取り、株主総会で会社の方針に投票できる。会社が倒れても出資額以上は失わない。",
+q764:"労働時間や休日、賃金の最低ラインを定めた法律。労働組合法・労働関係調整法と合わせて労働三法。",
+q765:"独占禁止法を公正取引委員会が監視する。競争がなくなると価格が上がり消費者が損をするため。",
+q766:"円の価値が上がるので、外国のものを安く買える。だから輸入や海外旅行に有利。",
+q767:"円の価値が下がるので、外国から見て日本の製品が安くなる。だから輸出に有利。円高と対で覚える。",
+q768:"道路など必要なものを用意し（資源配分）、税で差を縮め（再分配）、景気を調整する。",
+q769:"借金なので、返すのは今の子どもたち。将来世代に負担を先送りすることになる。",
+q770:"水俣病（有機水銀）・新潟水俣病（有機水銀）・イタイイタイ病（カドミウム）・四日市ぜんそく（亜硫酸ガス）。原因物質とセットで。",
+q771:"停戦の監視や選挙の支援などを行う活動。日本も自衛隊を派遣している。",
+q772:"大国も小国も1国1票で平等。一方、安全保障理事会では5大国が拒否権を持つ。この差が問われる。",
+q773:"京都議定書のあとに結ばれ、途上国を含むすべての国が削減目標を持つ点が新しい。",
+q774:"納税・勤労・子どもに普通教育を受けさせる義務の3つ。権利と混同しないよう区別する。"
+});
+
+/* ================= 状態 ================= */
+const SUBJ=["数学","英語","国語","理科","社会"];
+const LVNAME={1:"必修",2:"標準",3:"上積み"};
+const BASE=RAW.concat(RAW2).map((r,i)=>({id:"q"+i,s:r[0],u:r[1],q:r[2],a:r[3],c:r[4],h:r[5],lv:r[6]||1}));
+let MY=[], EX=[], BANK=BASE.slice(), UNITS={};
+function rebuild(){
+  BANK=BASE.concat(MY.map(m=>({id:m.id,s:m.s,u:m.u,q:m.q,a:m.a,c:null,h:m.h,lv:1,my:1})));
+  SUBJ.forEach(s=>UNITS[s]=[...new Set(BANK.filter(b=>b.s===s).map(b=>b.u))]);
+}
+const INTERVAL=[0,1,2,4,8,16,35]; // box→日数
+const DAY=864e5;
+let P={}, S={exam:"2027-02-25",real:"",pace:10,goal:0,streak:0,last:"",doneToday:0,mission:[0,0,0]};
+let mem={}, sess=null, curSubj="数学", curUnit=null;
+
+const store={
+  mode:"memory",
+  _ls(){try{const k="__t";localStorage.setItem(k,"1");localStorage.removeItem(k);return true}catch(e){return false}},
+  init(){ this.mode = this._ls() ? "local" : (window.storage?"claude":"memory"); return this.mode },
+  async get(k){
+    if(this.mode==="local"){try{const v=localStorage.getItem("ina_"+k);return v?JSON.parse(v):null}catch(e){}}
+    try{if(window.storage){const r=await window.storage.get(k,false);return r?JSON.parse(r.value):null}}catch(e){}
+    return mem[k]??null},
+  async set(k,v){
+    mem[k]=v;
+    if(this.mode==="local"){try{localStorage.setItem("ina_"+k,JSON.stringify(v));return}catch(e){}}
+    try{if(window.storage)await window.storage.set(k,JSON.stringify(v),false)}catch(e){}}
+};
+const today=()=>new Date().toISOString().slice(0,10);
+function toast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
+
+async function load(){
+  store.init();
+  P=await store.get("prog")||{};
+  MY=await store.get("mycards")||[];
+  EX=await store.get("exams")||[];
+  LOG=await store.get("log")||[];
+  TM=await store.get("timer")||null;
+  rebuild();
+  const s=await store.get("set"); if(s)S={...S,...s};
+  // 日付が変わったらミッションをリセット
+  if(S.last!==today()){
+    const y=new Date(Date.now()-DAY).toISOString().slice(0,10);
+    S.streak=(S.last===y)?(S.streak||0):0;
+    S.doneToday=0; S.mission=[0,0,0]; S.last=today(); await store.set("set",S);
+  }
+  document.getElementById("examDate").value=S.exam;
+  document.getElementById("realScore").value=S.real;
+  document.getElementById("bankN").textContent=BANK.length;
+  buildChips(); buildRecUI(); buildLogChips();
+  document.getElementById("lgDate").value=today();
+  if(TM){document.getElementById("clock").classList.add("run");
+    document.getElementById("timerBtn").textContent="おわる"; runTick()}
+  render(); renderExams(); renderLog(); renderList(); renderMy(); showStoreMsg();
+}
+async function saveP(){await store.set("prog",P)}
+async function saveSettings(){
+  S.exam=document.getElementById("examDate").value||S.exam;
+  S.real=document.getElementById("realScore").value;
+  await store.set("set",S); render();
+}
+
+/* ============ 推定得点 ============ */
+function subjMastery(sub){
+  const list=BANK.filter(b=>b.s===sub);
+  let pt=0; list.forEach(b=>{const p=P[b.id]; if(p) pt+=Math.min(p.box,4)/4});
+  return list.length?pt/list.length:0;
+}
+function latestExam(){return EX.length?EX[EX.length-1]:null}
+function estScore(){
+  const e=latestExam();
+  if(e&&e.total!=null)return Math.max(0,Math.min(500,e.total));
+  if(S.real!==""&&!isNaN(+S.real))return Math.max(0,Math.min(500,+S.real));
+  // 何もやっていない状態を偏差値40相当（=約150点）と置き、習熟で上乗せ
+  let t=0; SUBJ.forEach(s=>{t+=30+subjMastery(s)*55});
+  return Math.round(t);
+}
+function daysLeft(){return Math.max(0,Math.ceil((new Date(S.exam+"T00:00:00")-new Date(today()+"T00:00:00"))/DAY))}
+
+/* ============ 描画 ============ */
+function render(){
+  document.getElementById("cd").textContent=daysLeft();
+  const sc=estScore();
+  document.getElementById("gScore").innerHTML=sc+'<small>/500点</small>';
+  document.getElementById("gFill").style.width=Math.min(100,sc/5)+"%";
+  const msg=sc>=320?"伊奈学園ライン到達。この状態を本番までキープ。":
+            sc>=250?"白岡ラインは突破。ここから理社を70点に上げる。":
+            sc>=190?"土台ができてきた。理社と数学の計算を最優先。":
+                    "まずは毎日25分。理科と社会の一問一答から。";
+  document.getElementById("gMsg").textContent=msg;
+
+  const due=BANK.filter(b=>isDue(b.id)).length;
+  const mast=BANK.filter(b=>(P[b.id]?.box||0)>=4).length;
+  const weak=BANK.filter(b=>(P[b.id]?.miss||0)>=3).length;
+  document.getElementById("stDue").textContent=due;
+  document.getElementById("stMastered").textContent=mast;
+  document.getElementById("stStreak").textContent=S.streak||0;
+  document.getElementById("weakN").textContent=weak;
+
+  const L=lvNow(), lm=Math.round(mastLv(L)*100);
+  const tmin=minOn(today()), st=logStreak();
+  document.getElementById("stage").innerHTML=
+    `いまは <b>ステージ${L}「${LVNAME[L]}」</b>（定着 ${lm}%）。`+
+    (L<3?`このステージが70%になると「${LVNAME[L+1]}」の問題が出はじめます。`:`全ステージ解放ずみ。あとは回転数です。`)+
+    `<br>今日の勉強 <b>${fmtHM(tmin)}</b>${st>0?`／<b>${st}日</b>続いています`:""}`;
+
+  document.getElementById("subjBars").innerHTML=SUBJ.map(s=>{
+    const m=Math.round(subjMastery(s)*100);
+    return `<div class="srow"><div class="nm">${s}</div><div class="track"><i style="width:${m}%"></i></div><div class="vl">${m}%</div></div>`;
+  }).join("");
+
+  const M=[["理科・社会の一問一答",`知識を${S.pace}問`],["数学の計算ドリル","大問1で落とさない"],["前回まちがえた問題","忘れる前に上書き"]];
+  document.getElementById("missions").innerHTML=M.map((m,i)=>
+    `<div class="mission ${S.mission[i]?"done":""}"><div class="no">${S.mission[i]?"✓":i+1}</div>
+     <div class="tx"><b>${m[0]}</b><span>${m[1]}</span></div></div>`).join("");
+
+  // シミュレーター
+  if(!document.getElementById("simRows").dataset.built){
+    document.getElementById("simRows").innerHTML=SUBJ.map(s=>
+      `<div class="srow2"><b>${s}</b><input class="slider" type="range" min="0" max="100" value="60" oninput="sim()" data-s="${s}"><span class="num" id="sv-${s}">60</span></div>`).join("");
+    document.getElementById("simRows").dataset.built=1; sim();
+  }
+}
+function sim(){
+  let t=0;
+  document.querySelectorAll("#simRows .slider").forEach(el=>{t+=+el.value;document.getElementById("sv-"+el.dataset.s).textContent=el.value});
+  document.getElementById("simTotal").textContent=t;
+  document.getElementById("simMsg").textContent=
+    t>=320?"伊奈学園（人文系・理数系）の合格圏の目安です。":
+    t>=280?"伊奈学園の他学系なら射程内。あと40点で本命ラインです。":
+    t>=250?"白岡高校の目安は超えています。伊奈学園まであと"+(320-t)+"点。":
+    "まず250点（白岡ライン）を目標に。理社を各10点ずつ上げるのが最短です。";
+}
+function buildChips(){
+  document.getElementById("subjChips").innerHTML=SUBJ.map(s=>
+    `<button class="chip ${s===curSubj?"on":""}" onclick="pickSubj('${s}')">${s}</button>`).join("");
+  document.getElementById("unitChips").innerHTML=
+    `<button class="chip ${!curUnit?"on":""}" onclick="pickUnit(null)">すべて</button>`+
+    UNITS[curSubj].map(u=>`<button class="chip ${u===curUnit?"on":""}" onclick="pickUnit('${u}')">${u}</button>`).join("");
+  document.getElementById("paceChips").innerHTML=[5,10,15,20,30].map(n=>
+    `<button class="chip ${n===S.pace?"on":""}" onclick="setPace(${n})">${n}問</button>`).join("");
+}
+function pickSubj(s){curSubj=s;curUnit=null;buildChips()}
+function pickUnit(u){curUnit=u;buildChips()}
+async function setPace(n){S.pace=n;await store.set("set",S);buildChips()}
+
+/* ============ SRS ============ */
+function isDue(id){const p=P[id]; if(!p)return false; return p.due<=Date.now()}
+function mastLv(l){
+  const list=BANK.filter(b=>b.lv===l); if(!list.length)return 1;
+  let t=0; list.forEach(b=>{const p=P[b.id]; if(p)t+=Math.min(p.box,4)/4});
+  return t/list.length;
+}
+function lvNow(){ if(mastLv(1)<0.7)return 1; return mastLv(2)<0.7?2:3 }
+function pickCards(mode,a,b){
+  let pool=BANK.slice();
+  if(mode==="mix")pool=pool.filter(x=>x.lv<=lvNow());
+  if(mode==="weak")pool=pool.filter(x=>(P[x.id]?.miss||0)>=3);
+  if(mode==="subj")pool=pool.filter(x=>x.s===a);
+  if(mode==="unit")pool=pool.filter(x=>x.s===a&&x.u===b);
+  if(mode==="filter")pool=pool.filter(x=>x.s===curSubj&&(!curUnit||x.u===curUnit));
+  if(mode==="newonly")pool=pool.filter(x=>!P[x.id]&&x.s===curSubj&&(!curUnit||x.u===curUnit));
+  if(mode==="mix"){
+    const due=pool.filter(x=>isDue(x.id)).sort((x,y)=>P[x.id].due-P[y.id].due);
+    const fresh=shuffle(pool.filter(x=>!P[x.id]));
+    // 復習7割・新規3割で混ぜる（インターリービング）
+    const nDue=Math.min(due.length,Math.ceil(S.pace*0.7));
+    return shuffle(due.slice(0,nDue).concat(fresh.slice(0,S.pace-nDue)));
+  }
+  const due=pool.filter(x=>isDue(x.id)), rest=shuffle(pool.filter(x=>!isDue(x.id)));
+  return due.concat(rest).slice(0,S.pace);
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function startSession(mode,a,b){
+  const cards=pickCards(mode,a,b);
+  if(!cards.length){toast(mode==="weak"?"弱点カードはまだありません":"この範囲に出せる問題がありません");return}
+  sess={cards,i:0,ok:0,mode};
+  go("quiz"); showCard();
+}
+let qStart=0;
+function showCard(){
+  const c=sess.cards[sess.i];
+  qStart=Date.now();
+  document.getElementById("qProg").style.width=(sess.i/sess.cards.length*100)+"%";
+  document.getElementById("qTag").textContent=`${c.s}／${c.u}　${sess.i+1} / ${sess.cards.length}`;
+  document.getElementById("qText").textContent=c.q;
+  document.getElementById("qAns").textContent=c.a;
+  document.getElementById("qHint").textContent=c.h?"ヒント："+c.h:"";
+  const ex=document.getElementById("qExp"), t=EXP[c.id];
+  ex.classList.toggle("hide",!t);
+  if(t)ex.innerHTML='<b>なぜそうなるか</b>'+t;
+  document.getElementById("qAnsWrap").classList.add("hide");
+  document.getElementById("qGrade").classList.add("hide");
+  document.getElementById("qNext").classList.add("hide");
+  document.getElementById("qResult").style.display="none";
+  const ch=document.getElementById("qChoices"); ch.innerHTML="";
+  if(c.c){
+    document.getElementById("qShow").classList.add("hide");
+    shuffle(c.c.split("|")).forEach(t=>{
+      const b=document.createElement("button"); b.className="choice"; b.textContent=t;
+      b.onclick=()=>{
+        [...ch.children].forEach(x=>{x.onclick=null; if(x.textContent===c.a)x.classList.add("ok")});
+        if(t!==c.a)b.classList.add("ng");
+        document.getElementById("qAnsWrap").classList.remove("hide");
+        grade(t===c.a?2:0,true);
+      };
+      ch.appendChild(b);
+    });
+  }else{
+    document.getElementById("qShow").classList.remove("hide");
+  }
+}
+function showAnswer(){
+  document.getElementById("qAnsWrap").classList.remove("hide");
+  document.getElementById("qShow").classList.add("hide");
+  document.getElementById("qGrade").classList.remove("hide");
+}
+async function grade(g,auto){
+  const c=sess.cards[sess.i];
+  const p=P[c.id]||{box:0,miss:0,seen:0};
+  p.seen++;
+  if(g===2){p.box=Math.min(p.box+1,6); sess.ok++}
+  else if(g===1){p.box=Math.max(1,p.box)}
+  else{p.box=0; p.miss++}
+  p.due=Date.now()+INTERVAL[p.box]*DAY - (p.box===0?0:0);
+  if(p.box===0)p.due=Date.now(); // 同じ日にもう一度出す
+  P[c.id]=p; await saveP();
+  if(qStart){await addStudyMin(c.s,Math.min(Date.now()-qStart,180000)/60000,1); qStart=0}
+  document.getElementById("qGrade").classList.add("hide");
+  document.getElementById("qNext").classList.remove("hide");
+  if(auto)document.getElementById("qNext").scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+function nextCard(){
+  sess.i++;
+  if(sess.i>=sess.cards.length){finish();return}
+  showCard();
+}
+async function finish(){
+  document.getElementById("qProg").style.width="100%";
+  const n=sess.cards.length,ok=sess.ok;
+  S.doneToday=(S.doneToday||0)+n;
+  if(S.streak===0||S.last!==today()){}
+  if(!S.streakToday){S.streak=(S.streak||0)+1;S.streakToday=true}
+  const mi=sess.mode==="weak"?2:(sess.cards[0].s==="数学"?1:0);
+  S.mission[mi]=1;
+  await store.set("set",S);
+  document.getElementById("qText").textContent="おつかれさま。";
+  document.getElementById("qChoices").innerHTML="";
+  document.getElementById("qAnsWrap").classList.add("hide");
+  document.getElementById("qShow").classList.add("hide");
+  document.getElementById("qNext").classList.add("hide");
+  document.getElementById("qTag").textContent="セッション終了";
+  const r=document.getElementById("qResult");
+  const again=BANK.filter(b=>P[b.id]&&P[b.id].box===0&&sess.cards.some(c=>c.id===b.id)).length;
+  r.style.display="block";
+  r.innerHTML=`<h2>結果</h2>
+    <div class="grid"><div><b class="num">${n}</b><span>解いた</span></div>
+    <div><b class="num">${ok}</b><span>できた</span></div>
+    <div><b class="num">${again}</b><span>要復習</span></div></div>
+    <p class="sub" style="margin-top:10px">${again?"できなかった問題は今日のうちにもう一度出てきます。1日後・3日後・1週間後にも自動で戻ってきます。":"全問クリア。次の復習日まで、この問題はもう出しません。"}</p>
+    <button class="btn" onclick="go('home')">ホームにもどる</button>
+    <button class="btn ghost" onclick="startSession('${sess.mode}')">もう10問やる</button>`;
+  render();
+}
+function endSession(){sess=null;go("home")}
+
+/* ============ 模試の記録 ============ */
+const EXS=["国語","数学","英語","理科","社会"];
+const SHORT={国語:"国",数学:"数",英語:"英",理科:"理",社会:"社"};
+let chartKey="5科偏差値";
+
+function buildRecUI(){
+  document.getElementById("exInputs").innerHTML=EXS.map(s=>
+    `<div class="srow2" style="margin-bottom:6px"><b style="width:34px">${s}</b>
+     <input type="number" id="ep-${s}" placeholder="点" style="flex:1;min-width:0">
+     <input type="number" id="eh-${s}" placeholder="偏差値" style="flex:1;min-width:0"></div>`).join("");
+  document.getElementById("exDate").value=today();
+  document.getElementById("chartChips").innerHTML=["5科偏差値","合計点"].concat(EXS)
+    .map(k=>`<button class="chip ${k===chartKey?"on":""}" onclick="setChart('${k}')">${k}</button>`).join("");
+  document.getElementById("addSubjChips").innerHTML=SUBJ.map(s=>
+    `<button class="chip ${s===curSubj?"on":""}" onclick="pickAddSubj('${s}')">${s}</button>`).join("");
+}
+function setChart(k){chartKey=k;buildRecUI();drawChart()}
+let addSubj="数学";
+function pickAddSubj(s){addSubj=s;
+  document.getElementById("addSubjChips").innerHTML=SUBJ.map(x=>
+    `<button class="chip ${x===addSubj?"on":""}" onclick="pickAddSubj('${x}')">${x}</button>`).join("")}
+
+async function addExam(){
+  const rec={d:document.getElementById("exDate").value||today(),
+    label:document.getElementById("exLabel").value.trim()||"模試",
+    p:{},h:{},total:null,t5:null};
+  let sum=0,got=0;
+  EXS.forEach(s=>{
+    const p=document.getElementById("ep-"+s).value, h=document.getElementById("eh-"+s).value;
+    if(p!==""){rec.p[s]=+p;sum+=+p;got++}
+    if(h!=="")rec.h[s]=+h;
+  });
+  if(got===5)rec.total=sum;
+  const t5=document.getElementById("exT5").value;
+  if(t5!=="")rec.t5=+t5;
+  else{const hs=EXS.map(s=>rec.h[s]).filter(v=>v!=null); if(hs.length)rec.t5=Math.round(hs.reduce((a,b)=>a+b,0)/hs.length*10)/10}
+  if(!got&&rec.t5==null){toast("点数か偏差値を入れてください");return}
+  EX.push(rec); EX.sort((a,b)=>a.d<b.d?-1:1); await store.set("exams",EX);
+  EXS.forEach(s=>{document.getElementById("ep-"+s).value="";document.getElementById("eh-"+s).value=""});
+  document.getElementById("exT5").value="";document.getElementById("exLabel").value="";
+  toast("記録しました"); renderExams(); render();
+}
+async function delExam(i){
+  if(!confirm("この回の記録を消しますか？"))return;
+  EX.splice(i,1); await store.set("exams",EX); renderExams(); render();
+}
+function renderExams(){
+  const el=document.getElementById("exList");
+  if(!EX.length){el.innerHTML='<p class="sub" style="margin:0">まだ記録がありません。北辰テストが返ってきたら、点数と偏差値を入れてください。1回目から折れ線が伸びていきます。</p>';drawChart();return}
+  el.innerHTML=EX.map((e,i)=>{
+    const det=EXS.filter(s=>e.p[s]!=null||e.h[s]!=null)
+      .map(s=>`${SHORT[s]} ${e.p[s]!=null?e.p[s]:"–"}${e.h[s]!=null?`(${e.h[s]})`:""}`).join("　");
+    return `<div class="srow" style="display:block;padding:10px 0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <b style="font-size:14px">${e.label}</b>
+        <button style="font-size:11px;color:var(--bad);font-weight:700" onclick="delExam(${i})">削除</button></div>
+      <div class="sub" style="margin:2px 0">${e.d}　${e.total!=null?`<b>合計 ${e.total}点</b>`:""}${e.t5!=null?`　偏差値 <b>${e.t5}</b>`:""}</div>
+      <div class="sub num" style="font-size:11.5px">${det}</div></div>`;
+  }).reverse().join("");
+  drawChart();
+}
+function drawChart(){
+  const box=document.getElementById("chartBox"), msg=document.getElementById("chartMsg");
+  const isDev=chartKey!=="合計点";
+  const vals=EX.map(e=>{
+    if(chartKey==="5科偏差値")return e.t5;
+    if(chartKey==="合計点")return e.total;
+    return e.h[chartKey]!=null?e.h[chartKey]:null;
+  });
+  const pts=EX.map((e,i)=>({v:vals[i],l:e.label,d:e.d})).filter(p=>p.v!=null);
+  if(pts.length===0){box.innerHTML='<p class="sub" style="margin:0">この項目のデータはまだありません。</p>';msg.textContent="";return}
+  const W=320,H=170,PL=32,PR=10,PT=14,PB=26;
+  const lo=isDev?30:100, hi=isDev?70:500;
+  const goal=isDev?55:320, safe=isDev?45:250;
+  const x=i=>PL+(pts.length===1?(W-PL-PR)/2:i*(W-PL-PR)/(pts.length-1));
+  const y=v=>PT+(hi-Math.max(lo,Math.min(hi,v)))/(hi-lo)*(H-PT-PB);
+  const line=pts.map((p,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(p.v).toFixed(1)}`).join(" ");
+  const ticks=isDev?[30,40,50,60,70]:[100,200,300,400,500];
+  box.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block" role="img" aria-label="${chartKey}の推移">
+    ${ticks.map(t=>`<line x1="${PL}" y1="${y(t)}" x2="${W-PR}" y2="${y(t)}" stroke="#E3E8EF" stroke-width="1"/>
+      <text x="${PL-5}" y="${y(t)+3.5}" font-size="9" fill="#5B6B84" text-anchor="end">${t}</text>`).join("")}
+    <line x1="${PL}" y1="${y(goal)}" x2="${W-PR}" y2="${y(goal)}" stroke="#B4232A" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <text x="${W-PR}" y="${y(goal)-4}" font-size="8.5" fill="#B4232A" text-anchor="end">伊奈学園ライン ${goal}</text>
+    <line x1="${PL}" y1="${y(safe)}" x2="${W-PR}" y2="${y(safe)}" stroke="#5B6B84" stroke-width="1" stroke-dasharray="2 3"/>
+    <text x="${W-PR}" y="${y(safe)-4}" font-size="8.5" fill="#5B6B84" text-anchor="end">白岡ライン ${safe}</text>
+    <path d="${line}" fill="none" stroke="#0F766E" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+    ${pts.map((p,i)=>`<circle cx="${x(i)}" cy="${y(p.v)}" r="4" fill="#fff" stroke="#0F766E" stroke-width="2.4"/>
+      <text x="${x(i)}" y="${y(p.v)-9}" font-size="10" font-weight="700" fill="#14213D" text-anchor="middle">${p.v}</text>
+      <text x="${x(i)}" y="${H-8}" font-size="8" fill="#5B6B84" text-anchor="middle">${p.d.slice(5).replace("-","/")}</text>`).join("")}
+  </svg>`;
+  const first=pts[0].v, last=pts[pts.length-1].v, dif=Math.round((last-first)*10)/10;
+  msg.textContent=pts.length<2?`基準ができました。次の回と比べられます。`:
+    dif>0?`はじめの回から ${dif} 上がっています。${last<goal?`目標まであと ${Math.round((goal-last)*10)/10}。`:"目標ラインに到達しています。"}`:
+    dif<0?`はじめの回から ${Math.abs(dif)} 下がっています。範囲が広がった時期は下がるのがふつうです。定着率のほうを見てください。`:
+    `横ばいです。復習の間隔があきすぎていないか確認してみてください。`;
+}
+
+/* ============ 問題リスト ============ */
+let listSubj="数学";
+function pickListSubj(s){listSubj=s;renderList()}
+function renderList(){
+  const chips=document.getElementById("listChips");
+  if(chips)chips.innerHTML=SUBJ.map(s=>
+    `<button class="chip ${s===listSubj?"on":""}" onclick="pickListSubj('${s}')">${s} <span style="opacity:.7">${BANK.filter(b=>b.s===s).length}</span></button>`).join("");
+  const kw=(document.getElementById("listSearch")?.value||"").trim();
+  let items=BANK.filter(b=>b.s===listSubj);
+  if(kw)items=BANK.filter(b=>(b.q+b.a+b.u).includes(kw));
+  document.getElementById("listCount").textContent=
+    kw?`「${kw}」に一致：${items.length}問`:`${listSubj} ${items.length}問／全${BANK.length}問`;
+  const byU={}; items.forEach(b=>{(byU[b.u]=byU[b.u]||[]).push(b)});
+  document.getElementById("listBody").innerHTML=Object.keys(byU).map(u=>
+    `<div style="margin:12px 0 4px;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--mid)">${u}（${byU[u].length}）</div>`+
+    byU[u].map(b=>{
+      const box=P[b.id]?.box||0;
+      const st=!P[b.id]?'<span style="color:#98A5B8">未</span>':box>=4?'<span style="color:var(--accent)">定着</span>':box>=1?'<span style="color:var(--warn)">途中</span>':'<span style="color:var(--bad)">要復習</span>';
+      return `<div style="padding:8px 0;border-bottom:1px solid #EDF1F5;font-size:13.5px;line-height:1.6">
+        <div style="display:flex;gap:8px"><div style="flex:1">${b.q}</div>
+        <div style="font-size:11px;font-weight:700;white-space:nowrap">${st}</div></div>
+        <div style="color:var(--accent);font-weight:700">${b.a}</div>
+        ${EXP[b.id]?`<div style="font-size:12px;color:var(--mid);line-height:1.7;margin-top:2px">${EXP[b.id]}</div>`:""}
+        <div style="font-size:10.5px;color:var(--mid)">${b.my?"自分で追加":LVNAME[b.lv]}</div></div>`;
+    }).join("")).join("")||'<p class="sub">見つかりませんでした。</p>';
+}
+
+/* ============ 自作カード ============ */
+async function addCard(){
+  const q=document.getElementById("addQ").value.trim(), a=document.getElementById("addA").value.trim();
+  if(!q||!a){toast("問題と答えの両方を入れてください");return}
+  MY.push({id:"my"+Date.now(),s:addSubj,u:document.getElementById("addUnit").value.trim()||"自分の弱点",
+    q,a,h:document.getElementById("addH").value.trim()||null});
+  await store.set("mycards",MY); rebuild(); buildChips();
+  ["addQ","addA","addH","addUnit"].forEach(i=>document.getElementById(i).value="");
+  toast("追加しました"); renderMy(); renderList(); render();
+  document.getElementById("bankN").textContent=BANK.length;
+}
+async function delCard(id){
+  if(!confirm("このカードを消しますか？"))return;
+  MY=MY.filter(m=>m.id!==id); delete P[id];
+  await store.set("mycards",MY); await saveP(); rebuild(); buildChips(); renderMy(); renderList(); render();
+  document.getElementById("bankN").textContent=BANK.length;
+}
+function renderMy(){
+  document.getElementById("myN").textContent=MY.length;
+  const el=document.getElementById("myList");
+  if(!MY.length){el.innerHTML='<p class="sub" style="margin:0">まだありません。過去問や北辰でまちがえた問題を1問ずつ入れていくのが、いちばん点になります。</p>';return}
+  el.innerHTML=MY.slice().reverse().map(m=>
+    `<div style="padding:9px 0;border-bottom:1px solid #EDF1F5">
+      <div style="display:flex;justify-content:space-between;gap:8px">
+        <div class="sub" style="font-weight:700">${m.s}／${m.u}</div>
+        <button style="font-size:11px;color:var(--bad);font-weight:700" onclick="delCard('${m.id}')">削除</button></div>
+      <div style="font-size:13.5px">${m.q}</div>
+      <div style="font-size:13.5px;color:var(--accent);font-weight:700">${m.a}</div></div>`).join("");
+}
+
+/* ============ バックアップ ============ */
+function showStoreMsg(){
+  const el=document.getElementById("storeMsg"); if(!el)return;
+  const m={
+    local:'<b>保存されています</b>このブラウザに記録が残ります。アプリを閉じても、次に同じブラウザで開けば続きから始められます。念のため下のバックアップも取っておいてください。',
+    claude:'<b>保存されています</b>Claudeアプリ内に記録が残ります。ブラウザで開いて使いたい場合は、下のバックアップから引き継げます。',
+    memory:'<b>注意：保存できていません</b>この開き方だと、閉じた時点で記録が消えます。下のバックアップを必ず取ってください。'
+  }[store.mode];
+  el.innerHTML=m;
+  el.style.borderLeftColor = store.mode==="memory" ? "var(--bad)" : "var(--accent)";
+}
+function makeBackup(){
+  const d={v:2,date:today(),prog:P,mycards:MY,exams:EX,log:LOG,set:S};
+  document.getElementById("bkText").value=btoa(unescape(encodeURIComponent(JSON.stringify(d))));
+  toast("バックアップを作りました");
+}
+function copyBackup(){
+  const t=document.getElementById("bkText");
+  if(!t.value){toast("先にバックアップを作ってください");return}
+  t.select(); t.setSelectionRange(0,999999);
+  try{document.execCommand("copy");toast("コピーしました")}catch(e){toast("長押しでコピーしてください")}
+}
+async function restoreBackup(){
+  const s=document.getElementById("bkText").value.trim();
+  if(!s){toast("復元する文字列を貼り付けてください");return}
+  let d;
+  try{d=JSON.parse(decodeURIComponent(escape(atob(s))))}catch(e){toast("文字列が正しくありません");return}
+  if(!d||!d.prog){toast("バックアップの中身が読み取れません");return}
+  if(!confirm("いまの記録を、このバックアップの内容で置きかえます。よろしいですか？"))return;
+  P=d.prog||{}; MY=d.mycards||[]; EX=d.exams||[]; LOG=d.log||[]; if(d.set)S={...S,...d.set};
+  await store.set("prog",P); await store.set("mycards",MY);
+  await store.set("exams",EX); await store.set("log",LOG); await store.set("set",S);
+  rebuild(); buildChips(); renderExams(); renderLog(); renderMy(); renderList(); render();
+  document.getElementById("bankN").textContent=BANK.length;
+  toast("復元しました");
+}
+
+/* ============ 学習記録 ============ */
+let LOG=[], TM=null, tick=null, recView="log", timerSubj="数学", manSubj="数学";
+const dstr=d=>new Date(d).toISOString().slice(0,10);
+
+function switchRec(v){
+  recView=v;
+  document.getElementById("recLog").classList.toggle("hide",v!=="log");
+  document.getElementById("recExam").classList.toggle("hide",v!=="exam");
+  document.getElementById("segLog").classList.toggle("on",v==="log");
+  document.getElementById("segExam").classList.toggle("on",v==="exam");
+  if(v==="log")renderLog(); else renderExams();
+}
+async function addStudyMin(s,min,auto){
+  if(!(min>0))return;
+  const d=today();
+  const e=LOG.find(x=>x.d===d&&x.s===s&&!!x.auto===!!auto&&!x.memo);
+  if(e)e.m+=min; else LOG.push({d,s,m:min,memo:"",auto:auto?1:0});
+  await store.set("log",LOG);
+}
+function minOn(d){return LOG.filter(x=>x.d===d).reduce((a,b)=>a+b.m,0)}
+function weekDays(){const a=[];for(let i=6;i>=0;i--)a.push(dstr(Date.now()-i*DAY));return a}
+function logStreak(){
+  let n=0,d=Date.now();
+  if(minOn(dstr(d))<1)d-=DAY;
+  while(minOn(dstr(d))>=1){n++;d-=DAY}
+  return n;
+}
+function fmtHM(min,small){
+  const t=Math.round(min), h=Math.floor(t/60), m=t%60;
+  const u=small?(x,l)=>`${x}<small>${l}</small>`:(x,l)=>`${x}${l}`;
+  return h ? (m ? u(h,"時間")+u(m,"分") : u(h,"時間")) : u(m,"分");
+}
+function fmtHMc(min){ // グラフ用の短い表記
+  const t=Math.round(min), h=Math.floor(t/60), m=t%60;
+  return h ? (m?`${h}h${m}`:`${h}h`) : `${m}`;
+}
+function fmtClock(ms){
+  const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;
+  return (h?String(h).padStart(2,"0")+":":"")+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function pickTimerSubj(s){timerSubj=s;buildLogChips()}
+function pickManSubj(s){manSubj=s;buildLogChips()}
+function buildLogChips(){
+  const t=document.getElementById("timerChips"), m=document.getElementById("manChips");
+  if(t)t.innerHTML=SUBJ.concat(["その他"]).map(s=>`<button class="chip ${s===timerSubj?"on":""}" onclick="pickTimerSubj('${s}')">${s}</button>`).join("");
+  if(m)m.innerHTML=SUBJ.concat(["その他"]).map(s=>`<button class="chip ${s===manSubj?"on":""}" onclick="pickManSubj('${s}')">${s}</button>`).join("");
+}
+async function toggleTimer(){
+  if(TM){
+    const ms=Date.now()-TM.t0;
+    clearInterval(tick); tick=null;
+    const s=TM.s; TM=null; await store.set("timer",null);
+    document.getElementById("clock").classList.remove("run");
+    document.getElementById("timerBtn").textContent="はじめる";
+    if(ms<30000){toast("30秒未満なので記録しませんでした")}
+    else{await addStudyMin(s,ms/60000,0); toast(`${s} を ${fmtHM(ms/60000)} 記録しました`)}
+    document.getElementById("clock").textContent="00:00";
+    renderLog(); render();
+  }else{
+    TM={s:timerSubj,t0:Date.now()}; await store.set("timer",TM);
+    document.getElementById("clock").classList.add("run");
+    document.getElementById("timerBtn").textContent="おわる";
+    runTick();
+  }
+}
+function runTick(){
+  if(tick)clearInterval(tick);
+  tick=setInterval(()=>{
+    if(!TM)return;
+    const el=document.getElementById("clock"); if(el)el.textContent=fmtClock(Date.now()-TM.t0);
+  },1000);
+}
+async function addManual(){
+  const m=+document.getElementById("lgMin").value;
+  if(!(m>0)){toast("時間（分）を入れてください");return}
+  LOG.push({d:document.getElementById("lgDate").value||today(),s:manSubj,m,
+    memo:document.getElementById("lgMemo").value.trim(),auto:0});
+  await store.set("log",LOG);
+  document.getElementById("lgMin").value="";document.getElementById("lgMemo").value="";
+  toast("記録しました"); renderLog(); render();
+}
+async function delLog(i){
+  if(!confirm("この記録を消しますか？"))return;
+  LOG.splice(i,1); await store.set("log",LOG); renderLog(); render();
+}
+async function saveGoal(){
+  S.goal=(+document.getElementById("goalH").value||0)*60+(+document.getElementById("goalM").value||0);
+  await store.set("set",S); renderLog();
+}
+function renderLog(){
+  const el=document.getElementById("todayMin"); if(!el)return;
+  const td=minOn(today()), wk=weekDays().reduce((a,d)=>a+minOn(d),0);
+  const all=LOG.reduce((a,b)=>a+b.m,0);
+  el.innerHTML=fmtHM(td,true);
+  document.getElementById("weekMin").innerHTML=fmtHM(wk,true);
+  document.getElementById("allMin").innerHTML=fmtHM(all,true);
+  document.getElementById("dayStreak").textContent=logStreak();
+
+  const g=S.goal||0;
+  document.getElementById("goalH").value=g?Math.floor(g/60)||"":"";
+  document.getElementById("goalM").value=g?(Math.round(g)%60||""):"";
+  const pct=g?Math.min(100,wk/g*100):0;
+  document.getElementById("goalBar").style.width=pct+"%";
+  document.getElementById("goalMsg").textContent = !g
+    ? "下の「目標」に1週間の目標時間を入れると、ここに達成率が出ます。"
+    : wk>=g ? `今週の目標 ${fmtHM(g)} を達成しています。よくやりました。`
+    : `今週の目標まであと ${fmtHM(g-wk)}（達成率 ${Math.round(pct)}%）。`;
+
+  // 週の棒グラフ
+  const days=weekDays(), vals=days.map(minOn), mx=Math.max(60,...vals);
+  const W=320,H=150,PL=26,PR=6,PT=12,PB=24,bw=(W-PL-PR)/7*0.62;
+  document.getElementById("weekChart").innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">
+    ${[0,mx/2,mx].map(t=>{const y=PT+(1-t/mx)*(H-PT-PB);
+      return `<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#E3E8EF"/><text x="${PL-4}" y="${y+3.5}" font-size="9" fill="#5B6B84" text-anchor="end">${Math.round(t)}</text>`}).join("")}
+    ${days.map((d,i)=>{
+      const cx=PL+(i+0.5)*(W-PL-PR)/7, hgt=(vals[i]/mx)*(H-PT-PB), y=H-PB-hgt;
+      const wd=["日","月","火","水","木","金","土"][new Date(d).getDay()], isT=d===today();
+      return `${hgt>0?`<rect x="${cx-bw/2}" y="${y}" width="${bw}" height="${hgt}" rx="3" fill="${isT?"#0F766E":"#9DB3B0"}"/>`:""}
+        ${vals[i]>0?`<text x="${cx}" y="${y-4}" font-size="9.5" font-weight="700" fill="#14213D" text-anchor="middle">${fmtHMc(vals[i])}</text>`:""}
+        <text x="${cx}" y="${H-8}" font-size="10" fill="${isT?"#0F766E":"#5B6B84"}" font-weight="${isT?700:400}" text-anchor="middle">${wd}</text>`;
+    }).join("")}
+  </svg>`;
+
+  // 教科別（今週）
+  const set=new Set(days), by={};
+  LOG.filter(x=>set.has(x.d)).forEach(x=>by[x.s]=(by[x.s]||0)+x.m);
+  const keys=Object.keys(by).sort((a,b)=>by[b]-by[a]), top=keys.length?by[keys[0]]:1;
+  document.getElementById("subjMin").innerHTML=keys.length
+    ? `<p class="sub" style="margin:0 0 8px">今週の教科別</p>`+keys.map(s=>
+        `<div class="mbar"><b>${s}</b><div><span style="width:${by[s]/top*100}%"></span></div><em>${fmtHM(by[s])}</em></div>`).join("")
+    : `<p class="sub" style="margin:0">まだ今週の記録がありません。ストップウォッチを押すところから。</p>`;
+
+  // 一覧
+  const list=LOG.map((x,i)=>({...x,i})).sort((a,b)=>a.d<b.d?1:a.d>b.d?-1:0).slice(0,40);
+  document.getElementById("logList").innerHTML=list.length
+    ? list.map(x=>`<div class="srow" style="padding:9px 0">
+        <div style="flex:1"><b style="font-size:13.5px">${x.s}</b>
+          <span class="sub" style="margin-left:6px">${x.d.slice(5).replace("-","/")}</span>
+          ${x.auto?'<span class="sub" style="margin-left:6px;font-size:10.5px">アプリ演習</span>':""}
+          ${x.memo?`<div class="sub" style="font-size:11.5px">${x.memo}</div>`:""}</div>
+        <div class="num" style="font-weight:700">${fmtHM(x.m)}</div>
+        <button style="font-size:11px;color:var(--bad);font-weight:700;margin-left:10px" onclick="delLog(${x.i})">削除</button></div>`).join("")
+    : '<p class="sub" style="margin:0">まだ記録がありません。</p>';
+}
+
+/* ============ ナビ ============ */
+function go(v){
+  ["home","drill","quiz","rec","list","add","plan","set"].forEach(x=>{
+    const el=document.getElementById("v-"+x); if(el)el.classList.toggle("hide",x!==v);
+  });
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v||(v==="list"||v==="add")&&b.dataset.v==="drill"));
+  window.scrollTo(0,0);
+  if(v==="home")render();
+  if(v==="rec"){recView==="log"?renderLog():renderExams()}
+  if(v==="list")renderList();
+}
+async function resetAll(){
+  if(!confirm("学習履歴をすべて消します。よろしいですか？"))return;
+  P={}; await saveP(); toast("履歴を消しました"); render();
+  LOG=[]; await store.set("log",LOG); renderLog();
+}
+load();
+</script>
+</body>
+</html>
